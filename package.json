@@ -1,0 +1,15 @@
+{
+  "name": "imdev-mcp-server",
+  "version": "1.0.0",
+  "description": "Monorepo wrapper for easeim-mcp-server",
+  "private": true,
+  "bin": {
+    "easeim-mcp-server": "easeim-mcp-server/dist/index.js"
+  },
+  "scripts": {
+    "prepare": "npm --prefix \"easeim-mcp-server\" install --include=dev --ignore-scripts && npm --prefix \"easeim-mcp-server\" run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

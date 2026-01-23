@@ -3,11 +3,11 @@
 
 ## 方案 1: GitHub 直接安装 (最快)
 
-`npm install -g github:easemob/imdev-mcp-server#path:easeim-mcp-server`
+`npm install -g "github:easemob/imdev-mcp-server"`
 
 或指定分支/tag
 
-`npm install -g github:zjc19891106/imdev-mcp-server#path:easeim-mcp-server`
+`npm install -g "github:easemob/imdev-mcp-server#v1.0.0"`
 
 
 ---
