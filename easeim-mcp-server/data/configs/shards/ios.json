@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "platform": "ios",
+  "lastUpdated": "2026-01-15T08:01:09.610Z",
+  "components": {
+    "EaseChatDemo": {
+      "name": "EaseChatDemo",
+      "description": "ios 平台的 EaseChatDemo 组件",
+      "configProperties": [],
+      "extensionPoints": [
+        {
+          "name": "ImageBrowserProtocol",
+          "type": "protocol",
+          "file": "ios/EaseChatDemo/PhotoBrowser/PreviewImage.swift",
+          "line": 30,
+          "methods": [
+            "numberOfPhotos",
+            "photo"
+          ]
+        }
+      ]
+    }
+  },
+  "stats": {
+    "componentCount": 1,
+    "configPropertyCount": 0,
+    "extensionPointCount": 1
+  }
+}

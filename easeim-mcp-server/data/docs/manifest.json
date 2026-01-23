@@ -1,0 +1,77 @@
+{
+  "version": "3.0.0",
+  "lastUpdated": "2026-01-15T07:45:58.288Z",
+  "description": "文档索引清单 - 支持按平台分片加载",
+  "platforms": [
+    "android",
+    "ios",
+    "web"
+  ],
+  "shards": {
+    "android": {
+      "path": "shards/android.json",
+      "platform": "android",
+      "guideCount": 35,
+      "apiModuleCount": 72,
+      "errorCodeCount": 0,
+      "sizeBytes": 47123,
+      "keywords": [
+        "android",
+        "kotlin",
+        "java",
+        "gradle",
+        "maven",
+        "google",
+        "apk"
+      ]
+    },
+    "ios": {
+      "path": "shards/ios.json",
+      "platform": "ios",
+      "guideCount": 25,
+      "apiModuleCount": 60,
+      "errorCodeCount": 0,
+      "sizeBytes": 35939,
+      "keywords": [
+        "ios",
+        "swift",
+        "objective-c",
+        "xcode",
+        "cocoapods",
+        "spm",
+        "apple",
+        "iphone",
+        "ipad"
+      ]
+    },
+    "web": {
+      "path": "shards/web.json",
+      "platform": "web",
+      "guideCount": 34,
+      "apiModuleCount": 53,
+      "errorCodeCount": 0,
+      "sizeBytes": 38895,
+      "keywords": [
+        "web",
+        "javascript",
+        "typescript",
+        "react",
+        "vue",
+        "angular"
+      ]
+    }
+  },
+  "shared": {
+    "errorCodes": {
+      "path": "shards/error-codes.json",
+      "description": "跨平台共享的错误码索引",
+      "count": 99,
+      "sizeBytes": 45987
+    }
+  },
+  "stats": {
+    "totalGuides": 94,
+    "totalApiModules": 185,
+    "totalErrorCodes": 99
+  }
+}
