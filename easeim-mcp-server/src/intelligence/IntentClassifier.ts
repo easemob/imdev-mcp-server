@@ -78,6 +78,8 @@ export class IntentClassifier {
     }
 
     const entities = this.extractEntities(query, platform);
+    const normalizedPlatform = this.normalizePlatform(platform);
+    const inferredSubIntent = this.inferUiSubIntent(query, normalizedPlatform);
 
     let bestIntent = UserIntent.UNKNOWN;
     let bestScore = 0;
@@ -110,14 +112,14 @@ export class IntentClassifier {
 
     // === 信号3: 语义匹配兜底 ===
     let semanticScenarioId: string | undefined;
-    if (bestScore < 60) {
-      const bestSemanticMatch = this.matchSemanticScenario(query);
-      if (bestSemanticMatch && bestSemanticMatch.score > 0.15) {
+    const bestSemanticMatch = this.matchSemanticScenario(query);
+    if (bestSemanticMatch && bestSemanticMatch.score > 0.15) {
+      semanticScenarioId = bestSemanticMatch.target.id;
+      if (bestScore < 60) {
         const semanticScore = bestSemanticMatch.score * 100;
         if (semanticScore > bestScore) {
           bestIntent = this.mapScenarioToIntent(bestSemanticMatch.target.id);
           bestScore = semanticScore;
-          semanticScenarioId = bestSemanticMatch.target.id;
         }
       }
     }
@@ -129,7 +131,7 @@ export class IntentClassifier {
       intent: bestIntent,
       confidence: Math.min(finalConfidence, 100),
       entities,
-      subIntent: semanticScenarioId,
+      subIntent: semanticScenarioId || inferredSubIntent,
     };
   }
 
@@ -293,6 +295,12 @@ export class IntentClassifier {
         }
       }
     }
+    if (!entities.configProperty) {
+      const inferredConfigProperty = this.inferConfigPropertyFromQuery(query, normalizedPlatform);
+      if (inferredConfigProperty) {
+        entities.configProperty = inferredConfigProperty;
+      }
+    }
 
     const featureRules = rules.featureName;
     if (featureRules) {
@@ -317,6 +325,43 @@ export class IntentClassifier {
   private matchSemanticScenario(query: string) {
     const scenarioTargets: Vectorizable[] = this.registry.getScenarioTargets();
     return SimilarityMatcher.findBestMatch(query, scenarioTargets, 0.20);
+  }
+
+  private inferConfigPropertyFromQuery(query: string, platform?: string): string | null {
+    if (platform && platform !== 'ios') {
+      return null;
+    }
+    const lowerQuery = query.toLowerCase();
+    if (/(长按.*菜单|消息.*长按|长按消息|长按菜单样式)/.test(lowerQuery)) {
+      return 'messageLongPressedActions';
+    }
+    if (/(内容.*展示.*样式|消息.*展示.*样式|消息内容样式|content\s*style|contentstyle)/.test(lowerQuery)) {
+      return 'contentStyle';
+    }
+    if (/(隐藏|不显示).*(头像|昵称)|头像昵称.*(隐藏|不显示)|hide.*(avatar|nickname)/.test(lowerQuery)) {
+      return 'contentStyle';
+    }
+    return null;
+  }
+
+  private inferUiSubIntent(query: string, platform?: string): string | undefined {
+    if (platform && platform !== 'ios') {
+      return undefined;
+    }
+    const lowerQuery = query.toLowerCase();
+    if (/(长按.*菜单|消息.*长按|长按消息|长按菜单样式|long\s*press.*menu|message\s*long\s*press)/.test(lowerQuery)) {
+      return 'message_long_press_menu';
+    }
+    if (/(内容.*展示.*样式|消息.*展示.*样式|消息内容样式|content\s*style|contentstyle)/.test(lowerQuery)) {
+      return 'message_content_style';
+    }
+    if (/(隐藏|不显示).*(头像|昵称)|头像昵称.*(隐藏|不显示)|hide.*(avatar|nickname)/.test(lowerQuery)) {
+      return 'hide_message_avatar_nickname';
+    }
+    if (/(样式|风格|外观|配置|开关|选项|appearance|option|switch|toggle)/.test(lowerQuery)) {
+      return 'appearance_quick_index';
+    }
+    return undefined;
   }
 
   private mapScenarioToIntent(scenarioId: string): UserIntent {

@@ -26,8 +26,8 @@
     "ios": {
       "path": "shards/ios.json",
       "platform": "ios",
-      "scenarioCount": 3,
-      "sizeBytes": 3054,
+      "scenarioCount": 7,
+      "sizeBytes": 6468,
       "keywords": [
         "ios",
         "swift",

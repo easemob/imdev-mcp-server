@@ -43,10 +43,17 @@
       "patterns": [
         "自定义.*(样式|颜色|UI|界面|气泡|头像|主题|字体|字号)",
         "修改.*(样式|外观|主题|颜色|背景|头像|昵称|字体|字号)",
+        "长按.*(菜单|menu|按钮)",
+        "消息.*(长按|长按菜单|长按操作)",
+        "消息.*内容.*(样式|展示)",
+        "(隐藏|不显示).*(头像|昵称)",
+        "(开关|配置项|选项|option|switch|toggle)",
         "更换.*(图标|图片|颜色|背景|头像)",
         "设置.*(头像|昵称|用户信息)",
         "更新.*(头像|昵称|用户资料)",
         "customize|custom.*style|theme",
+        "message.*long\\s*press.*menu",
+        "content\\s*style",
         "(气泡|bubble).*(颜色|样式|圆角)",
         "Appearance",
         "userCache",
@@ -96,12 +103,32 @@
     {
       "id": "text_style_customization",
       "text": "修改 文本 消息 颜色 字体 大小 样式 color font size"
+    },
+    {
+      "id": "message_long_press_menu",
+      "text": "消息 长按 菜单 样式 ActionSheet menu long press messageLongPressedActions"
+    },
+    {
+      "id": "message_content_style",
+      "text": "消息 内容 展示 样式 contentStyle withAvatar withNickName withDateAndTime"
+    },
+    {
+      "id": "hide_message_avatar_nickname",
+      "text": "隐藏 头像 昵称 不显示 头像昵称 hide avatar nickname contentStyle"
+    },
+    {
+      "id": "appearance_quick_index",
+      "text": "Appearance 外观 样式 风格 配置 开关 选项 主题 iOS UIKit"
     }
   ],
   "scenarioIntentMap": {
     "user_profile_update": "customize_ui",
     "text_style_customization": "customize_ui",
-    "custom_message": "customize_message"
+    "custom_message": "customize_message",
+    "message_long_press_menu": "configure_appearance",
+    "message_content_style": "configure_appearance",
+    "hide_message_avatar_nickname": "configure_appearance",
+    "appearance_quick_index": "configure_appearance"
   },
   "intentDescriptions": {
     "implement_feature": "实现功能",
@@ -170,6 +197,7 @@
           "\\b(bubbleStyle|contentStyle|imageMessageCorner)\\b",
           "\\b(inputExtendActions|messageLongPressedActions)\\b",
           "\\b(alertStyle|actionSheetRowHeight)\\b",
+          "Appearance\\s*\\.\\s*chat\\s*\\.\\s*(\\w+)",
           "Appearance\\s*\\.\\s*(\\w+)"
         ]
       },

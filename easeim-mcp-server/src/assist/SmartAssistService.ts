@@ -11,8 +11,19 @@ import { KnowledgeGraph } from '../intelligence/KnowledgeGraph.js';
 import { ShardedSourceSearch } from '../search/ShardedSourceSearch.js';
 import { SimilarityMatcher, Vectorizable } from '../intelligence/SimilarityMatcher.js';
 import { SmartAssistLogger } from '../utils/SmartAssistLogger.js';
+import { PlatformCapabilityRegistry, PlatformRoute } from '../intelligence/PlatformCapabilityRegistry.js';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const execFileAsync = promisify(execFile);
 
 export class SmartAssistService {
+  private readonly platformCapabilityRegistry = new PlatformCapabilityRegistry();
+
   constructor(
     private readonly intentClassifier: IntentClassifier,
     private readonly context: SmartAssistContext,
@@ -223,7 +234,13 @@ export class SmartAssistService {
 
       case UserIntent.CUSTOMIZE_UI:
       case UserIntent.CONFIGURE_APPEARANCE:
-        resultText += await this.getUiCustomizationSolution(entities.configProperty, intentResult.subIntent, normalizedPlatform);
+        resultText += await this.getUiCustomizationSolution(
+          entities.configProperty,
+          intentResult.subIntent,
+          normalizedPlatform,
+          entities.componentName,
+          query
+        );
         break;
 
       case UserIntent.UNDERSTAND_CLASS:
@@ -545,9 +562,39 @@ EMClient.shared().chatManager?.send(message) { msg, error in
     return resultText;
   }
 
-  private async getUiCustomizationSolution(configProperty: string | null, subIntent?: string, platform?: string): Promise<string> {
+  private async getUiCustomizationSolution(
+    configProperty: string | null,
+    subIntent?: string,
+    platform?: string,
+    componentName?: string | null,
+    rawQuery?: string
+  ): Promise<string> {
     const normalizedPlatform = platform === 'react-native' ? 'rn' : platform;
+    const moduleId = this.resolveModuleId(componentName);
+    const platformRoute = normalizedPlatform
+      ? this.platformCapabilityRegistry.getPlatformRoute(moduleId, normalizedPlatform)
+      : null;
+    const routingNotice = this.buildPlatformRoutingNotice(platformRoute, moduleId, normalizedPlatform);
+    const normalizedConfigProperty = configProperty?.trim() || null;
+    const subIntentFromConfig = normalizedConfigProperty === 'messageLongPressedActions'
+      ? 'message_long_press_menu'
+      : normalizedConfigProperty === 'contentStyle'
+        ? 'message_content_style'
+        : undefined;
+    const resolvedSubIntent = subIntent || subIntentFromConfig;
     let resultText = `## 🎨 UI 定制方案\n\n`;
+    if (routingNotice) {
+      resultText += routingNotice;
+      return resultText;
+    }
+
+    const appearanceQuickIndex = normalizedPlatform === 'ios'
+      ? this.buildAppearanceQuickIndex(platformRoute)
+      : '';
+    const uiOptionsFallback = normalizedPlatform === 'ios'
+      ? this.buildUiOptionsFallback(platformRoute)
+      : '';
+    const entryRouteSummary = appearanceQuickIndex ? '' : this.buildEntryRouteSummary(platformRoute);
 
     if (configProperty) {
       const usage = this.configSearch.getConfigUsage(configProperty, 'all');
@@ -559,7 +606,7 @@ EMClient.shared().chatManager?.send(message) { msg, error in
       }
     }
 
-    switch (subIntent) {
+    switch (resolvedSubIntent) {
       case 'bubble_style':
         resultText += `### 气泡样式定制\n\n`;
         resultText += `\`\`\`swift
@@ -633,7 +680,68 @@ Appearance.errorHue = 350/360.0       // 红色
         }
         break;
 
+      case 'message_long_press_menu':
+        resultText += `### 消息长按菜单样式\n\n`;
+        resultText += `**Appearance 快速索引**：\n`;
+        resultText += `- \`Appearance.chat.messageLongPressedActions\`：长按菜单项配置\n`;
+        resultText += `- \`Appearance.actionSheetRowHeight\`：ActionSheet 行高\n\n`;
+        resultText += `\`\`\`swift
+// 1) 配置长按菜单项（ActionSheetItemProtocol）
+let copy = ActionSheetItem(title: "复制", type: .normal, tag: "Copy")
+copy.action = { /* 处理复制 */ }
+
+let delete = ActionSheetItem(title: "删除", type: .destructive, tag: "Delete")
+delete.action = { /* 处理删除 */ }
+
+Appearance.chat.messageLongPressedActions = [copy, delete]
+
+// 2) 调整菜单行高（可选）
+Appearance.actionSheetRowHeight = 56
+\`\`\`\n\n`;
+        resultText += `说明：以上配置来自 \`Appearance.md\`（iOS ChatUIKit）。请在初始化 UIKit 前设置。\n`;
+        break;
+
+      case 'message_content_style':
+        resultText += `### 消息内容展示样式\n\n`;
+        resultText += `**Appearance 快速索引**：\n`;
+        resultText += `- \`Appearance.chat.contentStyle\`：消息内容显示元素组合\n\n`;
+        resultText += `\`\`\`swift
+// 可选项：.withReply, .withAvatar, .withNickName, .withDateAndTime
+Appearance.chat.contentStyle = [.withReply, .withAvatar, .withNickName, .withDateAndTime]
+\`\`\`\n\n`;
+        resultText += `说明：以上配置来自 \`Appearance.md\`（iOS ChatUIKit）。请在初始化 UIKit 前设置。\n`;
+        break;
+
+      case 'hide_message_avatar_nickname':
+        resultText += `### 隐藏消息头像/昵称\n\n`;
+        resultText += `**Appearance 快速索引**：\n`;
+        resultText += `- \`Appearance.chat.contentStyle\`：去掉 \`.withAvatar\` / \`.withNickName\`\n\n`;
+        resultText += `\`\`\`swift
+// 仅保留需要显示的元素
+Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
+\`\`\`\n\n`;
+        resultText += `说明：以上配置来自 \`Appearance.md\`（iOS ChatUIKit）。请在初始化 UIKit 前设置。\n`;
+        break;
+
+      case 'appearance_quick_index':
+        if (entryRouteSummary) {
+          resultText += entryRouteSummary;
+        }
+        resultText += appearanceQuickIndex;
+        resultText += uiOptionsFallback;
+        break;
+
       default:
+        if (entryRouteSummary) {
+          resultText += entryRouteSummary;
+        }
+        if (appearanceQuickIndex) {
+          resultText += appearanceQuickIndex;
+          resultText += uiOptionsFallback;
+        }
+        if (moduleId !== 'chat_uikit') {
+          break;
+        }
         resultText += `### 常用配置项\n\n`;
         resultText += `| 配置项 | 作用 | 示例 |\n`;
         resultText += `|--------|------|------|\n`;
@@ -645,7 +753,305 @@ Appearance.errorHue = 350/360.0       // 红色
         resultText += `使用 \`list_config_options\` 查看所有可配置项。\n`;
     }
 
+    const rgFallback = await this.buildRgFallbackSummary({
+      query: rawQuery,
+      moduleId,
+      platform: normalizedPlatform,
+      subIntent: resolvedSubIntent,
+      configProperty: normalizedConfigProperty
+    });
+    if (rgFallback) {
+      resultText += rgFallback;
+    }
+
     return resultText;
+  }
+
+  private async buildRgFallbackSummary(options: {
+    query?: string;
+    moduleId: string;
+    platform?: string;
+    subIntent?: string;
+    configProperty?: string | null;
+  }): Promise<string> {
+    const { query, moduleId, platform, subIntent, configProperty } = options;
+    if (!query || !platform) return '';
+    if (platform !== 'ios') return '';
+    if (configProperty) return '';
+    if (!this.shouldUseRgFallback(query)) return '';
+    if (subIntent && subIntent !== 'appearance_quick_index') return '';
+
+    const { docRoots, sourceRoots, projectRoot, docBase, sourceBase } = this.getRgSearchRoots(moduleId, platform);
+    if (docRoots.length === 0 && sourceRoots.length === 0) return '';
+
+    const docResult = await this.runRgSearch({
+      query,
+      roots: docRoots,
+      globs: ['*.md'],
+      projectRoot,
+      maxFiles: 4,
+      maxLines: 40
+    });
+
+    const sourceResult = await this.runRgSearch({
+      query,
+      roots: sourceRoots,
+      globs: ['*.swift'],
+      projectRoot,
+      maxFiles: 4,
+      maxLines: 40
+    });
+
+    if (docResult.status === 'none' && sourceResult.status === 'none') {
+      return '';
+    }
+
+    let result = `### 兜底检索（rg）\n\n`;
+
+    if (docResult.status === 'ambiguous' || sourceResult.status === 'ambiguous') {
+      result += `命中结果较多，请提供更具体的关键词（类名/配置项/文件名），以便精确定位。\n\n`;
+    }
+
+    if (docResult.status === 'ok') {
+      result += `**文档候选**\n`;
+      for (const item of docResult.files) {
+        const docPath = this.toDocPath(item.path, docBase);
+        if (!docPath) continue;
+        result += `- \`${docPath}\`（建议：\`read_doc path="${docPath}"\`）\n`;
+      }
+      result += '\n';
+    }
+
+    if (sourceResult.status === 'ok') {
+      result += `**源码候选**\n`;
+      for (const item of sourceResult.files) {
+        const sourcePath = this.toSourcePath(item.path, sourceBase);
+        if (!sourcePath) continue;
+        const lineInfo = item.line ? `:${item.line}` : '';
+        result += `- \`${sourcePath}${lineInfo}\`\n`;
+      }
+      result += '\n';
+    }
+
+    return result;
+  }
+
+  private shouldUseRgFallback(query: string): boolean {
+    const trimmed = query.trim();
+    if (trimmed.length < 2) return false;
+    const hasChinese = /[\u4e00-\u9fa5]{2,}/.test(trimmed);
+    const hasAscii = /[a-zA-Z0-9]{3,}/.test(trimmed);
+    return hasChinese || hasAscii;
+  }
+
+  private getRgSearchRoots(moduleId: string, platform: string) {
+    const projectRoot = path.join(__dirname, '../..');
+    const docBase = path.join(projectRoot, 'data/docs');
+    const sourceBase = path.join(projectRoot, 'data/sources');
+
+    if (platform !== 'ios') {
+      return { docRoots: [], sourceRoots: [], projectRoot, docBase, sourceBase };
+    }
+
+    if (moduleId === 'call_kit') {
+      return {
+        docRoots: [path.join(docBase, 'ios/guides/callkit')],
+        sourceRoots: [path.join(sourceBase, 'ios/EaseCallUIKit')],
+        projectRoot,
+        docBase,
+        sourceBase
+      };
+    }
+
+    return {
+      docRoots: [path.join(docBase, 'ios/guides/chatuikit')],
+      sourceRoots: [path.join(sourceBase, 'ios/EaseChatUIKit')],
+      projectRoot,
+      docBase,
+      sourceBase
+    };
+  }
+
+  private async runRgSearch(options: {
+    query: string;
+    roots: string[];
+    globs: string[];
+    projectRoot: string;
+    maxFiles: number;
+    maxLines: number;
+  }): Promise<{ status: 'ok' | 'ambiguous' | 'none'; files: Array<{ path: string; line?: number }> }> {
+    const { query, roots, globs, projectRoot, maxFiles, maxLines } = options;
+    if (roots.length === 0) return { status: 'none', files: [] };
+
+    const args: string[] = ['-n', '-S', '--no-heading', '--color', 'never', '--max-count', String(maxLines)];
+    for (const glob of globs) {
+      args.push('-g', glob);
+    }
+    args.push('--', query, ...roots.map(root => path.relative(projectRoot, root)));
+
+    try {
+      const { stdout } = await execFileAsync('rg', args, {
+        cwd: projectRoot,
+        maxBuffer: 1024 * 1024
+      });
+      const lines = stdout.trim().split('\n').filter(Boolean);
+      if (lines.length === 0) return { status: 'none', files: [] };
+
+      const fileMap = new Map<string, { path: string; line?: number }>();
+      for (const line of lines) {
+        const first = line.indexOf(':');
+        const second = first === -1 ? -1 : line.indexOf(':', first + 1);
+        if (first === -1 || second === -1) continue;
+        const rawPath = line.slice(0, first);
+        const filePath = path.isAbsolute(rawPath) ? rawPath : path.join(projectRoot, rawPath);
+        const lineNumber = parseInt(line.slice(first + 1, second), 10);
+        if (!fileMap.has(filePath)) {
+          fileMap.set(filePath, {
+            path: filePath,
+            line: Number.isNaN(lineNumber) ? undefined : lineNumber
+          });
+        }
+        if (fileMap.size >= maxFiles && lines.length >= maxLines) {
+          break;
+        }
+      }
+
+      if (fileMap.size > maxFiles || lines.length >= maxLines) {
+        return { status: 'ambiguous', files: [] };
+      }
+
+      return {
+        status: 'ok',
+        files: Array.from(fileMap.values())
+      };
+    } catch (error: any) {
+      if (error?.code === 1) {
+        return { status: 'none', files: [] };
+      }
+      return { status: 'none', files: [] };
+    }
+  }
+
+  private toDocPath(filePath: string, docBase: string): string | null {
+    const normalized = filePath.replace(/\\/g, '/');
+    const marker = docBase.replace(/\\/g, '/') + '/';
+    const index = normalized.indexOf(marker);
+    if (index === -1) return null;
+    return normalized.slice(index + marker.length);
+  }
+
+  private toSourcePath(filePath: string, sourceBase: string): string | null {
+    const normalized = filePath.replace(/\\/g, '/');
+    const marker = sourceBase.replace(/\\/g, '/') + '/';
+    const index = normalized.indexOf(marker);
+    if (index === -1) return null;
+    return normalized.slice(index + marker.length);
+  }
+
+  private resolveModuleId(componentName?: string | null): string {
+    if (!componentName) return 'chat_uikit';
+    const moduleMatch = this.platformCapabilityRegistry.getModuleByAlias(componentName);
+    return moduleMatch?.id || 'chat_uikit';
+  }
+
+  private buildPlatformRoutingNotice(
+    route: PlatformRoute | null,
+    moduleId: string,
+    platform?: string
+  ): string {
+    if (!platform) return '';
+    if (!route) {
+      return `### 平台入口未接入\n\n` +
+        `模块 \`${moduleId}\` 的 \`${platform}\` 入口尚未配置。\n` +
+        `请参考 \`docs/PLATFORM_ENTRY_ROUTING.md\` 接入平台入口路由。\n\n`;
+    }
+    if (route.status !== 'available') {
+      return `### 平台入口未接入\n\n` +
+        `${route.moduleName} 在 \`${platform}\` 平台尚未接入入口路由。\n` +
+        `${route.note ? `备注: ${route.note}\n` : ''}` +
+        `请参考 \`docs/PLATFORM_ENTRY_ROUTING.md\` 接入平台入口路由。\n\n`;
+    }
+    return '';
+  }
+
+  private buildAppearanceQuickIndex(route: PlatformRoute | null): string {
+    if (!route || route.status !== 'available') return '';
+    const appearanceRoute = route.entryRoutes.find(item => item.surface === 'appearance');
+    if (!appearanceRoute) return '';
+
+    let result = `### Appearance 优先入口\n\n`;
+    if (appearanceRoute.docPath) {
+      result += `- 直接查看: \`read_doc path="${appearanceRoute.docPath}"\`\n`;
+    } else if (appearanceRoute.sourcePath) {
+      result += `- 直接查看: \`read_source path="${appearanceRoute.sourcePath}"\`\n`;
+    }
+    if (appearanceRoute.examples && appearanceRoute.examples.length > 0) {
+      for (const example of appearanceRoute.examples) {
+        result += `- ${example}\n`;
+      }
+    }
+    return result + '\n';
+  }
+
+  private buildEntryRouteSummary(route: PlatformRoute | null): string {
+    if (!route || route.status !== 'available') return '';
+    if (!route.entryRoutes || route.entryRoutes.length === 0) return '';
+
+    let result = `### 平台入口路由（${route.moduleName} / ${route.platform}）\n\n`;
+    for (const item of route.entryRoutes) {
+      const label = this.formatEntryRouteLabel(item.surface);
+      const parts: string[] = [];
+      if (item.summary) {
+        parts.push(item.summary);
+      }
+      if (item.docPath) {
+        parts.push(`read_doc: \`${item.docPath}\``);
+      }
+      if (item.sourcePath) {
+        parts.push(`read_source: \`${item.sourcePath}\``);
+      }
+      const detail = parts.length > 0 ? ` - ${parts.join(' | ')}` : '';
+      result += `- ${label}${detail}\n`;
+    }
+    return result + '\n';
+  }
+
+  private formatEntryRouteLabel(surface: string): string {
+    switch (surface) {
+      case 'appearance':
+        return 'Appearance';
+      case 'options':
+        return 'UIOptions / 初始化选项';
+      case 'component_props':
+        return '组件构造参数';
+      case 'theme_tokens':
+        return '主题变量';
+      case 'override':
+        return '源码扩展/继承';
+      case 'source':
+        return '源码入口';
+      default:
+        return surface;
+    }
+  }
+
+  private buildUiOptionsFallback(route: PlatformRoute | null): string {
+    if (!route || route.status !== 'available') return '';
+    const optionsRoute = route.entryRoutes.find(item => item.surface === 'options');
+    if (!optionsRoute) return '';
+
+    let result = `### 未命中 Appearance？\n\n`;
+    if (optionsRoute.docPath) {
+      result += `- 直接查看: \`read_doc path="${optionsRoute.docPath}"\`\n`;
+    }
+    if (optionsRoute.examples && optionsRoute.examples.length > 0) {
+      result += `初始化开关优先看：\n`;
+      for (const example of optionsRoute.examples) {
+        result += `- \`${example}\`\n`;
+      }
+      result += '\n';
+    }
+    return result;
   }
 
   async explainClass(className: string): Promise<string> {

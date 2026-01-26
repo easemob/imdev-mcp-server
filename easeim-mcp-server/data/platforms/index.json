@@ -1,0 +1,83 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-23T12:00:00.000Z",
+  "modules": {
+    "chat_uikit": {
+      "displayName": "ChatUIKit",
+      "aliases": [
+        "EaseChatUIKit",
+        "ChatUIKit",
+        "EaseChatroomUIKit",
+        "ChatroomUIKit",
+        "EaseIMKit",
+        "IMKit",
+        "chatuikit",
+        "chat_uikit"
+      ],
+      "defaultPlatform": "ios",
+      "platforms": {
+        "ios": {
+          "status": "available",
+          "entryRoutes": [
+            {
+              "surface": "appearance",
+              "docPath": "ios/guides/chatuikit/Appearance.md",
+              "summary": "外观/样式/菜单/内容展示的优先入口",
+              "examples": [
+                "通用: Appearance.primaryHue / secondaryHue / errorHue / avatarRadius / actionSheetRowHeight",
+                "聊天: Appearance.chat.bubbleStyle / contentStyle / messageLongPressedActions / inputPlaceHolder",
+                "会话: Appearance.conversation.rowHeight / swipeLeftActions / swipeRightActions",
+                "联系人: Appearance.contact.rowHeight / headerRowHeight / moreActions"
+              ]
+            },
+            {
+              "surface": "options",
+              "summary": "初始化开关/选项",
+              "examples": [
+                "ChatUIKitOptions.option_UI.loadLocalHistoryMessages",
+                "ChatUIKitOptions.option_UI.saveConversationInfo",
+                "ChatUIKitOptions.option_UI.soundOnReceivedNewMessage",
+                "ChatUIKitOptions.option_UI.enableContact"
+              ]
+            }
+          ],
+          "sourceEntrypoints": [
+            "data/sources/ios/EaseChatUIKit/Classes/UI/Core/UIKit/Commons/Appearance.swift"
+          ]
+        },
+        "android": { "status": "planned", "entryRoutes": [], "note": "待接入 Android 入口路由" },
+        "web": { "status": "planned", "entryRoutes": [], "note": "待接入 Web 入口路由" },
+        "rn": { "status": "planned", "entryRoutes": [], "note": "待接入 RN 入口路由" },
+        "flutter": { "status": "planned", "entryRoutes": [], "note": "待接入 Flutter 入口路由" },
+        "harmony": { "status": "planned", "entryRoutes": [], "note": "待接入 鸿蒙 入口路由" }
+      }
+    },
+    "call_kit": {
+      "displayName": "CallKit",
+      "aliases": [
+        "EaseCallUIKit",
+        "CallUIKit",
+        "CallKit",
+        "callkit"
+      ],
+      "defaultPlatform": "ios",
+      "platforms": {
+        "ios": {
+          "status": "available",
+          "entryRoutes": [
+            {
+              "surface": "appearance",
+              "sourcePath": "data/sources/ios/EaseCallUIKit/Classes/Commons/Appearance.swift",
+              "summary": "CallKit 外观配置入口"
+            }
+          ],
+          "sourceEntrypoints": [
+            "data/sources/ios/EaseCallUIKit/Classes/Commons/Appearance.swift"
+          ]
+        },
+        "android": { "status": "planned", "entryRoutes": [], "note": "待接入 Android 入口路由" },
+        "web": { "status": "planned", "entryRoutes": [], "note": "待接入 Web 入口路由" }
+      }
+    }
+  }
+}

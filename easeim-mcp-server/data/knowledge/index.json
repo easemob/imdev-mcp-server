@@ -134,6 +134,119 @@
       "relatedConfigs": [],
       "codeTemplate": "ios:message:message_ext_before_send",
       "difficulty": "low"
+    },
+    {
+      "id": "ios:message_long_press_menu",
+      "scenario": "消息长按菜单样式",
+      "description": "通过 Appearance.chat.messageLongPressedActions 配置长按菜单项",
+      "platform": "ios",
+      "keywords": [
+        "长按菜单",
+        "消息长按",
+        "message long press",
+        "ActionSheet",
+        "messageLongPressedActions"
+      ],
+      "steps": [
+        "在初始化 ChatUIKit 前设置 Appearance.chat.messageLongPressedActions",
+        "使用 ActionSheetItem 配置菜单标题、图标和回调",
+        "如需调整行高，设置 Appearance.actionSheetRowHeight"
+      ],
+      "relatedClasses": [
+        "MessageLongPressMenu",
+        "ActionSheetItem"
+      ],
+      "relatedApis": [],
+      "relatedConfigs": [
+        "Appearance.chat.messageLongPressedActions",
+        "Appearance.actionSheetRowHeight"
+      ],
+      "difficulty": "low"
+    },
+    {
+      "id": "ios:message_content_style",
+      "scenario": "消息内容展示样式",
+      "description": "通过 Appearance.chat.contentStyle 组合消息内容显示元素",
+      "platform": "ios",
+      "keywords": [
+        "内容展示样式",
+        "消息内容样式",
+        "contentStyle",
+        "withAvatar",
+        "withNickName",
+        "withDateAndTime"
+      ],
+      "steps": [
+        "在初始化 ChatUIKit 前设置 Appearance.chat.contentStyle",
+        "组合 .withReply / .withAvatar / .withNickName / .withDateAndTime"
+      ],
+      "relatedClasses": [
+        "MessageCell"
+      ],
+      "relatedApis": [],
+      "relatedConfigs": [
+        "Appearance.chat.contentStyle"
+      ],
+      "difficulty": "low"
+    },
+    {
+      "id": "ios:hide_message_avatar_nickname",
+      "scenario": "隐藏消息头像/昵称",
+      "description": "从 Appearance.chat.contentStyle 移除 .withAvatar / .withNickName",
+      "platform": "ios",
+      "keywords": [
+        "隐藏头像",
+        "隐藏昵称",
+        "不显示头像",
+        "不显示昵称",
+        "hide avatar",
+        "hide nickname"
+      ],
+      "steps": [
+        "设置 Appearance.chat.contentStyle 不包含 .withAvatar / .withNickName",
+        "保留需要显示的元素，如 .withReply / .withDateAndTime"
+      ],
+      "relatedClasses": [
+        "MessageCell"
+      ],
+      "relatedApis": [],
+      "relatedConfigs": [
+        "Appearance.chat.contentStyle"
+      ],
+      "difficulty": "low"
+    },
+    {
+      "id": "ios:appearance_quick_index",
+      "scenario": "Appearance 配置快速索引",
+      "description": "iOS UIKit 外观配置优先入口，找不到再查 ChatUIKitOptions / UIOptions",
+      "platform": "ios",
+      "keywords": [
+        "Appearance",
+        "外观",
+        "样式",
+        "风格",
+        "配置",
+        "开关",
+        "UIOptions",
+        "ChatUIKitOptions"
+      ],
+      "steps": [
+        "优先查阅 Appearance.md（外观/样式/菜单/内容展示）",
+        "使用 Appearance.chat / conversation / contact 的配置项调整 UI",
+        "未命中时检查 ChatUIKitOptions / UIOptions 的初始化开关"
+      ],
+      "relatedClasses": [
+        "Appearance",
+        "ChatUIKitOptions",
+        "UIOptions"
+      ],
+      "relatedApis": [],
+      "relatedConfigs": [
+        "Appearance.chat",
+        "Appearance.conversation",
+        "Appearance.contact"
+      ],
+      "difficulty": "low"
     }
   ]
 }
