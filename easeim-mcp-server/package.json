@@ -12,6 +12,7 @@
     "watch": "tsc --watch",
     "prepare": "npm run build",
     "generate-docs-index": "tsx scripts/generate-docs-index.ts",
+    "generate-docs-shards": "tsx scripts/generate-doc-shards.ts",
     "generate-source-index": "tsx scripts/generate-source-index.ts",
     "generate-config-index": "tsx scripts/generate-config-index.ts",
     "generate-config-shards": "tsx scripts/generate-config-shards.ts",

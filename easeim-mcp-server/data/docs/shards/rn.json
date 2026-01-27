@@ -1,0 +1,2041 @@
+{
+  "version": "3.0.0",
+  "platform": "rn",
+  "lastUpdated": "2026-01-27T02:25:55.945Z",
+  "guides": [
+    {
+      "id": "rn_guides_callkit_callkit-quick-start",
+      "title": "快速开始介绍",
+      "path": "rn/guides/callkit/callkit-quick-start.md",
+      "platform": "rn",
+      "product": "callkit",
+      "keywords": [
+        "rn",
+        "快速开始介绍"
+      ],
+      "description": "创建应用，配置项目，填写必要 callkit 代码，实现1v1音视频通话。"
+    },
+    {
+      "id": "rn_guides_callkit_callkit",
+      "title": "CallKit 介绍",
+      "path": "rn/guides/callkit/callkit.md",
+      "platform": "rn",
+      "product": "callkit",
+      "keywords": [
+        "rn",
+        "CallKit 介绍"
+      ],
+      "description": "CallKit 是一个基于声网 Agora RTC 的音视频通话 UIKit，支持："
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_best_practice",
+      "title": "最佳实践",
+      "path": "rn/guides/chatroomuikit/roomuikit_best_practice.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "最佳实践"
+      ],
+      "description": "初始化是使用 ChatroomUIKit 的必要步骤，需在所有接口方法调用前完成。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_config_item",
+      "title": "可配置项",
+      "path": "rn/guides/chatroomuikit/roomuikit_config_item.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "可配置项"
+      ],
+      "description": "`room uikit sdk` 的组件中包含各种属性，你可以根据需求进行设置。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_customize",
+      "title": "自定义",
+      "path": "rn/guides/chatroomuikit/roomuikit_customize.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "自定义"
+      ],
+      "description": "本文以 `Chatroom` 组件为例介绍如何添加自己的业务逻辑，实现个性化业务需求。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_integrated",
+      "title": "集成 ChatroomUIKit",
+      "path": "rn/guides/chatroomuikit/roomuikit_integrated.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "集成 ChatroomUIKit"
+      ],
+      "description": "使用 ChatroomUIKit 之前，你需要将 ChatroomUIKit 集成到你的应用中。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_overview",
+      "title": "概述",
+      "path": "rn/guides/chatroomuikit/roomuikit_overview.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "概述"
+      ],
+      "description": "环信 ChatroomUIKit 提供 UIKit 的各种组件帮助开发者根据实际业务需求快速搭建聊天室应用。通过该 UIKit，聊天室中的用户可实时交互，发送普通弹幕消息、打赏消息和全局广播等功能。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_quickstart",
+      "title": "集成聊天室 ChatroomUIKit",
+      "path": "rn/guides/chatroomuikit/roomuikit_quickstart.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "集成聊天室 ChatroomUIKit"
+      ],
+      "description": "利用 ChatroomUIKit，你可以轻松实现聊天室内的用户交互。本文介绍如何实现在聊天室中发送消息。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_releasenote",
+      "title": "聊天室 UIKit 更新日志",
+      "path": "rn/guides/chatroomuikit/roomuikit_releasenote.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "聊天室 UIKit 更新日志"
+      ],
+      "description": "升级 react-native 至 0.76。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_run",
+      "title": "跑通示例项目",
+      "path": "rn/guides/chatroomuikit/roomuikit_run.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "跑通示例项目"
+      ],
+      "description": "环信提供一个开源的 ChatroomUIKit 示例项目，演示了如何使用该 UIKit 快速搭建聊天室页面，实现完整业务。"
+    },
+    {
+      "id": "rn_guides_chatroomuikit_roomuikit_theme",
+      "title": "主题",
+      "path": "rn/guides/chatroomuikit/roomuikit_theme.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "主题"
+      ],
+      "description": "ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。每个 UI 组件都会用到主题。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_advancedusage",
+      "title": "进阶用法",
+      "path": "rn/guides/chatuikit/chatuikit_advancedusage.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "进阶用法"
+      ],
+      "description": "`Chat UIKit SDK` UI 组件库提供主题、国际化、常用 UI 组件等。除提供默认使用方式外，该组件库支持自定义组件样式和行为。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_chat",
+      "title": "自定义聊天页面",
+      "path": "rn/guides/chatuikit/chatuikit_chat.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "自定义聊天页面"
+      ],
+      "description": "导航栏组件为通用组件，布局为左中右。自定义方式和方法与会话列表类似，详见[会话列表页面的自定义导航栏部分](chatuikit_conversation.html#自定义导航栏)。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_chat_intro",
+      "title": "聊天页面",
+      "path": "rn/guides/chatuikit/chatuikit_chat_intro.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "聊天页面"
+      ],
+      "description": "聊天页面组件 `ConversationDetail` 主要由输入组件、消息列表组件、菜单组件和导航栏组件组成。该组件支持以下功能："
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_contactlist",
+      "title": "自定义通讯录页面",
+      "path": "rn/guides/chatuikit/chatuikit_contactlist.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "自定义通讯录页面"
+      ],
+      "description": "导航栏组件为通用组件，布局为左中右。自定义方式和方法与会话列表类似，详见[会话列表页面的自定义导航栏部分](chatuikit_conversation.html#自定义导航栏)。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_contactlist_intro",
+      "title": "通讯录页面",
+      "path": "rn/guides/chatuikit/chatuikit_contactlist_intro.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "通讯录页面"
+      ],
+      "description": "通讯录页面组件 `ContactList` 组件显示和管理联系人列表。默认情况下提供添加联系人、删除联系人、添加联系人备注功能。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_conversation",
+      "title": "自定义会话列表页面",
+      "path": "rn/guides/chatuikit/chatuikit_conversation.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "自定义会话列表页面"
+      ],
+      "description": "导航栏组件为通用组件，布局为左中右。该组件 `TopNavigationBar` 支持自定义左中右布局。左中右子组件可选且支持自定义，例如，修改样式、布局、行为、颜色等。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_conversationlist_intro",
+      "title": "会话列表页面",
+      "path": "rn/guides/chatuikit/chatuikit_conversationlist_intro.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "会话列表页面"
+      ],
+      "description": "会话列表组件 `ConversationList` 组件提供显示和管理会话列表。默认情况下，该组件提供创建新会话、删除会话、会话消息免打扰、会话置顶等功能："
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_chat_basic",
+      "title": "聊天页面的基本设置",
+      "path": "rn/guides/chatuikit/chatuikit_custom_chat_basic.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "聊天页面的基本设置"
+      ],
+      "description": "本文介绍如何通过 `ConversationDetail` 组件实现聊天页面的基本设置，包括标题栏显示、消息发送、点击事件监听等常用功能。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_chat_intro",
+      "title": "聊天页面介绍",
+      "path": "rn/guides/chatuikit/chatuikit_custom_chat_intro.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "聊天页面介绍"
+      ],
+      "description": "环信单群聊 UIKit 提供 `ConversationDetail` 组件加载聊天页面。该页面提供如下功能："
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_chat_message_input",
+      "title": "消息输入组件的设置",
+      "path": "rn/guides/chatuikit/chatuikit_custom_chat_message_input.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "消息输入组件的设置"
+      ],
+      "description": "本文介绍如何通过 `MessageInput` 组件实现消息输入的自定义设置，包括发送文本、表情、文件、图片、语音等功能。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_chat_message_list",
+      "title": "消息列表组件的设置",
+      "path": "rn/guides/chatuikit/chatuikit_custom_chat_message_list.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "消息列表组件的设置"
+      ],
+      "description": "本文介绍如何通过 `MessageList` 组件实现消息列表的自定义设置，包括消息显示、点击事件监听、历史消息加载等功能。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_chat_message_pin",
+      "title": "消息置顶组件",
+      "path": "rn/guides/chatuikit/chatuikit_custom_chat_message_pin.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "消息置顶组件"
+      ],
+      "description": "本文介绍如何使用 `MessagePin` 组件实现消息置顶功能，包括显示置顶消息列表、点击置顶消息等操作。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_chat_message_search",
+      "title": "消息搜索组件",
+      "path": "rn/guides/chatuikit/chatuikit_custom_chat_message_search.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "消息搜索组件"
+      ],
+      "description": "本文介绍如何通过 `MessageSearch` 组件实现聊天消息的搜索功能，包括搜索框、搜索结果列表展示等。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_contact_details",
+      "title": "联系人详情页面",
+      "path": "rn/guides/chatuikit/chatuikit_custom_contact_details.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "联系人详情页面"
+      ],
+      "description": "对于联系人详情页面，你可以自定义联系人导航栏、联系人列表项和自定义发消息、音频通话、视频通话等按钮。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_conversation_list_advanced",
+      "title": "会话列表的高级设置",
+      "path": "rn/guides/chatuikit/chatuikit_custom_conversation_list_advanced.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "会话列表的高级设置"
+      ],
+      "description": "本文介绍如何通过 `ConversationList` 组件实现会话列表的高级设置，包括自定义排序、自定义菜单项、自定义列表项样式、列表控制器以及页面状态监听等。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_conversation_list_basic",
+      "title": "会话列表的基本设置",
+      "path": "rn/guides/chatuikit/chatuikit_custom_conversation_list_basic.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "会话列表的基本设置"
+      ],
+      "description": "本文介绍如何通过 `ConversationList` 组件实现会话列表的基本设置，包括标题栏显示、搜索样式、点击事件监听等常用功能。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_conversation_list_intro",
+      "title": "会话列表页面介绍",
+      "path": "rn/guides/chatuikit/chatuikit_custom_conversation_list_intro.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "会话列表页面介绍"
+      ],
+      "description": "`ConversationList` 用于展示当前用户的所有会话，包含单聊和群组聊天（不包括聊天室），并且提供会话搜索、删除、置顶和免打扰功能。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_conversation_list_searchbar",
+      "title": "设置会话搜索",
+      "path": "rn/guides/chatuikit/chatuikit_custom_conversation_list_searchbar.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "设置会话搜索"
+      ],
+      "description": "会话列表页面支持按会话名称搜索会话。你可以设置是否显示搜索栏、自定义搜索样式以及处理搜索点击事件。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_data_model",
+      "title": "数据模型自定义",
+      "path": "rn/guides/chatuikit/chatuikit_custom_data_model.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "数据模型自定义"
+      ],
+      "description": "通过自定义模型，可以修改或者新增自己的数据行为。通过继承 `ChatServiceImpl` 并重载方法，可以实现更灵活的业务逻辑。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_group_details",
+      "title": "群详情页面",
+      "path": "rn/guides/chatuikit/chatuikit_custom_group_details.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "群详情页面"
+      ],
+      "description": "你可以配置群详情页面的导航栏、自定义按钮和群详情列表项等。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_icon",
+      "title": "图标自定义",
+      "path": "rn/guides/chatuikit/chatuikit_custom_icon.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "图标自定义"
+      ],
+      "description": "对于已有的内置的图标，只要找到对应图标名字就可以进行替换。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_text",
+      "title": "文案自定义",
+      "path": "rn/guides/chatuikit/chatuikit_custom_text.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "文案自定义"
+      ],
+      "description": "UIKit 提供了灵活的文案自定义机制，允许你修改界面上显示的所有文本内容。你可以替换单个文案，也可以添加完整的自定义语言版本。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_theme",
+      "title": "主题和调色板",
+      "path": "rn/guides/chatuikit/chatuikit_custom_theme.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "主题和调色板"
+      ],
+      "description": "UIKit 提供了强大的主题定制能力，让您可以根据品牌需求自定义界面外观。主题系统主要包括三个核心部分："
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_custom_titlebar",
+      "title": "页面标题栏",
+      "path": "rn/guides/chatuikit/chatuikit_custom_titlebar.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "页面标题栏"
+      ],
+      "description": "`TopNavigationBar` 是一个灵活的标题栏组件，采用左-中-右三段式布局。聊天页面、会话列表页面、联系人列表页面等均使用 `TopNavigationBar`。该组件支持完全自定义左侧、中部和右侧的子组件，让你可以根据业务需求灵活定制标题栏。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_design_guide",
+      "title": "chatuikit_design_guide.md",
+      "path": "rn/guides/chatuikit/chatuikit_design_guide.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn"
+      ],
+      "description": ""
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_integrated",
+      "title": "集成单群聊 UIKit",
+      "path": "rn/guides/chatuikit/chatuikit_integrated.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "集成单群聊 UIKit"
+      ],
+      "description": "本文介绍如何将 `Chat UIKit SDK` 集成到现有的项目中。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_internationalization",
+      "title": "国际化",
+      "path": "rn/guides/chatuikit/chatuikit_internationalization.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "国际化"
+      ],
+      "description": "`Chat UIKit SDK` UI 组件库提供国际化服务，默认提供中文和英文两种语言包。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_overview",
+      "title": "概述",
+      "path": "rn/guides/chatuikit/chatuikit_overview.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "概述"
+      ],
+      "description": "环信聊天 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_quickstart",
+      "title": "集成单群聊 UIKit",
+      "path": "rn/guides/chatuikit/chatuikit_quickstart.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "集成单群聊 UIKit"
+      ],
+      "description": "下面介绍如何集成单群聊 UIKit。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_run",
+      "title": "跑通示例项目",
+      "path": "rn/guides/chatuikit/chatuikit_run.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "跑通示例项目"
+      ],
+      "description": "环信提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_theme",
+      "title": "主题",
+      "path": "rn/guides/chatuikit/chatuikit_theme.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "主题"
+      ],
+      "description": "`Chat UIKit SDK` UI 组件库内置浅色和深色主题，默认为浅色主题。"
+    },
+    {
+      "id": "rn_guides_chatuikit_chatuikit_userinfo",
+      "title": "用户提供数据",
+      "path": "rn/guides/chatuikit/chatuikit_userinfo.md",
+      "platform": "rn",
+      "product": "chatuikit",
+      "keywords": [
+        "rn",
+        "用户提供数据"
+      ],
+      "description": "`Chat UIKit SDK` UI 组件库数据分类主要包括：会话列表、联系人列表、群组列表、群成员列表、新请求列表和聊天页面。这些 UI 组件都需要显示头像和昵称。UI 库组件内部默认没有这些数据，而是提供了一套解决方案，由用户提供数据，UI 组件库使用提供的数据显示头像和昵称。如果用户没有提供数据，则使用默认头像和 ID。"
+    },
+    {
+      "id": "rn_guides_sdk_beginner_guide",
+      "title": "入门指引",
+      "path": "rn/guides/sdk/beginner_guide.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "入门指引"
+      ],
+      "description": "环信即时通讯 IM 可实现发送文本、图片、位置、语音、视频等各类型消息，提供单聊、群聊、聊天室、离线推送、账号鉴权、用户属性和用户关系等服务。"
+    },
+    {
+      "id": "rn_guides_sdk_connection",
+      "title": "连接",
+      "path": "rn/guides/sdk/connection.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "连接"
+      ],
+      "description": "应用客户端成功连接到环信服务器后，才能使用环信即时通讯 SDK 的收发消息等功能。"
+    },
+    {
+      "id": "rn_guides_sdk_conversation_delete",
+      "title": "删除会话",
+      "path": "rn/guides/sdk/conversation_delete.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "删除会话"
+      ],
+      "description": "删除好友或退出群组后，SDK 不会自动删除对应的单聊或群聊会话。你可以调用相应的接口从服务器和本地删除单个会话及其历史消息。"
+    },
+    {
+      "id": "rn_guides_sdk_conversation_list",
+      "title": "会话列表",
+      "path": "rn/guides/sdk/conversation_list.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "会话列表"
+      ],
+      "description": "对于单聊、群组聊天和聊天室会话，用户发消息时 SDK 会自动创建会话并将会话添加至用户的会话列表。"
+    },
+    {
+      "id": "rn_guides_sdk_conversation_mark",
+      "title": "会话标记",
+      "path": "rn/guides/sdk/conversation_mark.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "会话标记"
+      ],
+      "description": "某些情况下，你可能需要对会话添加标记，例如会话标星或将会话标为已读或未读。即时通讯云 IM 支持对单聊和群聊会话添加标记，最大支持 20 个标记，所以一个会话最多可添加 20 个标记。"
+    },
+    {
+      "id": "rn_guides_sdk_conversation_overview",
+      "title": "会话介绍",
+      "path": "rn/guides/sdk/conversation_overview.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "会话介绍"
+      ],
+      "description": "会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息、查看或清空历史消息等操作。"
+    },
+    {
+      "id": "rn_guides_sdk_conversation_pin",
+      "title": "会话置顶",
+      "path": "rn/guides/sdk/conversation_pin.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "会话置顶"
+      ],
+      "description": "会话置顶指将单聊或群聊会话固定在会话列表的顶部，方便用户查找。例如，将重点会话置顶，可快速定位会话。"
+    },
+    {
+      "id": "rn_guides_sdk_conversation_receipt",
+      "title": "会话已读回执",
+      "path": "rn/guides/sdk/conversation_receipt.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "会话已读回执"
+      ],
+      "description": "会话已读回执指接收方进入会话页面，阅读会话中的所有消息后，调用接口向服务器发送会话已读回执，服务器将该回执回调给消息发送方，消息发送方将会收到会话已读回调。在多端多设备登录下，接收方的其他设备也会收到该回调。"
+    },
+    {
+      "id": "rn_guides_sdk_conversation_unread",
+      "title": "conversation_unread.md",
+      "path": "rn/guides/sdk/conversation_unread.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn"
+      ],
+      "description": ""
+    },
+    {
+      "id": "rn_guides_sdk_error",
+      "title": "常见错误码",
+      "path": "rn/guides/sdk/error.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "常见错误码"
+      ],
+      "description": "[Android 平台](/document/android/error.html)"
+    },
+    {
+      "id": "rn_guides_sdk_faq",
+      "title": "常见问题",
+      "path": "rn/guides/sdk/faq.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "常见问题"
+      ],
+      "description": "需要通过 `keytool` 工具生成该文件。例如，`keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname \"CN=Android Debug,O=Android,C=US\"`"
+    },
+    {
+      "id": "rn_guides_sdk_group_attributes",
+      "title": "管理群组属性",
+      "path": "rn/guides/sdk/group_attributes.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理群组属性"
+      ],
+      "description": "群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM React Native SDK 在实时互动 app 中实现群组属性相关功能。"
+    },
+    {
+      "id": "rn_guides_sdk_group_manage",
+      "title": "创建管理群组和监听群组事件",
+      "path": "rn/guides/sdk/group_manage.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "创建管理群组和监听群组事件"
+      ],
+      "description": "群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM React Native SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。"
+    },
+    {
+      "id": "rn_guides_sdk_group_members",
+      "title": "管理群组成员",
+      "path": "rn/guides/sdk/group_members.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理群组成员"
+      ],
+      "description": "群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM React Native SDK 在实时互动 app 中实现群组成员管理相关功能。"
+    },
+    {
+      "id": "rn_guides_sdk_group_overview",
+      "title": "group_overview.md",
+      "path": "rn/guides/sdk/group_overview.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn"
+      ],
+      "description": ""
+    },
+    {
+      "id": "rn_guides_sdk_initialization",
+      "title": "初始化",
+      "path": "rn/guides/sdk/initialization.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "初始化"
+      ],
+      "description": "初始化是使用 SDK 的必要步骤，需在所有接口方法调用前完成。"
+    },
+    {
+      "id": "rn_guides_sdk_integration",
+      "title": "添加依赖",
+      "path": "rn/guides/sdk/integration.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "添加依赖"
+      ],
+      "description": "本文介绍如何将环信即时通讯 IM SDK 集成到你的 React Native 项目中。"
+    },
+    {
+      "id": "rn_guides_sdk_limitation",
+      "title": "limitation.md",
+      "path": "rn/guides/sdk/limitation.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn"
+      ],
+      "description": ""
+    },
+    {
+      "id": "rn_guides_sdk_log",
+      "title": "SDK 日志",
+      "path": "rn/guides/sdk/log.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "SDK 日志"
+      ],
+      "description": "环信即时通讯 IM 日志记录 SDK 相关的信息和事件。环信技术支持团队帮你排查问题时可能会请你发送 SDK 日志。"
+    },
+    {
+      "id": "rn_guides_sdk_login",
+      "title": "登录",
+      "path": "rn/guides/sdk/login.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "登录"
+      ],
+      "description": "初始化 IM SDK 后，你需要首先调用接口登录。登录成功后，才能使用 IM 的功能。"
+    },
+    {
+      "id": "rn_guides_sdk_message_delete",
+      "title": "删除消息",
+      "path": "rn/guides/sdk/message_delete.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "删除消息"
+      ],
+      "description": "本文介绍用户如何单向删除服务端以及删除本地的历史消息。"
+    },
+    {
+      "id": "rn_guides_sdk_message_deliver_only_online",
+      "title": "消息仅投递在线用户",
+      "path": "rn/guides/sdk/message_deliver_only_online.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "消息仅投递在线用户"
+      ],
+      "description": "环信即时通讯 IM 支持只将消息投递给在线用户。若接收方不在线，则无法收到消息。该功能用于实现应用只需要向在线用户进行展示目的，例如，利用透传消息实现群投票的票数实时变化, 只有在线用户需要关注实时变化的动态, 离线用户只需要再次上线时获取最终状态。"
+    },
+    {
+      "id": "rn_guides_sdk_message_extension",
+      "title": "消息扩展",
+      "path": "rn/guides/sdk/message_extension.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "消息扩展"
+      ],
+      "description": "当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型，例如消息中需要携带被回复的消息内容或者是图文消息等场景。"
+    },
+    {
+      "id": "rn_guides_sdk_message_forward",
+      "title": "转发消息",
+      "path": "rn/guides/sdk/message_forward.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "转发消息"
+      ],
+      "description": "转发消息即将会话中发送成功或收到的消息转发给别人，例如，用户 A 向用户 B 发送了一条消息，用户 B 收到后，将其转发给用户 C。"
+    },
+    {
+      "id": "rn_guides_sdk_message_import_insert",
+      "title": "导入和插入消息",
+      "path": "rn/guides/sdk/message_import_insert.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "导入和插入消息"
+      ],
+      "description": "本文介绍环信即时通讯 IM React Native SDK 如何在本地导入消息。"
+    },
+    {
+      "id": "rn_guides_sdk_message_modify",
+      "title": "修改消息",
+      "path": "rn/guides/sdk/message_modify.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "修改消息"
+      ],
+      "description": "对于单聊或群组会话中已经发送成功的文本消息，SDK 支持对这些消息的内容进行修改。"
+    },
+    {
+      "id": "rn_guides_sdk_message_overview",
+      "title": "message_overview.md",
+      "path": "rn/guides/sdk/message_overview.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn"
+      ],
+      "description": ""
+    },
+    {
+      "id": "rn_guides_sdk_message_pin",
+      "title": "消息置顶",
+      "path": "rn/guides/sdk/message_pin.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "消息置顶"
+      ],
+      "description": "消息置顶指将会话中的消息固定在会话顶部，方便会话中的所有用户快速查看重要消息。"
+    },
+    {
+      "id": "rn_guides_sdk_message_recall",
+      "title": "撤回消息",
+      "path": "rn/guides/sdk/message_recall.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "撤回消息"
+      ],
+      "description": "单聊、群聊和聊天室聊天支持撤回一条发送成功的消息："
+    },
+    {
+      "id": "rn_guides_sdk_message_receipt",
+      "title": "实现消息回执",
+      "path": "rn/guides/sdk/message_receipt.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "实现消息回执"
+      ],
+      "description": "**单聊会话支持消息送达回执和消息已读回执**，发送方发送消息后可及时了解接收方是否及时收到并阅读了消息。"
+    },
+    {
+      "id": "rn_guides_sdk_message_receive",
+      "title": "接收消息",
+      "path": "rn/guides/sdk/message_receive.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "接收消息"
+      ],
+      "description": "环信即时通讯 IM React Native SDK 通过 `ChatMessageEventListener` 类实现文本、图片、音频、视频和文件等类型的消息的接收。"
+    },
+    {
+      "id": "rn_guides_sdk_message_retrieve",
+      "title": "获取历史消息",
+      "path": "rn/guides/sdk/message_retrieve.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "获取历史消息"
+      ],
+      "description": "本文介绍环信即时通讯 IM React Native SDK 如何从服务器和本地获取历史消息。"
+    },
+    {
+      "id": "rn_guides_sdk_message_search",
+      "title": "搜索消息",
+      "path": "rn/guides/sdk/message_search.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "搜索消息"
+      ],
+      "description": "本文介绍环信即时通讯 IM React Native SDK 如何搜索本地消息。"
+    },
+    {
+      "id": "rn_guides_sdk_message_send",
+      "title": "发送消息",
+      "path": "rn/guides/sdk/message_send.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "发送消息"
+      ],
+      "description": "环信即时通讯 IM React Native SDK 通过 `ChatManager` 类和 `ChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送。"
+    },
+    {
+      "id": "rn_guides_sdk_message_target",
+      "title": "定向消息",
+      "path": "rn/guides/sdk/message_target.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "定向消息"
+      ],
+      "description": "发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。"
+    },
+    {
+      "id": "rn_guides_sdk_message_translation",
+      "title": "翻译",
+      "path": "rn/guides/sdk/message_translation.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "翻译"
+      ],
+      "description": "为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM React Native SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译："
+    },
+    {
+      "id": "rn_guides_sdk_message_update",
+      "title": "更新消息",
+      "path": "rn/guides/sdk/message_update.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "更新消息"
+      ],
+      "description": "本文介绍环信即时通讯 IM React Native SDK 如何更新本地消息。"
+    },
+    {
+      "id": "rn_guides_sdk_moderation",
+      "title": "消息审核（举报）",
+      "path": "rn/guides/sdk/moderation.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "消息审核（举报）"
+      ],
+      "description": "即时通讯 IM SDK 提供消息举报接口。你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在[环信控制台](https://console.easemob.com/user/login)展示。你可在环信控制台查看举报记录，并进行相应处理。"
+    },
+    {
+      "id": "rn_guides_sdk_multi_device",
+      "title": "在多个设备上登录",
+      "path": "rn/guides/sdk/multi_device.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "在多个设备上登录"
+      ],
+      "description": "即时通讯 IM 支持同一账号在多个设备上登录。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。"
+    },
+    {
+      "id": "rn_guides_sdk_overview",
+      "title": "SDK 集成概述",
+      "path": "rn/guides/sdk/overview.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "SDK 集成概述"
+      ],
+      "description": "介绍 React Native 集成相关内容。"
+    },
+    {
+      "id": "rn_guides_sdk_presence",
+      "title": "在线状态订阅",
+      "path": "rn/guides/sdk/presence.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "在线状态订阅"
+      ],
+      "description": "用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户离在线状态实时同步)。"
+    },
+    {
+      "id": "rn_guides_sdk_quickstart",
+      "title": "快速开始",
+      "path": "rn/guides/sdk/quickstart.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "快速开始"
+      ],
+      "description": "本文介绍如何极简集成环信即时通讯 React-Native SDK，在你的 app 中实现发送和接收单聊文本消息。"
+    },
+    {
+      "id": "rn_guides_sdk_reaction",
+      "title": "消息表情回复",
+      "path": "rn/guides/sdk/reaction.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "消息表情回复"
+      ],
+      "description": "环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。"
+    },
+    {
+      "id": "rn_guides_sdk_room_attributes",
+      "title": "管理聊天室属性",
+      "path": "rn/guides/sdk/room_attributes.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理聊天室属性"
+      ],
+      "description": "聊天室是支持多人沟通的即时通讯系统。聊天室属性可分为聊天室名称、描述和公告等基本属性和自定义属性（key-value）。若聊天室基本属性不满足业务要求，用户可增加自定义属性并同步给所有成员。利用自定义属性可以存储直播聊天室的类型、狼人杀等游戏中的角色信息和游戏状态以及实现语聊房的麦位管理和同步等。聊天室自定义属性以键值对（key-value）形式存储，属性信息变更会实时同步给聊天室成员。"
+    },
+    {
+      "id": "rn_guides_sdk_room_manage",
+      "title": "创建和管理聊天室以及监听事件",
+      "path": "rn/guides/sdk/room_manage.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "创建和管理聊天室以及监听事件"
+      ],
+      "description": "聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系环信商务经理。"
+    },
+    {
+      "id": "rn_guides_sdk_room_members",
+      "title": "管理聊天室成员",
+      "path": "rn/guides/sdk/room_members.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理聊天室成员"
+      ],
+      "description": "聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM React Native SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。"
+    },
+    {
+      "id": "rn_guides_sdk_room_overview",
+      "title": "room_overview.md",
+      "path": "rn/guides/sdk/room_overview.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn"
+      ],
+      "description": ""
+    },
+    {
+      "id": "rn_guides_sdk_thread",
+      "title": "管理子区",
+      "path": "rn/guides/sdk/thread.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理子区"
+      ],
+      "description": "子区是群组成员的子集，是支持多人沟通的即时通讯系统。使用子区功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通。详见 [环信控制台文档](/product/console/basic_conversation_group_chatroom.html#消息话题)。"
+    },
+    {
+      "id": "rn_guides_sdk_thread_message",
+      "title": "管理子区消息",
+      "path": "rn/guides/sdk/thread_message.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理子区消息"
+      ],
+      "description": "子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。使用子区消息功能前，你需要在 [环信控制台](https://console.easemob.com/user/login)开通。详见 [环信控制台文档](/product/console/basic_conversation_group_chatroom.html#消息话题)。"
+    },
+    {
+      "id": "rn_guides_sdk_typing_indication",
+      "title": "通过透传消息实现输入指示器",
+      "path": "rn/guides/sdk/typing_indication.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "通过透传消息实现输入指示器"
+      ],
+      "description": "输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。"
+    },
+    {
+      "id": "rn_guides_sdk_user_relationship",
+      "title": "管理用户关系",
+      "path": "rn/guides/sdk/user_relationship.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理用户关系"
+      ],
+      "description": "用户登录后，可进行添加联系人、获取好友列表等操作。"
+    },
+    {
+      "id": "rn_guides_sdk_userprofile",
+      "title": "管理用户属性",
+      "path": "rn/guides/sdk/userprofile.md",
+      "platform": "rn",
+      "product": "sdk",
+      "keywords": [
+        "rn",
+        "管理用户属性"
+      ],
+      "description": "用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。"
+    }
+  ],
+  "apiModules": [
+    {
+      "id": "rn_api_README",
+      "name": "README.md",
+      "description": "",
+      "docPath": "rn/api/README.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatClient",
+      "name": "Class: ChatClient",
+      "description": "Defined in: ChatClient.ts:77",
+      "docPath": "rn/api/classes/ChatClient.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatCmdMessageBody",
+      "name": "Class: ChatCmdMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1538",
+      "docPath": "rn/api/classes/ChatCmdMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatCombineMessageBody",
+      "name": "Class: ChatCombineMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1590",
+      "docPath": "rn/api/classes/ChatCombineMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatContact",
+      "name": "Class: ChatContact",
+      "description": "Defined in: common/ChatContact.ts:4",
+      "docPath": "rn/api/classes/ChatContact.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatContactManager",
+      "name": "Class: ChatContactManager",
+      "description": "Defined in: ChatContactManager.ts:34",
+      "docPath": "rn/api/classes/ChatContactManager.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatConversation",
+      "name": "Class: ChatConversation",
+      "description": "Defined in: common/ChatConversation.ts:122",
+      "docPath": "rn/api/classes/ChatConversation.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatConversationFetchOptions",
+      "name": "Class: ChatConversationFetchOptions",
+      "description": "Defined in: common/ChatConversation.ts:846",
+      "docPath": "rn/api/classes/ChatConversationFetchOptions.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatCursorResult",
+      "name": "Class: ChatCursorResult\\<T\\>",
+      "description": "Defined in: common/ChatCursorResult.ts:6",
+      "docPath": "rn/api/classes/ChatCursorResult.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatCustomMessageBody",
+      "name": "Class: ChatCustomMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1561",
+      "docPath": "rn/api/classes/ChatCustomMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatDeviceInfo",
+      "name": "Class: ChatDeviceInfo",
+      "description": "Defined in: common/ChatDeviceInfo.ts:4",
+      "docPath": "rn/api/classes/ChatDeviceInfo.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatError",
+      "name": "Class: ChatError",
+      "description": "Defined in: common/ChatError.ts:4",
+      "docPath": "rn/api/classes/ChatError.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatException",
+      "name": "Class: ChatException",
+      "description": "Defined in: common/ChatError.ts:27",
+      "docPath": "rn/api/classes/ChatException.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatFetchMessageOptions",
+      "name": "Class: ChatFetchMessageOptions",
+      "description": "Defined in: common/ChatMessage.ts:1665",
+      "docPath": "rn/api/classes/ChatFetchMessageOptions.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatFileMessageBody",
+      "name": "Class: ChatFileMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1327",
+      "docPath": "rn/api/classes/ChatFileMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatGroup",
+      "name": "Class: ChatGroup",
+      "description": "Defined in: common/ChatGroup.ts:165",
+      "docPath": "rn/api/classes/ChatGroup.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatGroupInfo",
+      "name": "Class: ChatGroupInfo",
+      "description": "Defined in: common/ChatGroup.ts:376",
+      "docPath": "rn/api/classes/ChatGroupInfo.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatGroupManager",
+      "name": "Class: ChatGroupManager",
+      "description": "Defined in: ChatGroupManager.ts:75",
+      "docPath": "rn/api/classes/ChatGroupManager.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatGroupMember",
+      "name": "Class: ChatGroupMember",
+      "description": "Defined in: common/ChatGroup.ts:425",
+      "docPath": "rn/api/classes/ChatGroupMember.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatGroupMessageAck",
+      "name": "Class: ChatGroupMessageAck",
+      "description": "Defined in: common/ChatGroup.ts:116",
+      "docPath": "rn/api/classes/ChatGroupMessageAck.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatGroupOptions",
+      "name": "Class: ChatGroupOptions",
+      "description": "Defined in: common/ChatGroup.ts:279",
+      "docPath": "rn/api/classes/ChatGroupOptions.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatGroupSharedFile",
+      "name": "Class: ChatGroupSharedFile",
+      "description": "Defined in: common/ChatGroup.ts:337",
+      "docPath": "rn/api/classes/ChatGroupSharedFile.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatImageMessageBody",
+      "name": "Class: ChatImageMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1346",
+      "docPath": "rn/api/classes/ChatImageMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatLocationMessageBody",
+      "name": "Class: ChatLocationMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1237",
+      "docPath": "rn/api/classes/ChatLocationMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatLog",
+      "name": "Class: ChatLog",
+      "description": "Defined in: common/ChatLog.ts:12",
+      "docPath": "rn/api/classes/ChatLog.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatManager",
+      "name": "Class: ChatManager",
+      "description": "Defined in: ChatManager.ts:187",
+      "docPath": "rn/api/classes/ChatManager.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatMessage",
+      "name": "Class: ChatMessage",
+      "description": "Defined in: common/ChatMessage.ts:355",
+      "docPath": "rn/api/classes/ChatMessage.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatMessageBody",
+      "name": "Abstract Class: ChatMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1155",
+      "docPath": "rn/api/classes/ChatMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatMessagePinInfo",
+      "name": "Class: ChatMessagePinInfo",
+      "description": "Defined in: common/ChatMessage.ts:1646",
+      "docPath": "rn/api/classes/ChatMessagePinInfo.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatMessageReaction",
+      "name": "Class: ChatMessageReaction",
+      "description": "Defined in: common/ChatMessageReaction.ts:53",
+      "docPath": "rn/api/classes/ChatMessageReaction.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatMessageReactionEvent",
+      "name": "Class: ChatMessageReactionEvent",
+      "description": "Defined in: common/ChatMessageReaction.ts:88",
+      "docPath": "rn/api/classes/ChatMessageReactionEvent.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatMessageThread",
+      "name": "Class: ChatMessageThread",
+      "description": "Defined in: common/ChatMessageThread.ts:6",
+      "docPath": "rn/api/classes/ChatMessageThread.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatMessageThreadEvent",
+      "name": "Class: ChatMessageThreadEvent",
+      "description": "Defined in: common/ChatMessageThread.ts:132",
+      "docPath": "rn/api/classes/ChatMessageThreadEvent.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatOptions",
+      "name": "Class: ChatOptions",
+      "description": "Defined in: common/ChatOptions.ts:8",
+      "docPath": "rn/api/classes/ChatOptions.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatPageResult",
+      "name": "Class: ChatPageResult\\<T\\>",
+      "description": "Defined in: common/ChatPageResult.ts:8",
+      "docPath": "rn/api/classes/ChatPageResult.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatPresence",
+      "name": "Class: ChatPresence",
+      "description": "Defined in: common/ChatPresence.ts:4",
+      "docPath": "rn/api/classes/ChatPresence.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatPresenceManager",
+      "name": "Class: ChatPresenceManager",
+      "description": "Defined in: ChatPresenceManager.ts:19",
+      "docPath": "rn/api/classes/ChatPresenceManager.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatPushConfig",
+      "name": "Class: ChatPushConfig",
+      "description": "Defined in: common/ChatPushConfig.ts:32",
+      "docPath": "rn/api/classes/ChatPushConfig.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatPushManager",
+      "name": "Class: ChatPushManager",
+      "description": "Defined in: ChatPushManager.ts:33",
+      "docPath": "rn/api/classes/ChatPushManager.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatPushOption",
+      "name": "Class: ChatPushOption",
+      "description": "Defined in: common/ChatPushConfig.ts:67",
+      "docPath": "rn/api/classes/ChatPushOption.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatRTCTokenInfo",
+      "name": "Class: ChatRTCTokenInfo",
+      "description": "Defined in: common/ChatRTCTokenInfo.ts:4",
+      "docPath": "rn/api/classes/ChatRTCTokenInfo.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatReactionOperation",
+      "name": "Class: ChatReactionOperation",
+      "description": "Defined in: common/ChatMessageReaction.ts:12",
+      "docPath": "rn/api/classes/ChatReactionOperation.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatRecalledMessageInfo",
+      "name": "Class: ChatRecalledMessageInfo",
+      "description": "Defined in: common/ChatMessage.ts:1717",
+      "docPath": "rn/api/classes/ChatRecalledMessageInfo.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatRoom",
+      "name": "Class: ChatRoom",
+      "description": "Defined in: common/ChatRoom.ts:63",
+      "docPath": "rn/api/classes/ChatRoom.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatRoomManager",
+      "name": "Class: ChatRoomManager",
+      "description": "Defined in: ChatRoomManager.ts:50",
+      "docPath": "rn/api/classes/ChatRoomManager.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatSilentModeParam",
+      "name": "Class: ChatSilentModeParam",
+      "description": "Defined in: common/ChatSilentMode.ts:65",
+      "docPath": "rn/api/classes/ChatSilentModeParam.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatSilentModeResult",
+      "name": "Class: ChatSilentModeResult",
+      "description": "Defined in: common/ChatSilentMode.ts:164",
+      "docPath": "rn/api/classes/ChatSilentModeResult.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatSilentModeTime",
+      "name": "Class: ChatSilentModeTime",
+      "description": "Defined in: common/ChatSilentMode.ts:42",
+      "docPath": "rn/api/classes/ChatSilentModeTime.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatTextMessageBody",
+      "name": "Class: ChatTextMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1194",
+      "docPath": "rn/api/classes/ChatTextMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatTranslateLanguage",
+      "name": "Class: ChatTranslateLanguage",
+      "description": "Defined in: common/ChatTranslateLanguage.ts:4",
+      "docPath": "rn/api/classes/ChatTranslateLanguage.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatUserInfo",
+      "name": "Class: ChatUserInfo",
+      "description": "Defined in: common/ChatUserInfo.ts:4",
+      "docPath": "rn/api/classes/ChatUserInfo.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatUserInfoManager",
+      "name": "Class: ChatUserInfoManager",
+      "description": "Defined in: ChatUserInfoManager.ts:13",
+      "docPath": "rn/api/classes/ChatUserInfoManager.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatVideoMessageBody",
+      "name": "Class: ChatVideoMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1428",
+      "docPath": "rn/api/classes/ChatVideoMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_classes_ChatVoiceMessageBody",
+      "name": "Class: ChatVoiceMessageBody",
+      "description": "Defined in: common/ChatMessage.ts:1502",
+      "docPath": "rn/api/classes/ChatVoiceMessageBody.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatAreaCode",
+      "name": "Enumeration: ChatAreaCode",
+      "description": "Defined in: common/ChatAreaCode.ts:1",
+      "docPath": "rn/api/enumerations/ChatAreaCode.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatConversationMarkType",
+      "name": "Enumeration: ChatConversationMarkType",
+      "description": "Defined in: common/ChatConversation.ts:56",
+      "docPath": "rn/api/enumerations/ChatConversationMarkType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatConversationType",
+      "name": "Enumeration: ChatConversationType",
+      "description": "Defined in: common/ChatConversation.ts:36",
+      "docPath": "rn/api/enumerations/ChatConversationType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatDownloadStatus",
+      "name": "Enumeration: ChatDownloadStatus",
+      "description": "Defined in: common/ChatMessage.ts:66",
+      "docPath": "rn/api/enumerations/ChatDownloadStatus.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatGroupPermissionType",
+      "name": "Enumeration: ChatGroupPermissionType",
+      "description": "Defined in: common/ChatGroup.ts:28",
+      "docPath": "rn/api/enumerations/ChatGroupPermissionType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatGroupStyle",
+      "name": "Enumeration: ChatGroupStyle",
+      "description": "Defined in: common/ChatGroup.ts:6",
+      "docPath": "rn/api/enumerations/ChatGroupStyle.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMessageChatType",
+      "name": "Enumeration: ChatMessageChatType",
+      "description": "Defined in: common/ChatMessage.ts:12",
+      "docPath": "rn/api/enumerations/ChatMessageChatType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMessageDirection",
+      "name": "Enumeration: ChatMessageDirection",
+      "description": "Defined in: common/ChatMessage.ts:30",
+      "docPath": "rn/api/enumerations/ChatMessageDirection.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMessagePinOperation",
+      "name": "Enumeration: ChatMessagePinOperation",
+      "description": "Defined in: common/ChatMessage.ts:152",
+      "docPath": "rn/api/enumerations/ChatMessagePinOperation.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMessageSearchScope",
+      "name": "Enumeration: ChatMessageSearchScope",
+      "description": "Defined in: common/ChatMessage.ts:166",
+      "docPath": "rn/api/enumerations/ChatMessageSearchScope.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMessageStatus",
+      "name": "Enumeration: ChatMessageStatus",
+      "description": "Defined in: common/ChatMessage.ts:44",
+      "docPath": "rn/api/enumerations/ChatMessageStatus.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMessageThreadOperation",
+      "name": "Enumeration: ChatMessageThreadOperation",
+      "description": "Defined in: common/ChatMessageThread.ts:74",
+      "docPath": "rn/api/enumerations/ChatMessageThreadOperation.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMessageType",
+      "name": "Enumeration: ChatMessageType",
+      "description": "Defined in: common/ChatMessage.ts:88",
+      "docPath": "rn/api/enumerations/ChatMessageType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatMultiDeviceEvent",
+      "name": "Enumeration: ChatMultiDeviceEvent",
+      "description": "Defined in: ChatEvents.ts:20",
+      "docPath": "rn/api/enumerations/ChatMultiDeviceEvent.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatPushDisplayStyle",
+      "name": "Enumeration: ChatPushDisplayStyle",
+      "description": "Defined in: common/ChatPushConfig.ts:6",
+      "docPath": "rn/api/enumerations/ChatPushDisplayStyle.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatPushRemindType",
+      "name": "Enumeration: ChatPushRemindType",
+      "description": "Defined in: common/ChatSilentMode.ts:24",
+      "docPath": "rn/api/enumerations/ChatPushRemindType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatReactionOperate",
+      "name": "Enumeration: ChatReactionOperate",
+      "description": "Defined in: common/ChatMessageReaction.ts:4",
+      "docPath": "rn/api/enumerations/ChatReactionOperate.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatRoomMessagePriority",
+      "name": "Enumeration: ChatRoomMessagePriority",
+      "description": "Defined in: common/ChatMessage.ts:134",
+      "docPath": "rn/api/enumerations/ChatRoomMessagePriority.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatRoomPermissionType",
+      "name": "Enumeration: ChatRoomPermissionType",
+      "description": "Defined in: common/ChatRoom.ts:4",
+      "docPath": "rn/api/enumerations/ChatRoomPermissionType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatSearchDirection",
+      "name": "Enumeration: ChatSearchDirection",
+      "description": "Defined in: common/ChatConversation.ts:20",
+      "docPath": "rn/api/enumerations/ChatSearchDirection.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_enumerations_ChatSilentModeParamType",
+      "name": "Enumeration: ChatSilentModeParamType",
+      "description": "Defined in: common/ChatSilentMode.ts:6",
+      "docPath": "rn/api/enumerations/ChatSilentModeParamType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatConversationTypeFromNumber",
+      "name": "Function: ChatConversationTypeFromNumber()",
+      "description": "> **ChatConversationTypeFromNumber**(`params`): [`ChatConversationType`](../enumerations/ChatConversationType.md)",
+      "docPath": "rn/api/functions/ChatConversationTypeFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatConversationTypeToString",
+      "name": "Function: ChatConversationTypeToString()",
+      "description": "> **ChatConversationTypeToString**(`params`): `string`",
+      "docPath": "rn/api/functions/ChatConversationTypeToString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatDownloadStatusFromNumber",
+      "name": "Function: ChatDownloadStatusFromNumber()",
+      "description": "> **ChatDownloadStatusFromNumber**(`params`): [`ChatDownloadStatus`](../enumerations/ChatDownloadStatus.md)",
+      "docPath": "rn/api/functions/ChatDownloadStatusFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatDownloadStatusToString",
+      "name": "Function: ChatDownloadStatusToString()",
+      "description": "> **ChatDownloadStatusToString**(`params`): `string`",
+      "docPath": "rn/api/functions/ChatDownloadStatusToString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatGroupPermissionTypeFromNumber",
+      "name": "Function: ChatGroupPermissionTypeFromNumber()",
+      "description": "> **ChatGroupPermissionTypeFromNumber**(`params`): [`ChatGroupPermissionType`](../enumerations/ChatGroupPermissionType.md)",
+      "docPath": "rn/api/functions/ChatGroupPermissionTypeFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatGroupPermissionTypeToString",
+      "name": "Function: ChatGroupPermissionTypeToString()",
+      "description": "> **ChatGroupPermissionTypeToString**(`params`): `string`",
+      "docPath": "rn/api/functions/ChatGroupPermissionTypeToString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatGroupStyleFromNumber",
+      "name": "Function: ChatGroupStyleFromNumber()",
+      "description": "> **ChatGroupStyleFromNumber**(`params`): [`ChatGroupStyle`](../enumerations/ChatGroupStyle.md)",
+      "docPath": "rn/api/functions/ChatGroupStyleFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatGroupStyleToString",
+      "name": "Function: ChatGroupStyleToString()",
+      "description": "> **ChatGroupStyleToString**(`params`): `string`",
+      "docPath": "rn/api/functions/ChatGroupStyleToString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatMessageChatTypeFromNumber",
+      "name": "Function: ChatMessageChatTypeFromNumber()",
+      "description": "> **ChatMessageChatTypeFromNumber**(`params`): [`ChatMessageChatType`](../enumerations/ChatMessageChatType.md)",
+      "docPath": "rn/api/functions/ChatMessageChatTypeFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatMessageDirectionFromString",
+      "name": "Function: ChatMessageDirectionFromString()",
+      "description": "> **ChatMessageDirectionFromString**(`params`): [`ChatMessageDirection`](../enumerations/ChatMessageDirection.md)",
+      "docPath": "rn/api/functions/ChatMessageDirectionFromString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatMessageStatusFromNumber",
+      "name": "Function: ChatMessageStatusFromNumber()",
+      "description": "> **ChatMessageStatusFromNumber**(`params`): [`ChatMessageStatus`](../enumerations/ChatMessageStatus.md)",
+      "docPath": "rn/api/functions/ChatMessageStatusFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatMessageStatusToString",
+      "name": "Function: ChatMessageStatusToString()",
+      "description": "> **ChatMessageStatusToString**(`params`): `string`",
+      "docPath": "rn/api/functions/ChatMessageStatusToString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatMessageThreadOperationFromNumber",
+      "name": "Function: ChatMessageThreadOperationFromNumber()",
+      "description": "> **ChatMessageThreadOperationFromNumber**(`type`): [`UnKnown`](../enumerations/ChatMessageThreadOperation.md#unknown) \\| [`Create`](../enumerations/ChatMessageThreadOperation.md#create) \\| [`Update`](../enumerations/ChatMessageThreadOperation.md#update) \\| [`Delete`](../enumerations/ChatMessageThreadOperation.md#delete) \\| [`Update_Msg`](../enumerations/ChatMessageThreadOperation.md#update_msg)",
+      "docPath": "rn/api/functions/ChatMessageThreadOperationFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatMessageTypeFromString",
+      "name": "Function: ChatMessageTypeFromString()",
+      "description": "> **ChatMessageTypeFromString**(`params`): [`ChatMessageType`](../enumerations/ChatMessageType.md)",
+      "docPath": "rn/api/functions/ChatMessageTypeFromString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatMultiDeviceEventFromNumber",
+      "name": "Function: ChatMultiDeviceEventFromNumber()",
+      "description": "> **ChatMultiDeviceEventFromNumber**(`params`): [`ChatMultiDeviceEvent`](../enumerations/ChatMultiDeviceEvent.md)",
+      "docPath": "rn/api/functions/ChatMultiDeviceEventFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatPushRemindTypeFromNumber",
+      "name": "Function: ChatPushRemindTypeFromNumber()",
+      "description": "> **ChatPushRemindTypeFromNumber**(`params`): [`ChatPushRemindType`](../enumerations/ChatPushRemindType.md)",
+      "docPath": "rn/api/functions/ChatPushRemindTypeFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatPushRemindTypeToNumber",
+      "name": "Function: ChatPushRemindTypeToNumber()",
+      "description": "> **ChatPushRemindTypeToNumber**(`params`): `number`",
+      "docPath": "rn/api/functions/ChatPushRemindTypeToNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatRoomPermissionTypeFromNumber",
+      "name": "Function: ChatRoomPermissionTypeFromNumber()",
+      "description": "> **ChatRoomPermissionTypeFromNumber**(`params`): [`ChatRoomPermissionType`](../enumerations/ChatRoomPermissionType.md)",
+      "docPath": "rn/api/functions/ChatRoomPermissionTypeFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatRoomPermissionTypeToString",
+      "name": "Function: ChatRoomPermissionTypeToString()",
+      "description": "> **ChatRoomPermissionTypeToString**(`params`): `string`",
+      "docPath": "rn/api/functions/ChatRoomPermissionTypeToString.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatSilentModeParamTypeFromNumber",
+      "name": "Function: ChatSilentModeParamTypeFromNumber()",
+      "description": "> **ChatSilentModeParamTypeFromNumber**(`params`): [`ChatSilentModeParamType`](../enumerations/ChatSilentModeParamType.md)",
+      "docPath": "rn/api/functions/ChatSilentModeParamTypeFromNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_functions_ChatSilentModeParamTypeToNumber",
+      "name": "Function: ChatSilentModeParamTypeToNumber()",
+      "description": "> **ChatSilentModeParamTypeToNumber**(`params`): `number`",
+      "docPath": "rn/api/functions/ChatSilentModeParamTypeToNumber.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_globals",
+      "name": "react-native-chat-sdk",
+      "description": "- [ChatAreaCode](enumerations/ChatAreaCode.md)",
+      "docPath": "rn/api/globals.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatConnectEventListener",
+      "name": "Interface: ChatConnectEventListener",
+      "description": "Defined in: ChatEvents.ts:339",
+      "docPath": "rn/api/interfaces/ChatConnectEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatContactEventListener",
+      "name": "Interface: ChatContactEventListener",
+      "description": "Defined in: ChatEvents.ts:1035",
+      "docPath": "rn/api/interfaces/ChatContactEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatCustomEventListener",
+      "name": "Interface: ChatCustomEventListener",
+      "description": "Defined in: ChatEvents.ts:520",
+      "docPath": "rn/api/interfaces/ChatCustomEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatExceptionEventListener",
+      "name": "Interface: ChatExceptionEventListener",
+      "description": "Defined in: ChatEvents.ts:1283",
+      "docPath": "rn/api/interfaces/ChatExceptionEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatGroupEventListener",
+      "name": "Interface: ChatGroupEventListener",
+      "description": "Defined in: ChatEvents.ts:717",
+      "docPath": "rn/api/interfaces/ChatGroupEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatGroupFileStatusCallback",
+      "name": "Interface: ChatGroupFileStatusCallback",
+      "description": "Defined in: common/ChatGroup.ts:394",
+      "docPath": "rn/api/interfaces/ChatGroupFileStatusCallback.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatMessageEventListener",
+      "name": "Interface: ChatMessageEventListener",
+      "description": "Defined in: ChatEvents.ts:573",
+      "docPath": "rn/api/interfaces/ChatMessageEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatMessageStatusCallback",
+      "name": "Interface: ChatMessageStatusCallback",
+      "description": "Defined in: common/ChatMessage.ts:319",
+      "docPath": "rn/api/interfaces/ChatMessageStatusCallback.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatMultiDeviceEventListener",
+      "name": "Interface: ChatMultiDeviceEventListener",
+      "description": "Defined in: ChatEvents.ts:455",
+      "docPath": "rn/api/interfaces/ChatMultiDeviceEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatPresenceEventListener",
+      "name": "Interface: ChatPresenceEventListener",
+      "description": "Defined in: ChatEvents.ts:1274",
+      "docPath": "rn/api/interfaces/ChatPresenceEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_interfaces_ChatRoomEventListener",
+      "name": "Interface: ChatRoomEventListener",
+      "description": "Defined in: ChatEvents.ts:1082",
+      "docPath": "rn/api/interfaces/ChatRoomEventListener.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_type-aliases_PrintFunctionType",
+      "name": "Type Alias: PrintFunctionType()",
+      "description": "> **PrintFunctionType** = (`type`, `message?`, ...`optionalParams`) => `void`",
+      "docPath": "rn/api/type-aliases/PrintFunctionType.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_variables_CHAT_VERSION",
+      "name": "Variable: CHAT\\_VERSION",
+      "description": "> `const` **CHAT\\_VERSION**: `\"1.13.0\"` = `'1.13.0'`",
+      "docPath": "rn/api/variables/CHAT_VERSION.md",
+      "platform": "rn",
+      "product": "general"
+    },
+    {
+      "id": "rn_api_variables_chatlog",
+      "name": "Variable: chatlog",
+      "description": "> `const` **chatlog**: [`ChatLog`](../classes/ChatLog.md)",
+      "docPath": "rn/api/variables/chatlog.md",
+      "platform": "rn",
+      "product": "general"
+    }
+  ],
+  "stats": {
+    "guideCount": 95,
+    "apiModuleCount": 111,
+    "products": [
+      "callkit",
+      "chatuikit",
+      "sdk",
+      "general"
+    ]
+  }
+}

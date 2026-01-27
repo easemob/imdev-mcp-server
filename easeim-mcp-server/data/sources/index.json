@@ -1,9 +1,10 @@
 {
   "version": "2.1.0",
-  "lastUpdated": "2026-01-16T01:52:10.324Z",
+  "lastUpdated": "2026-01-27T02:29:00.689Z",
   "platforms": [
     "android",
     "ios",
+    "rn",
     "web"
   ],
   "files": [
@@ -10990,6 +10991,713 @@
         "LanguageConvertor"
       ],
       "lines": 52
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/__native__/NativeChatCallkit.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 11
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/assets/icons.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 266
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallConst.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 30
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallDevice.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 44
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallError.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 34
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallListener.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 42
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallManager.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 42
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallManagerImpl.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 2384
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallOption.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 26
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallRelationship.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 103
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallSignallingHandler.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 550
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallTimeoutHandler.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 167
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallUser.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 18
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/CallViewListener.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 208
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/call/index.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 9
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/rename.chat.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 4
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/utils/utils.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 114
+    },
+    {
+      "path": "rn/EaseCallUIKit/src/version.ts",
+      "platform": "rn",
+      "component": "EaseCallUIKit",
+      "classes": [],
+      "lines": 5
+    },
+    {
+      "path": "rn/EaseChat/src/ChatClient.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 1204
+    },
+    {
+      "path": "rn/EaseChat/src/ChatContactManager.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 417
+    },
+    {
+      "path": "rn/EaseChat/src/ChatEvents.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 1298
+    },
+    {
+      "path": "rn/EaseChat/src/ChatGroupManager.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 1832
+    },
+    {
+      "path": "rn/EaseChat/src/ChatManager.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 3965
+    },
+    {
+      "path": "rn/EaseChat/src/ChatPresenceManager.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 199
+    },
+    {
+      "path": "rn/EaseChat/src/ChatPushManager.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 328
+    },
+    {
+      "path": "rn/EaseChat/src/ChatRoomManager.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 1174
+    },
+    {
+      "path": "rn/EaseChat/src/ChatUserInfoManager.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 108
+    },
+    {
+      "path": "rn/EaseChat/src/__internal__/Base.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 98
+    },
+    {
+      "path": "rn/EaseChat/src/__internal__/Consts.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 396
+    },
+    {
+      "path": "rn/EaseChat/src/__internal__/ErrorHandler.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 38
+    },
+    {
+      "path": "rn/EaseChat/src/__internal__/Factory.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 31
+    },
+    {
+      "path": "rn/EaseChat/src/__internal__/Native.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 18
+    },
+    {
+      "path": "rn/EaseChat/src/__internal__/Utils.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 15
+    },
+    {
+      "path": "rn/EaseChat/src/__specs__/NativeChatSdk.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 19
+    },
+    {
+      "path": "rn/EaseChat/src/__specs__/index.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 41
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatAreaCode.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 10
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatConst.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 4
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatContact.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 18
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatConversation.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 901
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatCursorResult.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 28
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatDeviceInfo.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 28
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatError.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 28
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatGroup.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 448
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatLog.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 448
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatMessage.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 1762
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatMessageReaction.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 117
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatMessageThread.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 154
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatOptions.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 446
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatPageResult.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 32
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatPresence.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 43
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatPushConfig.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 84
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatRTCTokenInfo.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 25
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatRoom.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 194
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatSilentMode.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 273
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatTranslateLanguage.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 23
+    },
+    {
+      "path": "rn/EaseChat/src/common/ChatUserInfo.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 69
+    },
+    {
+      "path": "rn/EaseChat/src/index.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 32
+    },
+    {
+      "path": "rn/EaseChat/src/version.ts",
+      "platform": "rn",
+      "component": "EaseChat",
+      "classes": [],
+      "lines": 5
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/__native__/NativeChatUikit.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 11
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/assets/faces.sort.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 57
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/assets/faces.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 57
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/assets/icons.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 2093
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/config.local.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 5
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/rename.chat.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 4
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/ui/hooks/useFrameAnimationController.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 196
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/Queue.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 33
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/Sequence.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 27
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/colorConverter.const.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 13
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/colorConverter.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 541
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/emojiConvert.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 73
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/file.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 62
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/format.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 97
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/function.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 174
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/index.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 18
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/language.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 34
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/mergeObjects.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 28
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/permission.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 66
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/pinyin.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 30
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/platform.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 233
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/singleton.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 21
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/split.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 47
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/types.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 6
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/utils/uuid.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 6
+    },
+    {
+      "path": "rn/EaseChatUIKit/src/version.ts",
+      "platform": "rn",
+      "component": "EaseChatUIKit",
+      "classes": [],
+      "lines": 5
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/__native__/NativeChatRoom.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 11
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/assets/faces.sort.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 57
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/assets/faces.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 57
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/assets/icons.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 1769
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/config.local.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 5
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/rename.chat.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 4
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/Queue.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 33
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/Sequence.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 27
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/Stack.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 36
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/colorConverter.const.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 13
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/colorConverter.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 541
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/format.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 32
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/function.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 165
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/index.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 10
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/language.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 26
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/utils/mergeObjects.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 28
+    },
+    {
+      "path": "rn/EaseChatroomUIKit/src/version.ts",
+      "platform": "rn",
+      "component": "EaseChatroomUIKit",
+      "classes": [],
+      "lines": 5
     },
     {
       "path": "web/EaseCallUIKit/module/callkit/components/index.ts",

@@ -1,10 +1,11 @@
 {
   "version": "3.0.0",
-  "lastUpdated": "2026-01-15T07:45:58.288Z",
+  "lastUpdated": "2026-01-27T02:25:55.945Z",
   "description": "文档索引清单 - 支持按平台分片加载",
   "platforms": [
     "android",
     "ios",
+    "rn",
     "web"
   ],
   "shards": {
@@ -44,6 +45,23 @@
         "ipad"
       ]
     },
+    "rn": {
+      "path": "shards/rn.json",
+      "platform": "rn",
+      "guideCount": 95,
+      "apiModuleCount": 111,
+      "errorCodeCount": 0,
+      "sizeBytes": 76811,
+      "keywords": [
+        "rn",
+        "react-native",
+        "cross-platform",
+        "javascript",
+        "typescript",
+        "android",
+        "ios"
+      ]
+    },
     "web": {
       "path": "shards/web.json",
       "platform": "web",
@@ -65,13 +83,13 @@
     "errorCodes": {
       "path": "shards/error-codes.json",
       "description": "跨平台共享的错误码索引",
-      "count": 99,
-      "sizeBytes": 45987
+      "count": 103,
+      "sizeBytes": 48202
     }
   },
   "stats": {
-    "totalGuides": 94,
-    "totalApiModules": 185,
-    "totalErrorCodes": 99
+    "totalGuides": 189,
+    "totalApiModules": 296,
+    "totalErrorCodes": 103
   }
 }

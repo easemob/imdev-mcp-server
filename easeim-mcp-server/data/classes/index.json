@@ -1,44 +1,25 @@
 {
   "version": "1.0.0",
   "lastUpdated": "2026-01-16T08:00:00.000Z",
-  "platforms": [
-    "common",
-    "ios",
-    "android",
-    "web",
-    "flutter",
-    "unity"
-  ],
+  "platforms": ["common", "ios", "android", "web", "flutter", "unity", "rn"],
   "classes": [
     {
       "name": "CustomMessageCell",
       "description": "自定义消息 Cell 的基类，用于展示自定义类型的消息",
       "superclass": "MessageCell",
-      "protocols": [
-        "ThemeSwitchProtocol"
-      ],
+      "protocols": ["ThemeSwitchProtocol"],
       "isOpen": true,
       "file": "EaseChatUIKit/Classes/UI/Components/Chat/Cells/CustomMessageCell.swift",
-      "keyMethods": [
-        "refresh(entity:)",
-        "switchTheme(style:)"
-      ],
-      "keyProperties": [
-        "content",
-        "towards"
-      ],
-      "usageScenarios": [
-        "custom_message"
-      ],
+      "keyMethods": ["refresh(entity:)", "switchTheme(style:)"],
+      "keyProperties": ["content", "towards"],
+      "usageScenarios": ["custom_message"],
       "platform": "ios"
     },
     {
       "name": "MessageCell",
       "description": "消息 Cell 的基类，所有消息类型的 Cell 都继承自它",
       "superclass": "UITableViewCell",
-      "protocols": [
-        "ThemeSwitchProtocol"
-      ],
+      "protocols": ["ThemeSwitchProtocol"],
       "isOpen": true,
       "file": "EaseChatUIKit/Classes/UI/Components/Chat/Cells/MessageCell.swift",
       "keyMethods": [
@@ -56,10 +37,7 @@
         "avatar",
         "nickName"
       ],
-      "usageScenarios": [
-        "custom_message",
-        "custom_bubble_style"
-      ],
+      "usageScenarios": ["custom_message", "custom_bubble_style"],
       "platform": "ios"
     },
     {
@@ -82,20 +60,14 @@
         "content",
         "replySize"
       ],
-      "usageScenarios": [
-        "custom_message",
-        "text_style_customization"
-      ],
+      "usageScenarios": ["custom_message", "text_style_customization"],
       "platform": "ios"
     },
     {
       "name": "MessageListController",
       "description": "消息列表页面控制器，管理消息的展示和交互",
       "superclass": "UIViewController",
-      "protocols": [
-        "MessageListDriverEventsListener",
-        "ThemeSwitchProtocol"
-      ],
+      "protocols": ["MessageListDriverEventsListener", "ThemeSwitchProtocol"],
       "isOpen": true,
       "file": "EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift",
       "keyMethods": [
@@ -104,12 +76,7 @@
         "processMessage(item:message:)",
         "sendMessage()"
       ],
-      "keyProperties": [
-        "viewModel",
-        "messageContainer",
-        "profile",
-        "chatType"
-      ],
+      "keyProperties": ["viewModel", "messageContainer", "profile", "chatType"],
       "usageScenarios": [
         "custom_message",
         "add_attachment_menu",
@@ -136,32 +103,19 @@
         "MessageViewController",
         "MessageRenderEntity"
       ],
-      "usageScenarios": [
-        "custom_message"
-      ],
+      "usageScenarios": ["custom_message"],
       "platform": "ios"
     },
     {
       "name": "ActionSheetItem",
       "description": "操作菜单项，用于定义菜单的标题、图标、类型等",
       "superclass": null,
-      "protocols": [
-        "ActionSheetItemProtocol"
-      ],
+      "protocols": ["ActionSheetItemProtocol"],
       "isOpen": false,
       "file": "EaseChatUIKit/Classes/UI/Core/UIKit/Commons/ActionSheetItem.swift",
       "keyMethods": [],
-      "keyProperties": [
-        "title",
-        "type",
-        "tag",
-        "image",
-        "action"
-      ],
-      "usageScenarios": [
-        "add_attachment_menu",
-        "message_long_press_menu"
-      ],
+      "keyProperties": ["title", "type", "tag", "image", "action"],
+      "usageScenarios": ["add_attachment_menu", "message_long_press_menu"],
       "platform": "ios"
     }
   ],
