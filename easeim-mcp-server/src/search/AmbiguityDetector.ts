@@ -292,6 +292,8 @@ export class AmbiguityDetector {
       web: 'Web（JavaScript/TypeScript）',
       flutter: 'Flutter（Dart）',
       unity: 'Unity（C#）',
+      rn: 'React Native（JavaScript/TypeScript）',
+      harmony: 'HarmonyOS（ArkTS）',
       all: '所有平台'
     };
     return descriptions[platform] || platform;

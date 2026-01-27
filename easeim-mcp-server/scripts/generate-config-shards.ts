@@ -12,18 +12,18 @@
  * - 支持 LRU 缓存自动淘汰不常用分片
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // 路径配置
-const DATA_DIR = path.join(__dirname, '../data/configs');
-const INDEX_PATH = path.join(DATA_DIR, 'index.json');
-const MANIFEST_PATH = path.join(DATA_DIR, 'manifest.json');
-const SHARDS_DIR = path.join(DATA_DIR, 'shards');
+const DATA_DIR = path.join(__dirname, "../data/configs");
+const INDEX_PATH = path.join(DATA_DIR, "index.json");
+const MANIFEST_PATH = path.join(DATA_DIR, "manifest.json");
+const SHARDS_DIR = path.join(DATA_DIR, "shards");
 
 // 确保 shards 目录存在
 if (!fs.existsSync(SHARDS_DIR)) {
@@ -42,7 +42,7 @@ interface ConfigProperty {
 
 interface ExtensionPoint {
   name: string;
-  type: 'protocol' | 'class';
+  type: "protocol" | "class";
   description?: string;
   file: string;
   line: number;
@@ -102,20 +102,33 @@ interface Manifest {
  */
 function extractPlatformFromPath(filePath: string): string {
   // 从路径中提取平台，例如 "ios/EaseChatUIKit/..." -> "ios"
-  const parts = filePath.split('/');
+  const parts = filePath.split("/");
   if (parts.length > 0) {
     const platform = parts[0].toLowerCase();
-    if (['ios', 'android', 'flutter', 'web', 'unity'].includes(platform)) {
+    if (
+      [
+        "ios",
+        "android",
+        "flutter",
+        "web",
+        "unity",
+        "rn",
+        "react-native",
+      ].includes(platform)
+    ) {
       return platform;
     }
   }
-  return 'ios'; // 默认平台
+  return "ios"; // 默认平台
 }
 
 /**
  * 从组件名称推断平台
  */
-function inferPlatformFromComponent(componentName: string, component: ComponentConfig): string {
+function inferPlatformFromComponent(
+  componentName: string,
+  component: ComponentConfig,
+): string {
   // 优先从配置属性的文件路径推断
   if (component.configProperties.length > 0) {
     return extractPlatformFromPath(component.configProperties[0].file);
@@ -125,13 +138,30 @@ function inferPlatformFromComponent(componentName: string, component: ComponentC
   if (component.extensionPoints.length > 0) {
     return extractPlatformFromPath(component.extensionPoints[0].file);
   }
-
+  // 从组件名称推断 (格式: platform/component)
+  const parts = componentName.split("/");
+  if (parts.length > 1) {
+    const platform = parts[0].toLowerCase();
+    if (
+      [
+        "ios",
+        "android",
+        "flutter",
+        "web",
+        "unity",
+        "rn",
+        "react-native",
+      ].includes(platform)
+    ) {
+      return platform;
+    }
+  }
   // 默认平台
-  return 'ios';
+  return "ios";
 }
 
 function main() {
-  console.log('📦 开始生成配置索引分片...\n');
+  console.log("📦 开始生成配置索引分片...\n");
 
   // 读取完整索引
   if (!fs.existsSync(INDEX_PATH)) {
@@ -139,26 +169,33 @@ function main() {
     process.exit(1);
   }
 
-  const indexContent = fs.readFileSync(INDEX_PATH, 'utf-8');
+  const indexContent = fs.readFileSync(INDEX_PATH, "utf-8");
   const index: ConfigIndex = JSON.parse(indexContent);
 
   const componentCount = Object.keys(index.components).length;
-  const configPropertyCount = Object.values(index.components)
-    .reduce((sum, c) => sum + c.configProperties.length, 0);
-  const extensionPointCount = Object.values(index.components)
-    .reduce((sum, c) => sum + c.extensionPoints.length, 0);
+  const configPropertyCount = Object.values(index.components).reduce(
+    (sum, c) => sum + c.configProperties.length,
+    0,
+  );
+  const extensionPointCount = Object.values(index.components).reduce(
+    (sum, c) => sum + c.extensionPoints.length,
+    0,
+  );
 
   console.log(`📖 读取索引文件: ${INDEX_PATH}`);
   console.log(`   - 版本: ${index.version}`);
   console.log(`   - 组件数量: ${componentCount}`);
   console.log(`   - 配置属性数量: ${configPropertyCount}`);
   console.log(`   - 扩展点数量: ${extensionPointCount}`);
-  console.log('');
+  console.log("");
 
   const now = new Date().toISOString();
 
   // 按平台分组组件
-  const platformComponents: Record<string, Record<string, ComponentConfig>> = {};
+  const platformComponents: Record<
+    string,
+    Record<string, ComponentConfig>
+  > = {};
 
   for (const [componentName, component] of Object.entries(index.components)) {
     const platform = inferPlatformFromComponent(componentName, component);
@@ -167,7 +204,7 @@ function main() {
       platformComponents[platform] = {};
     }
 
-    platformComponents[platform][componentName] = component;
+    platformComponents[platform][component.name] = component;
   }
 
   const platforms = Object.keys(platformComponents);
@@ -180,10 +217,14 @@ function main() {
     const components = platformComponents[platform];
     const componentNames = Object.keys(components);
 
-    const platformConfigPropertyCount = Object.values(components)
-      .reduce((sum, c) => sum + c.configProperties.length, 0);
-    const platformExtensionPointCount = Object.values(components)
-      .reduce((sum, c) => sum + c.extensionPoints.length, 0);
+    const platformConfigPropertyCount = Object.values(components).reduce(
+      (sum, c) => sum + c.configProperties.length,
+      0,
+    );
+    const platformExtensionPointCount = Object.values(components).reduce(
+      (sum, c) => sum + c.extensionPoints.length,
+      0,
+    );
 
     // 创建平台分片
     const platformShard: PlatformShard = {
@@ -194,8 +235,8 @@ function main() {
       stats: {
         componentCount: componentNames.length,
         configPropertyCount: platformConfigPropertyCount,
-        extensionPointCount: platformExtensionPointCount
-      }
+        extensionPointCount: platformExtensionPointCount,
+      },
     };
 
     // 写入分片文件
@@ -204,7 +245,7 @@ function main() {
     const shardContent = JSON.stringify(platformShard, null, 2);
     fs.writeFileSync(shardFullPath, shardContent);
 
-    const sizeBytes = Buffer.byteLength(shardContent, 'utf-8');
+    const sizeBytes = Buffer.byteLength(shardContent, "utf-8");
 
     shards[platform] = {
       path: shardPath,
@@ -213,7 +254,7 @@ function main() {
       configPropertyCount: platformConfigPropertyCount,
       extensionPointCount: platformExtensionPointCount,
       sizeBytes,
-      components: componentNames
+      components: componentNames,
     };
 
     console.log(`   ✅ 生成分片: ${shardPath}`);
@@ -224,39 +265,44 @@ function main() {
   }
 
   // 生成 manifest
-  console.log('\n📋 生成清单文件...');
+  console.log("\n📋 生成清单文件...");
 
   const manifest: Manifest = {
     version: index.version,
     lastUpdated: now,
-    description: '配置索引清单 - 支持按平台分片加载',
+    description: "配置索引清单 - 支持按平台分片加载",
     platforms,
     shards,
     stats: {
       totalComponents: componentCount,
       totalConfigProperties: configPropertyCount,
-      totalExtensionPoints: extensionPointCount
-    }
+      totalExtensionPoints: extensionPointCount,
+    },
   };
 
   const manifestContent = JSON.stringify(manifest, null, 2);
   fs.writeFileSync(MANIFEST_PATH, manifestContent);
 
-  const manifestSizeBytes = Buffer.byteLength(manifestContent, 'utf-8');
-  const originalSizeBytes = Buffer.byteLength(indexContent, 'utf-8');
-  const totalShardsSizeBytes = Object.values(shards).reduce((sum, s) => sum + s.sizeBytes, 0);
+  const manifestSizeBytes = Buffer.byteLength(manifestContent, "utf-8");
+  const originalSizeBytes = Buffer.byteLength(indexContent, "utf-8");
+  const totalShardsSizeBytes = Object.values(shards).reduce(
+    (sum, s) => sum + s.sizeBytes,
+    0,
+  );
 
   console.log(`   ✅ 生成清单: manifest.json`);
   console.log(`      - 大小: ${(manifestSizeBytes / 1024).toFixed(2)} KB`);
 
   // 输出统计信息
-  console.log('\n📊 分片统计:');
+  console.log("\n📊 分片统计:");
   console.log(`   原始索引大小: ${(originalSizeBytes / 1024).toFixed(2)} KB`);
   console.log(`   清单文件大小: ${(manifestSizeBytes / 1024).toFixed(2)} KB`);
   console.log(`   分片总大小: ${(totalShardsSizeBytes / 1024).toFixed(2)} KB`);
-  console.log(`   启动时内存节省: ${((originalSizeBytes - manifestSizeBytes) / 1024).toFixed(2)} KB (${((1 - manifestSizeBytes / originalSizeBytes) * 100).toFixed(1)}%)`);
+  console.log(
+    `   启动时内存节省: ${((originalSizeBytes - manifestSizeBytes) / 1024).toFixed(2)} KB (${((1 - manifestSizeBytes / originalSizeBytes) * 100).toFixed(1)}%)`,
+  );
 
-  console.log('\n✨ 配置索引分片生成完成!');
+  console.log("\n✨ 配置索引分片生成完成!");
 }
 
 main();

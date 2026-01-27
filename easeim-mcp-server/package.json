@@ -14,6 +14,7 @@
     "generate-docs-index": "tsx scripts/generate-docs-index.ts",
     "generate-source-index": "tsx scripts/generate-source-index.ts",
     "generate-config-index": "tsx scripts/generate-config-index.ts",
+    "generate-config-shards": "tsx scripts/generate-config-shards.ts",
     "analyze-config-impact": "tsx scripts/analyze-config-impact.ts",
     "generate-template-shards": "tsx scripts/generate-template-shards.ts",
     "generate-knowledge-shards": "tsx scripts/generate-knowledge-shards.ts",
