@@ -1,17 +1,18 @@
 {
-  "version": "2.0.0",
-  "lastUpdated": "2026-01-15T07:46:03.289Z",
+  "version": "2.1.0",
+  "lastUpdated": "2026-01-27T03:04:04.202Z",
   "platforms": [
     "android",
     "ios",
+    "rn",
     "web"
   ],
   "shards": {
     "EaseCallUIKit": {
       "path": "shards/EaseCallUIKit.json",
-      "fileCount": 151,
-      "symbolCount": 1538,
-      "sizeBytes": 523610,
+      "fileCount": 169,
+      "symbolCount": 2265,
+      "sizeBytes": 1233991,
       "classes": [
         "CallKitClient",
         "CallErrorType",
@@ -68,8 +69,8 @@
     "EaseChatDemo": {
       "path": "shards/EaseChatDemo.json",
       "fileCount": 171,
-      "symbolCount": 1402,
-      "sizeBytes": 491651,
+      "symbolCount": 1757,
+      "sizeBytes": 931150,
       "classes": [
         "DemoApplication",
         "DemoHelper",
@@ -125,9 +126,9 @@
     },
     "EaseChatUIKit": {
       "path": "shards/EaseChatUIKit.json",
-      "fileCount": 750,
-      "symbolCount": 7589,
-      "sizeBytes": 2822324,
+      "fileCount": 776,
+      "symbolCount": 9388,
+      "sizeBytes": 5619310,
       "classes": [
         "ChatUIKitClient",
         "ChatUIKitConfig",
@@ -183,9 +184,9 @@
     },
     "EaseChatroomUIKit": {
       "path": "shards/EaseChatroomUIKit.json",
-      "fileCount": 192,
-      "symbolCount": 1484,
-      "sizeBytes": 544774,
+      "fileCount": 209,
+      "symbolCount": 2248,
+      "sizeBytes": 1310072,
       "classes": [
         "UIChatroomService",
         "ComposeChatListController",
@@ -239,6 +240,13 @@
         "UserInfoProtocol"
       ]
     },
+    "EaseChat": {
+      "path": "shards/EaseChat.json",
+      "fileCount": 40,
+      "symbolCount": 0,
+      "sizeBytes": 6756,
+      "classes": []
+    },
     "_shared": {
       "path": "shards/_shared.json",
       "fileCount": 67,
@@ -247,6 +255,6 @@
       "classes": []
     }
   },
-  "totalFiles": 1331,
-  "totalSymbols": 12013
+  "totalFiles": 1432,
+  "totalSymbols": 15658
 }
