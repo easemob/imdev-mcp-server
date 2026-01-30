@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "lastUpdated": "2026-01-27T02:25:55.945Z",
+  "lastUpdated": "2026-01-30T09:33:21.199Z",
   "description": "文档索引清单 - 支持按平台分片加载",
   "platforms": [
     "android",
