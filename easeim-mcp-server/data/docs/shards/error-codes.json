@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "lastUpdated": "2026-01-15T07:45:58.288Z",
+  "lastUpdated": "2026-01-30T09:33:21.199Z",
   "errorCodes": {
     "1": {
       "code": 1,
@@ -304,6 +304,16 @@
       "causes": [],
       "solutions": [
         "检查调用绑定设备推送 token 的接口中传入的 token 是否为空。"
+      ]
+    },
+    "212": {
+      "code": 212,
+      "name": "USER_UNBIND_DEVICETOKEN_FAILED",
+      "brief": "解绑设备 token 失败。",
+      "description": "解绑设备 token 失败。",
+      "causes": [],
+      "solutions": [
+        "调用`EMClient#logout`时报错 `USER_UNBIND_DEVICETOKEN_FAILED`，可以再次尝试调用 `EMClient#logout`。如果为了保证退出操作，可以调用`EMClient#logout`，且参数设置为`false`（不解绑）。"
       ]
     },
     "213": {
@@ -1123,10 +1133,46 @@
       "solutions": [
         "检查调用 API 传入的消息下是否已经创建了子区。"
       ]
+    },
+    "1500": {
+      "code": 1500,
+      "name": "PUSH_NOT_SUPPORT",
+      "brief": "第三方推送不支持",
+      "description": "第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。",
+      "causes": [
+        "第三方推送不支持"
+      ],
+      "solutions": [
+        "查看[离线推送概述](/document/android/push/push_overview.html) 文档，检查遗漏配置设备厂商，如果是 SDK 不支持当前设备，请联系商务。"
+      ]
+    },
+    "1501": {
+      "code": 1501,
+      "name": "PUSH_BIND_FAILED",
+      "brief": "绑定第三方推送 token 失败",
+      "description": "绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败会返回该错误。",
+      "causes": [
+        "绑定第三方推送 token 失败"
+      ],
+      "solutions": [
+        "注册 EMPushHelper#setPushListener 后，绑定失败会收到回调 `PushListener#onError` 回调。检查网络是否正常，如果正常可以通过调用 `EMPushManager#bindDeviceToken` 再次绑定推送 token 。"
+      ]
+    },
+    "1502": {
+      "code": 1502,
+      "name": "PUSH_UNBIND_FAILED",
+      "brief": "解绑第三方推送 token 失败",
+      "description": "解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。",
+      "causes": [
+        "解绑第三方推送 token 失败"
+      ],
+      "solutions": [
+        "注册 EMPushHelper#setPushListener 后，绑定失败会收到回调 `PushListener#onError` 回调。可以再次尝试调用 `EMClient#logout`；如果为了保证退出操作，可以调用`EMClient#logout`，且参数设置为 `false`（不解绑）。"
+      ]
     }
   },
   "stats": {
-    "count": 99,
+    "count": 103,
     "categories": [
       "通用错误",
       "参数错误",

@@ -285,7 +285,8 @@ function getPlatformKeywords(platform: string): string[] {
     android: ['android', 'kotlin', 'java', 'gradle', 'maven', 'google', 'apk'],
     flutter: ['flutter', 'dart', 'cross-platform'],
     web: ['web', 'javascript', 'typescript', 'react', 'vue', 'angular'],
-    unity: ['unity', 'c#', 'game']
+    unity: ['unity', 'c#', 'game'],
+    rn: ['rn', 'react-native', 'cross-platform', 'javascript', 'typescript', 'android', 'ios']
   };
   return keywordMap[platform] || [platform];
 }

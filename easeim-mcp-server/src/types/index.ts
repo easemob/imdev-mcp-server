@@ -7,7 +7,7 @@
 /**
  * 支持的平台
  */
-export type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'all';
+export type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'harmony' | 'all';
 
 /**
  * 技术栈层级

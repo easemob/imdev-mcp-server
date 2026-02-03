@@ -1,0 +1,21 @@
+import type { IconNameType } from '../../assets';
+import { Image } from './Image';
+import { getIconSource } from './Image.hooks';
+import type { IconResolutionType, ImageProps } from './types';
+
+export type IconProps = Omit<ImageProps, 'source' | 'failedSource'> & {
+  name: IconNameType | number;
+  resolution?: IconResolutionType;
+};
+
+export function Icon(props: IconProps) {
+  const { name, resolution, style, ...others } = props;
+
+  return (
+    <Image
+      source={getIconSource(name, resolution) ?? 0}
+      style={[style]}
+      {...others}
+    />
+  );
+}

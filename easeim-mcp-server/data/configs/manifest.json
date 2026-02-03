@@ -1,12 +1,56 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-01-15T08:01:09.610Z",
+  "lastUpdated": "2026-01-27T01:46:01.324Z",
   "description": "配置索引清单 - 支持按平台分片加载",
   "platforms": [
-    "web",
-    "ios"
+    "android",
+    "ios",
+    "rn",
+    "web"
   ],
   "shards": {
+    "android": {
+      "path": "shards/android.json",
+      "platform": "android",
+      "componentCount": 4,
+      "configPropertyCount": 1192,
+      "extensionPointCount": 311,
+      "sizeBytes": 458157,
+      "components": [
+        "EaseCallUIKit",
+        "EaseChatDemo",
+        "EaseChatUIKit",
+        "EaseChatroomUIKit"
+      ]
+    },
+    "ios": {
+      "path": "shards/ios.json",
+      "platform": "ios",
+      "componentCount": 4,
+      "configPropertyCount": 40,
+      "extensionPointCount": 148,
+      "sizeBytes": 67822,
+      "components": [
+        "EaseCallUIKit",
+        "EaseChatDemo",
+        "EaseChatUIKit",
+        "EaseChatroomUIKit"
+      ]
+    },
+    "rn": {
+      "path": "shards/rn.json",
+      "platform": "rn",
+      "componentCount": 4,
+      "configPropertyCount": 4296,
+      "extensionPointCount": 0,
+      "sizeBytes": 1008403,
+      "components": [
+        "EaseCallUIKit",
+        "EaseChat",
+        "EaseChatUIKit",
+        "EaseChatroomUIKit"
+      ]
+    },
     "web": {
       "path": "shards/web.json",
       "platform": "web",
@@ -20,22 +64,11 @@
         "EaseChatroomUIKit",
         "_shared"
       ]
-    },
-    "ios": {
-      "path": "shards/ios.json",
-      "platform": "ios",
-      "componentCount": 1,
-      "configPropertyCount": 0,
-      "extensionPointCount": 1,
-      "sizeBytes": 665,
-      "components": [
-        "EaseChatDemo"
-      ]
     }
   },
   "stats": {
-    "totalComponents": 5,
-    "totalConfigProperties": 1782,
-    "totalExtensionPoints": 1
+    "totalComponents": 16,
+    "totalConfigProperties": 7310,
+    "totalExtensionPoints": 459
   }
 }
