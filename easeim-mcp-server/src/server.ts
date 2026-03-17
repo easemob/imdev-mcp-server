@@ -27,6 +27,7 @@ import { SmartAssistResponse } from './assist/SmartAssistResponse.js';
 import { SmartAssistService } from './assist/SmartAssistService.js';
 import { SmartAssistContext } from './assist/SmartAssistContext.js';
 import { ToolLogger } from './utils/ToolLogger.js';
+import { normalizePlatformInArgs } from './utils/platform.js';
 
 export class EaseIMServer {
   private server: Server;
@@ -111,7 +112,8 @@ export class EaseIMServer {
     });
 
     this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
-      const { name, arguments: args } = request.params;
+      const { name, arguments: rawArgs } = request.params;
+      const args = normalizePlatformInArgs(rawArgs);
       const requestId = ToolLogger.newRequestId();
       const startTime = Date.now();
       const sessionId = args && typeof args === 'object' && 'session_id' in args ? String((args as { session_id?: unknown }).session_id ?? '') : undefined;
@@ -530,7 +532,7 @@ ${resultsWithEvidence.map((r, i) => `
    * 支持智能交互引导
    */
   private async handleSearchSource(args: any) {
-    const { query, component = 'all', limit = 10 } = args;
+    const { query, platform, component = 'all', limit = 10 } = args;
 
 
     if (typeof query !== 'string' || !query.trim()) {
@@ -565,7 +567,7 @@ ${resultsWithEvidence.map((r, i) => `
       return builder.build();
     }
 
-    const { results, ambiguity } = this.sourceSearch.search(query, component, limit);
+    const { results, ambiguity } = this.sourceSearch.search(query, component, limit, platform);
     const resultsWithEvidence = results.map(result => {
       const evidence = (result.matchedSymbols || [])
         .filter(symbol => typeof symbol.line === 'number')

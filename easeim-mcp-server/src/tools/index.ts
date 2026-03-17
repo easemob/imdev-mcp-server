@@ -2,6 +2,8 @@
  * MCP Tools 定义
  */
 
+import { PLATFORM_INPUT_VALUES } from '../utils/platform.js';
+
 export const TOOLS = [
   {
     name: 'lookup_error',
@@ -15,7 +17,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -35,7 +37,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         },
         layer: {
@@ -70,7 +72,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         },
         component: {
@@ -102,7 +104,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -122,7 +124,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -142,7 +144,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -172,7 +174,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony, windows'
         },
         startLine: {
@@ -203,7 +205,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -231,7 +233,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -257,7 +259,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -284,7 +286,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，如 ios/android/web/flutter/rn/harmony/unity'
         }
       },
@@ -314,7 +316,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -334,7 +336,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },
@@ -355,7 +357,7 @@ export const TOOLS = [
         },
         platform: {
           type: 'string',
-          enum: ['ios', 'android', 'web', 'flutter', 'unity', 'rn', 'harmony', 'windows'],
+          enum: PLATFORM_INPUT_VALUES,
           description: '指定平台，可选：ios, android, web, flutter, unity, rn, harmony'
         }
       },

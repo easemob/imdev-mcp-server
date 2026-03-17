@@ -314,7 +314,7 @@ export function detectMissingPlatform(query: string, providedPlatform?: string):
     { pattern: /\b(android|kotlin|java|安卓)\b/i, platform: 'android' },
     { pattern: /\b(web|javascript|typescript|js|ts|网页|h5|浏览器)\b/i, platform: 'web' },
     { pattern: /\b(flutter|dart)\b/i, platform: 'flutter' },
-    { pattern: /\b(react-native|rn|reactnative)\b/i, platform: 'react-native' },
+    { pattern: /\b(react-native|rn|reactnative)\b/i, platform: 'rn' },
     { pattern: /\b(unity|c#|游戏)\b/i, platform: 'unity' },
     { pattern: /\b(windows|cpp|c\+\+|c-sharp|win32|pc)\b/i, platform: 'windows' }
   ];
@@ -380,7 +380,7 @@ export const SUPPORTED_PLATFORMS = [
   { value: 'android', label: 'Android', description: 'Android (Kotlin/Java)' },
   { value: 'web', label: 'Web', description: '网页端 (JS/TS)' },
   { value: 'flutter', label: 'Flutter', description: '跨平台 (Dart, 无 CallKit)' },
-  { value: 'react-native', label: 'React Native', description: '跨平台 (JS, 无 CallKit)' },
+  { value: 'rn', label: 'React Native', description: '跨平台 (JS, 无 CallKit)' },
   { value: 'unity', label: 'Unity', description: '游戏 (C#, 仅支持 IMSDK)' },
   { value: 'windows', label: 'Windows', description: '桌面端 (C++/C#, 仅支持 IMSDK)' }
 ];
