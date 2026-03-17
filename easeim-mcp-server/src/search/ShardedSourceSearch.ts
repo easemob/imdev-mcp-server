@@ -18,6 +18,7 @@ import { InvertedIndex, IndexedDocument, SearchResult as IndexSearchResult } fro
 import { QueryExpander } from '../intelligence/QueryExpander.js';
 import { AmbiguityDetector } from './AmbiguityDetector.js';
 import { SearchPipeline } from './SearchPipeline.js';
+import { normalizePlatform } from '../utils/platform.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -314,7 +315,8 @@ export class ShardedSourceSearch {
   search(
     query: string,
     component: string = 'all',
-    limit: number = 10
+    limit: number = 10,
+    platform?: string
   ): {
     results: SourceSearchResult[];
     ambiguity: AmbiguityDetection;
@@ -322,6 +324,7 @@ export class ShardedSourceSearch {
     loadedShards: string[];
   } {
     const manifest = this.loadManifest();
+    const normalizedPlatform = platform ? normalizePlatform(platform) : undefined;
 
     const prepared = this.pipeline.prepareQuery(query);
 
@@ -345,6 +348,10 @@ export class ShardedSourceSearch {
 
       // 转换结果
       for (const result of indexResults) {
+        if (normalizedPlatform && result.metadata?.platform !== normalizedPlatform) {
+          continue;
+        }
+
         if (result.metadata?.type === 'file') {
           allResults.push({
             path: result.metadata.path || result.docId.replace('file:', ''),
