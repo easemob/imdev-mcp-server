@@ -1,0 +1,24 @@
+{
+  "float": [
+    {
+      "name": "corner_radius_large",
+      "value": "16vp"
+    },
+    {
+      "name": "corner_radius_medium",
+      "value": "12vp"
+    },
+    {
+      "name": "corner_radius_small",
+      "value": "8vp"
+    },
+    {
+      "name": "corner_radius_small_extra",
+      "value": "4vp"
+    },
+    {
+      "name": "corner_radius_small_tiny",
+      "value": "2vp"
+    }
+  ]
+}

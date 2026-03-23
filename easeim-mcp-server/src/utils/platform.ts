@@ -11,7 +11,7 @@ const PLATFORM_ALIAS_CONFIG = {
   flutter: ['flutter'],
   unity: ['unity'],
   rn: ['rn', 'react-native', 'reactnative'],
-  harmony: ['harmony'],
+  harmony: ['harmony', 'harmonyos', 'ohos'],
   windows: ['windows'],
 } as const;
 

@@ -35,6 +35,14 @@ EaseIM MCP Server 是一个为环信 IM SDK 开发者设计的智能助手，通
 | 协议 | MCP (Model Context Protocol) |
 | SDK | @modelcontextprotocol/sdk |
 
+### 当前平台覆盖（2026-03）
+
+- 文档索引平台：`android`、`ios`、`web`、`rn`、`flutter`、`harmony`
+- 源码索引平台：`android`、`ios`、`web`、`rn`、`flutter`、`harmony`
+- 平台别名归一：
+  - `harmonyos` / `ohos` → `harmony`
+  - `react-native` / `reactnative` → `rn`
+
 ### 支持的客户端
 
 | 客户端 | 支持方式 |
@@ -60,7 +68,7 @@ EaseIM MCP Server 是一个为环信 IM SDK 开发者设计的智能助手，通
                                  │ MCP Protocol (stdio)
                                  ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      MCP 工具层 (14 个工具)                      │
+│                  MCP 工具层 (19 个工具，图中示意)                 │
 │  ┌─────────────┬─────────────┬─────────────┬─────────────┐     │
 │  │ lookup_error│ search_api  │search_source│ smart_assist│     │
 │  ├─────────────┼─────────────┼─────────────┼─────────────┤     │
@@ -118,7 +126,7 @@ easeim-mcp-server/
 │   ├── server.ts                   # MCP Server 实现
 │   │
 │   ├── tools/
-│   │   └── index.ts                # 工具定义 (14 个工具)
+│   │   └── index.ts                # 工具定义 (19 个工具)
 │   │
 │   ├── search/                     # 搜索引擎
 │   │   ├── DocSearch.ts            # 文档搜索 (倒排索引 + BM25)
@@ -156,8 +164,11 @@ easeim-mcp-server/
 │
 ├── scripts/
 │   ├── generate-docs-index.ts      # 生成文档索引
+│   ├── generate-doc-shards.ts      # 生成文档分片
 │   ├── generate-source-index.ts    # 生成源码索引
-│   ├── generate-shards.ts          # 生成分片索引
+│   ├── generate-source-shards.ts   # 生成源码分片
+│   ├── replay-smart-assist-sessions.ts # 回放会话生成日志
+│   ├── analyze-query-friction.ts   # 分析查询纠缠与证据链
 │   └── analyze-config-impact.ts    # 分析配置影响
 │
 └── tests/
@@ -241,6 +252,8 @@ Query → QueryExpander(同义词) → InvertedIndex(BM25) → Results
 - LRU 缓存自动淘汰
 - 驼峰命名拆分 (`MessageBubble` → `message bubble`)
 - 并行搜索多个分片
+- 符号级命中反推文件（提升 query → 文件命中率）
+- 支持 `.dart` / `.ets` / `.tsx` / `.jsx` 参与索引
 
 ```typescript
 // 分片结构
@@ -272,6 +285,38 @@ Query: "sendMessage"
 结果: iOS (3), Android (2), Web (2)
 提示: "检测到跨平台结果，请指定 platform 参数"
 ```
+
+---
+
+## 查询纠缠与证据链分析
+
+新增日志增强字段：
+
+- `response.category`: `answer | clarification | no_result`
+- `response.has_no_result_cue`
+- `response.direct_no_result`
+- `response.evidence_count`
+- `response.preview`
+
+新增脚本：
+
+```bash
+# 1) 回放会话并生成日志
+EASEIM_SMART_ASSIST_LOG=1 \
+EASEIM_SMART_ASSIST_LOG_PATH=./tmp/smart-assist.log \
+npm run replay-smart-assist-sessions
+
+# 2) 生成纠缠分析报告
+npm run analyze-query-friction -- \
+  --assist-log ./tmp/smart-assist.log \
+  --output ./tmp/query-friction-report.md
+```
+
+报告会自动识别：
+
+- 多轮纠缠问题（会话级 / 问题级）
+- 原因归因（表述不清、内容缺失、未直接告知无结果、证据链弱）
+- 对应优化建议与证据链样本
 
 ---
 

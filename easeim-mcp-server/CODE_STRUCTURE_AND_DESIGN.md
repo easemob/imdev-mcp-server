@@ -4,6 +4,38 @@
 
 ---
 
+## 0. 2026-03 结构增量（本轮优化）
+
+### 分片与平台覆盖
+
+- 文档/源码分片已纳入 `flutter` 与 `harmony` 平台。
+- 平台命名归一下沉到工具层通道：
+  - `harmonyos` / `ohos` → `harmony`
+  - `react-native` / `reactnative` → `rn`
+
+### 源码检索链路增强
+
+- `scripts/generate-source-index.ts` 增加对 `.dart/.ets/.tsx/.jsx` 的索引支持。
+- `src/search/ShardedSourceSearch.ts` 增加“符号命中反推文件”能力，提升结果召回。
+- `read_source` 返回代码块语言按扩展名自动识别（swift/kotlin/java/dart/typescript/javascript）。
+
+### 智能助手与日志观测
+
+- `src/assist/SmartAssistService.ts` 增加平台能力约束分支：
+  - `flutter/harmony` 请求 `CallKit` 直接给出“当前无内容”。
+  - `flutter` 请求 `ChatroomUIKit` 返回“能力并入 ChatUIKit”说明。
+- `src/utils/ToolLogger.ts`、`src/utils/SmartAssistLogger.ts`、`src/utils/LogResponseInspector.ts` 新增响应质量字段：
+  - `category`
+  - `has_no_result_cue`
+  - `direct_no_result`
+  - `evidence_count`
+  - `preview`
+- 新增日志回放与纠缠分析脚本：
+  - `scripts/replay-smart-assist-sessions.ts`
+  - `scripts/analyze-query-friction.ts`
+
+---
+
 ## 1. 核心服务层 (Core Server Layer)
 
 `EaseIMServer` 是整个系统的入口和协调者，采用 **Facade (外观模式)** 设计，对 MCP Client 隐藏了复杂的子系统交互。

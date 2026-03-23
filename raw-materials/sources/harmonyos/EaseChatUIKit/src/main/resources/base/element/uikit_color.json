@@ -1,0 +1,444 @@
+{
+  "color": [
+    {
+      "name": "chat_color_foreground",
+      "value": "#182431",
+      "comment": "前背景：前景色"
+    },
+    {
+      "name": "chat_color_foreground_contrary",
+      "value": "$color:primary_100",
+      "comment": "前背景：前景反色"
+    },
+    {
+      "name": "chat_color_foreground_contrary_disable",
+      "value": "$color:primary_100",
+      "comment": "前背景：前景反色"
+    },
+    {
+      "name": "chat_color_background",
+      "value": "$color:neutral_98",
+      "comment": "前背景：背景色"
+    },
+    {
+      "name": "chat_color_sub_background",
+      "value": "$color:neutral_95",
+      "comment": "前背景：辅助背景色"
+    },
+    {
+      "name": "chat_color_background_pressed",
+      "value": "$color:neutral_90",
+      "comment": "按压或者点击后的背景色"
+    },
+    {
+      "name": "chat_color_emphasize",
+      "value": "$color:primary_50",
+      "comment": "主色调：高亮色"
+    },
+    {
+      "name": "chat_color_emphasize_contrary",
+      "value": "$color:primary_95",
+      "comment": "主色调：高亮色反色"
+    },
+    {
+      "name": "chat_color_warning",
+      "value": "$color:error_50",
+      "comment": "主色调：警告色"
+    },
+    {
+      "name": "chat_color_alert",
+      "value": "$color:error_80",
+      "comment": "主色调：警示色"
+    },
+    {
+      "name": "chat_color_component_normal",
+      "value": "$color:primary_50",
+      "comment": "主色调：控件通用背景色"
+    },
+    {
+      "name": "chat_color_component_normal_off",
+      "value": "$color:neutral_95",
+      "comment": "主色调：控件通用未激活背景色"
+    },
+    {
+      "name": "chat_color_list_separator",
+      "value": "$color:neutral_90",
+      "comment": "主色调：分割线颜色"
+    },
+    {
+      "name": "chat_color_subheading_separator",
+      "value": "$color:neutral_98",
+      "comment": "主色调：列表分隔条颜色"
+    },
+    {
+      "name": "chat_color_click_effect",
+      "value": "$color:neutral_20",
+      "comment": "主色调：通用点击效果背景"
+    },
+    {
+      "name": "chat_color_primary",
+      "value": "$color:primary_50",
+      "comment": "图标颜色：界面可点击图标颜色"
+    },
+    {
+      "name": "chat_color_primary_contrary",
+      "value": "$color:neutral_70",
+      "comment": "图标颜色：界面可点击图标反色"
+    },
+    {
+      "name": "chat_color_icon_fill",
+      "value": "$color:neutral_30",
+      "comment": "图标颜色：图标高亮色"
+    },
+    {
+      "name": "chat_color_text_primary",
+      "value": "$color:neutral_10",
+      "comment": "不可点击文本颜色：一级文本颜色"
+    },
+    {
+      "name": "chat_color_text_primary_contrary",
+      "value": "$color:neutral_98",
+      "comment": "不可点击文本颜色：一级文本颜色反色"
+    },
+    {
+      "name": "chat_color_text_secondary",
+      "value": "$color:neutral_50",
+      "comment": "不可点击文本颜色：二级文本颜色"
+    },
+    {
+      "name": "chat_color_text_secondary_contrary",
+      "value": "$color:neutral_60",
+      "comment": "不可点击文本颜色：二级文本颜色反色"
+    },
+    {
+      "name": "chat_color_text_tertiary",
+      "value": "$color:neutral_70",
+      "comment": "不可点击文本颜色：三级文本颜色"
+    },
+    {
+      "name": "chat_color_text_tertiary_contrary",
+      "value": "$color:neutral_60",
+      "comment": "不可点击文本颜色：三级文本颜色反色"
+    },
+    {
+      "name": "chat_color_text_special",
+      "value": "$color:neutral_special_50",
+      "comment": "不可点击文本颜色：特定文本颜色"
+    },
+    {
+      "name": "chat_color_text_special_contrary",
+      "value": "$color:neutral_special_60",
+      "comment": "不可点击文本颜色：特定文本颜色反色"
+    },
+    {
+      "name": "chat_color_text_primary_activated",
+      "value": "$color:primary_50",
+      "comment": "可操作文本颜色：文本高亮色"
+    },
+    {
+      "name": "chat_color_text_secondary_activated",
+      "value": "$color:primary_60",
+      "comment": "可操作文本颜色：二级文本高亮色"
+    },
+    {
+      "name": "chat_color_badge",
+      "value": "#007DFF",
+      "comment": "新消息：新消息提醒背景颜色"
+    },
+    {
+      "name": "chat_color_badge_red",
+      "value": "#FA2A2D",
+      "comment": "新消息：新消息提醒背景红颜色"
+    },
+    {
+      "name": "chat_color_button_normal",
+      "value": "$color:chat_color_primary",
+      "comment": "Button：普通按钮背景色"
+    },
+    {
+      "name": "chat_color_button_disable",
+      "value": "$color:neutral_95",
+      "comment": "Button：按钮不可用背景色"
+    },
+    {
+      "name": "chat_color_switch_outline_off",
+      "value": "$color:neutral_70",
+      "comment": "Switch/Radio btn/Checkbox：背景颜色"
+    },
+    {
+      "name": "chat_color_switch_bg_off",
+      "value": "$color:neutral_70",
+      "comment": "Switch/Radio btn/Checkbox：背景颜色"
+    },
+    {
+      "name": "chat_color_text_alert_dialog_confirm",
+      "value": "$color:neutral_98",
+      "comment": "自定义AlertDialog中确认按钮文字颜色"
+    },
+    {
+      "name": "chat_color_text_alert_dialog_cancel",
+      "value": "$color:chat_color_text_primary",
+      "comment": "自定义AlertDialog中取消按钮文字颜色"
+    },
+    {
+      "name": "chat_color_message_item_date",
+      "value": "$color:chat_color_text_tertiary",
+      "comment": "消息条目日期"
+    },
+    {
+      "name": "chat_color_message_unsent_text",
+      "value": "$color:chat_color_text_tertiary",
+      "comment": "撤回消息的文本颜色"
+    },
+    {
+      "name": "chat_color_message_item_nickname",
+      "value": "$color:chat_color_text_special",
+      "comment": "消息条目昵称"
+    },
+    {
+      "name": "chat_color_switch_unselect",
+      "value": "$color:neutral_90",
+      "comment": "switch关闭状态的背景颜色"
+    },
+    {
+      "name": "chat_color_switch_point",
+      "value": "$color:chat_color_foreground_contrary",
+      "comment": "Switch类型的圆形滑块颜色"
+    },
+    {
+      "name": "chat_color_message_bubble_background",
+      "value": "$color:primary_95",
+      "comment": "消息气泡背景色"
+    },
+    {
+      "name": "chat_color_message_bubble_send_background",
+      "value": "$color:primary_50",
+      "comment": "消息气泡发送方背景色"
+    },
+    {
+      "name": "chat_color_message_voice_icon_fill_send",
+      "value": "$color:neutral_98",
+      "comment": "语音消息发送方语音标记填充色"
+    },
+    {
+      "name": "chat_color_message_voice_icon_fill_receive",
+      "value": "$color:neutral_special_50",
+      "comment": "语音消息接收方语音标记填充色"
+    },
+    {
+      "name": "chat_color_message_image_border",
+      "value": "$color:neutral_90",
+      "comment": "图片消息/视频消息描边颜色"
+    },
+    {
+      "name": "chat_color_message_file_length_send",
+      "value": "$color:neutral_98",
+      "comment": "文件消息文件长度字体颜色"
+    },
+    {
+      "name": "chat_color_message_file_length_receive",
+      "value": "$color:chat_color_text_special",
+      "comment": "文件消息文件长度字体颜色"
+    },
+    {
+      "name": "chat_color_message_user_card_receive_divider",
+      "value": "$color:neutral_special_80",
+      "comment": "名片消息接收分割线颜色"
+    },
+    {
+      "name": "chat_color_message_user_card_send_divider",
+      "value": "$color:primary_80",
+      "comment": "名片消息发送分割线颜色"
+    },
+    {
+      "name": "chat_color_message_reply_bg",
+      "value": "$color:chat_color_sub_background",
+      "comment": "回复消息布局的背景色"
+    },
+    {
+      "name": "chat_color_message_file_icon_bg",
+      "value": "$color:chat_color_background",
+      "comment": "文件消息文件图标背景色"
+    },
+    {
+      "name": "chat_color_reply_off_icon_fill",
+      "value": "$color:neutral_30",
+      "comment": "关闭回复消息的标记的填充色"
+    },
+    {
+      "name": "chat_color_bottom_sheet_drag",
+      "value": "$color:neutral_80",
+      "comment": "BottomSheetDialog的拖把手的颜色"
+    },
+    {
+      "name": "chat_color_bottom_sheet_divider",
+      "value": "$color:neutral_95",
+      "comment": "BottomSheetDialog的分割线的颜色"
+    },
+    {
+      "name": "chat_color_dialog_cancel_text",
+      "value": "$color:neutral_30",
+      "comment": "弹框取消按钮文字颜色"
+    },
+    {
+      "name": "chat_color_dialog_cancel_border",
+      "value": "$color:neutral_70",
+      "comment": "弹框取消按钮边框颜色"
+    },
+    {
+      "name": "chat_color_record_delete_button",
+      "value": "$color:neutral_90",
+      "comment": "录音弹框删除按钮背景色"
+    },
+    {
+      "name": "chat_color_record_send_button",
+      "value": "$color:chat_color_primary",
+      "comment": "录音弹框发送按钮背景色"
+    },
+    {
+      "name": "chat_color_record_bg_button",
+      "value": "$color:primary_95",
+      "comment": "录音弹框发送按钮后面的背景色"
+    },
+    {
+      "name": "chat_color_record_length_text",
+      "value": "$color:neutral_98",
+      "comment": "录音弹框录音长度的文本颜色"
+    },
+    {
+      "name": "chat_indicator_unselect",
+      "value": "$color:neutral_90",
+      "comment": "指示器未选中的颜色"
+    },
+    {
+      "name": "chat_indicator_select",
+      "value": "$color:neutral_50",
+      "comment": "指示器选中的颜色"
+    },
+    {
+      "name": "chat_color_menu_icon_fill",
+      "value": "$color:chat_color_icon_fill",
+      "comment": "菜单项中图标的默认填充颜色"
+    },
+    {
+      "name": "chat_color_edit_message_flag",
+      "value": "$color:neutral_special_90",
+      "comment": "消息已编辑文本颜色"
+    },
+    {
+      "name": "chat_color_edit_message_send_flag",
+      "value": "$color:neutral_special_98",
+      "comment": "发送消息已编辑文本颜色"
+    },
+    {
+      "name": "chat_color_edit_message_receive_flag",
+      "value": "$color:neutral_special_50",
+      "comment": "接收消息已编辑文本颜色"
+    },
+    {
+      "name": "chat_color_message_unknown_type",
+      "value": "$color:neutral_70",
+      "comment": "不支持的消息类型文字颜色"
+    },
+    {
+      "name": "chat_color_conv_item_name",
+      "value": "$color:chat_color_text_primary",
+      "comment": "会话列表条目名称颜色"
+    },
+    {
+      "name": "chat_color_conv_item_date",
+      "value": "$color:chat_color_text_secondary",
+      "comment": "会话列表条目日期颜色"
+    },
+    {
+      "name": "chat_color_conv_item_message",
+      "value": "$color:chat_color_text_secondary",
+      "comment": "会话列表条目最近一条消息颜色"
+    },
+    {
+      "name": "chat_color_conv_item_mention",
+      "value": "$color:chat_color_text_primary_activated",
+      "comment": "会话列表条目@内容"
+    },
+    {
+      "name": "chat_color_conv_item_badge",
+      "value": "$color:chat_color_primary",
+      "comment": "会话列表条目未读数标记背景颜色"
+    },
+    {
+      "name": "chat_color_conv_item_badge_count",
+      "value": "$color:chat_color_text_primary_contrary",
+      "comment": "会话列表条目未读数标记文字颜色"
+    },
+    {
+      "name": "chat_color_conv_item_bg",
+      "value": "$color:chat_color_background",
+      "comment": "会话列表条目背景色"
+    },
+    {
+      "name": "chat_color_conv_item_bg_pinned",
+      "value": "$color:chat_color_sub_background",
+      "comment": "会话列表条目置顶背景色"
+    },
+    {
+      "name": "chat_color_conv_item_bg_pressed",
+      "value": "$color:chat_color_background_pressed",
+      "comment": "会话列表条目点击背景色"
+    },
+    {
+      "name": "chat_color_conv_item_menu_bg_mute",
+      "value": "$color:neutral_special_50",
+      "comment": "会话列表条目免打扰/取消免打扰背景色"
+    },
+    {
+      "name": "chat_color_conv_item_menu_bg_pin",
+      "value": "$color:primary_50",
+      "comment": "会话列表条目免置顶/取消置顶背景色"
+    },
+    {
+      "name": "chat_color_conv_item_menu_bg_delete",
+      "value": "$color:error_50",
+      "comment": "会话列表条目删除背景色"
+    },
+    {
+      "name": "chat_color_conv_item_menu_icon_fillColor",
+      "value": "$color:neutral_98",
+      "comment": "会话列表条目滑动菜单图标的填充色"
+    },
+    {
+      "name": "chat_color_conv_item_mute_icon_fillColor",
+      "value": "$color:neutral_98",
+      "comment": "会话列表条目滑动菜单图标的填充色"
+    },
+    {
+      "name": "chat_color_search_select_keyword",
+      "value": "$color:primary_50",
+      "comment": "搜索中的关键字颜色"
+    },
+    {
+      "name": "chat_color_search_icon_fill",
+      "value": "$color:neutral_50",
+      "comment": "搜索中的搜索图标的填充颜色"
+    },
+    {
+      "name": "chat_color_contact_item_header",
+      "value": "$color:chat_color_text_secondary",
+      "comment": "联系人条目标题颜色"
+    },
+    {
+      "name": "chat_color_contact_item_side_selected",
+      "value": "$color:chat_color_text_primary_contrary",
+      "comment": "联系人侧边栏选中项颜色"
+    },
+    {
+      "name": "chat_color_contact_item_side_selected_bg",
+      "value": "$color:chat_color_primary",
+      "comment": "联系人侧边栏选中项背景颜色"
+    },
+    {
+      "name": "chat_color_create_group_menu_text",
+      "value": "$color:chat_color_text_primary_activated",
+      "comment": "创建群组菜单项字体颜色"
+    }
+  ]
+}

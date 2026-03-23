@@ -48,6 +48,7 @@ export const getPlatformOptions = (includeAll?: boolean): InteractionOption[] =>
     { label: 'Android', value: 'android', description: 'Android 应用开发 (Kotlin/Java)' },
     { label: 'Web', value: 'web', description: '网页端开发 (JavaScript/TypeScript)' },
     { label: 'Flutter', value: 'flutter', description: '跨平台开发 (Dart, 无 CallKit 文档/源码)' },
+    { label: 'HarmonyOS', value: 'harmony', description: '鸿蒙开发 (ArkTS, 无 CallKit 文档/源码)' },
     { label: 'React Native', value: 'rn', description: '跨平台开发 (JS, 无 CallKit 文档/源码)' },
     { label: 'Unity', value: 'unity', description: '游戏开发 (C#, 仅支持 IMSDK)' },
     { label: 'Windows', value: 'windows', description: 'Windows 桌面开发 (C++/C#, 仅支持 IMSDK)' }
@@ -116,7 +117,7 @@ export const buildFeatureImplementationInteraction = (options: FeatureImplementa
 
   if (options.askPlatform) {
     questions.push('您的目标平台是什么？');
-    missingFields.push('目标平台 (iOS/Android/Web/Flutter/RN/Windows/Unity)');
+    missingFields.push('目标平台 (iOS/Android/Web/Flutter/HarmonyOS/RN/Windows/Unity)');
   }
 
   if (options.askDetails) {
@@ -129,6 +130,7 @@ export const buildFeatureImplementationInteraction = (options: FeatureImplementa
     { label: 'Android', value: 'android', description: 'Kotlin/Java' },
     { label: 'Web', value: 'web', description: 'JavaScript/TypeScript' },
     { label: 'Flutter', value: 'flutter', description: 'Dart 跨平台 (无 CallKit)' },
+    { label: 'HarmonyOS', value: 'harmony', description: 'ArkTS 鸿蒙开发 (无 CallKit)' },
     { label: 'React Native', value: 'rn', description: 'JavaScript 跨平台 (无 CallKit)' },
     { label: 'Unity', value: 'unity', description: 'C# 游戏开发 (仅 IMSDK)' },
     { label: 'Windows', value: 'windows', description: 'C++/C# 桌面开发 (仅 IMSDK)' }

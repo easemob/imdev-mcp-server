@@ -16,7 +16,7 @@ const RAW_SOURCES_DIR = path.join(PROJECT_ROOT, 'raw-materials/sources');
 const OUTPUT_DIR = path.join(__dirname, '../data/sources');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'index.json');
 
-type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'windows' | 'all' | 'unknown';
+type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'harmony' | 'windows' | 'all' | 'unknown';
 
 interface CodeSymbol {
   name: string;
@@ -48,6 +48,16 @@ interface SourceIndex {
   platforms: Platform[];
   files: SourceFile[];
   symbols: CodeSymbol[];
+}
+
+function normalizePlatformName(rawPlatform: string): Platform {
+  const normalized = rawPlatform.trim().toLowerCase();
+  if (normalized === 'react-native' || normalized === 'reactnative') return 'rn';
+  if (normalized === 'harmonyos' || normalized === 'ohos') return 'harmony';
+  if (normalized === 'ios' || normalized === 'android' || normalized === 'web' || normalized === 'flutter' || normalized === 'unity' || normalized === 'rn' || normalized === 'windows') {
+    return normalized;
+  }
+  return 'unknown';
 }
 
 function countChar(text: string, char: string): number {
@@ -191,6 +201,22 @@ function parseJavaParams(signature: string): Array<{ name: string; type?: string
   });
 }
 
+function parseScriptLikeParams(signature: string): Array<{ name: string; type?: string }> {
+  const section = extractParamSection(signature);
+  if (!section) return [];
+  const params = splitTopLevelParams(section);
+  return params
+    .map(param => param.split('=').shift()?.trim() || param.trim())
+    .filter(Boolean)
+    .map(cleaned => {
+      const [namePart, typePart] = cleaned.split(':').map(part => part.trim());
+      if (!typePart) {
+        return { name: namePart.replace(/[{}\[\]\.?]/g, '') };
+      }
+      return { name: namePart.replace(/[{}\[\]\.?]/g, ''), type: typePart };
+    });
+}
+
 function collectDeclaration(lines: string[], startIndex: number): string {
   const signatureLines: string[] = [];
   let parenBalance = 0;
@@ -244,6 +270,111 @@ function walk(dir: string): string[] {
     }
   }
   return results;
+}
+
+function parseScriptLikeFile(
+  lines: string[],
+  relativePath: string,
+  platform: Platform,
+  component: string
+): { symbols: CodeSymbol[]; classes: string[] } {
+  const symbols: CodeSymbol[] = [];
+  const classes: string[] = [];
+  const ownerStack: Array<{ name: string; endLine: number }> = [];
+
+  const classRegex = /\b(class|interface|enum|mixin|struct)\s+([A-Z]\w*)/g;
+  const methodRegex = /\b([a-zA-Z_]\w*)\s*\([^)]*\)\s*(?::\s*[\w<>\[\]\|?]+)?\s*(?:=>|{)/g;
+  const propertyRegex = /\b(?:final|const|var|let|readonly|late|state|private|public|protected)\s+([a-zA-Z_]\w*)/g;
+
+  const methodStopWords = new Set([
+    'if', 'for', 'while', 'switch', 'catch', 'constructor', 'return', 'new',
+    'when', 'build', 'else', 'do', 'typeof', 'await'
+  ]);
+
+  lines.forEach((line, index) => {
+    while (ownerStack.length > 0 && ownerStack[ownerStack.length - 1].endLine < index + 1) {
+      ownerStack.pop();
+    }
+
+    const currentOwner = ownerStack[ownerStack.length - 1]?.name;
+
+    let match;
+    classRegex.lastIndex = 0;
+    methodRegex.lastIndex = 0;
+    propertyRegex.lastIndex = 0;
+
+    if ((match = classRegex.exec(line)) !== null) {
+      const className = match[2];
+      classes.push(className);
+      const signature = line.trim();
+      const { doc, description } = extractDocComment(lines, index);
+      const endLine = findBlockEnd(lines, index);
+      symbols.push({
+        name: className,
+        type: match[1],
+        file: relativePath,
+        line: index + 1,
+        startLine: index + 1,
+        endLine,
+        signature,
+        description,
+        doc,
+        platform,
+        component
+      });
+      ownerStack.push({ name: className, endLine });
+      return;
+    }
+
+    if ((match = methodRegex.exec(line)) !== null) {
+      const methodName = match[1];
+      if (methodStopWords.has(methodName)) {
+        return;
+      }
+      const signature = collectDeclaration(lines, index);
+      const params = parseScriptLikeParams(signature);
+      const { doc, description } = extractDocComment(lines, index);
+      const endLine = signature.includes('{') ? findBlockEnd(lines, index) : index + 1;
+      symbols.push({
+        name: methodName,
+        type: 'method',
+        file: relativePath,
+        line: index + 1,
+        startLine: index + 1,
+        endLine,
+        signature,
+        owner: currentOwner,
+        params,
+        description,
+        doc,
+        platform,
+        component
+      });
+      return;
+    }
+
+    if ((match = propertyRegex.exec(line)) !== null) {
+      const propertyName = match[1];
+      const signature = line.trim();
+      const { doc, description } = extractDocComment(lines, index);
+      symbols.push({
+        name: propertyName,
+        type: 'property',
+        file: relativePath,
+        line: index + 1,
+        startLine: index + 1,
+        endLine: index + 1,
+        signature,
+        owner: currentOwner,
+        description,
+        doc,
+        platform,
+        component
+      });
+    }
+  });
+
+  return { symbols, classes };
 }
 
 /**
@@ -425,6 +556,10 @@ function parseFile(filePath: string, platform: Platform, component: string): { s
       }
     });
   }
+
+  if (filePath.endsWith('.dart') || filePath.endsWith('.ets') || filePath.endsWith('.ts') || filePath.endsWith('.tsx') || filePath.endsWith('.js') || filePath.endsWith('.jsx')) {
+    return parseScriptLikeFile(lines, relativePath, platform, component);
+  }
   
   return { symbols, classes };
 }
@@ -441,9 +576,12 @@ function main() {
   
   const allFiles: SourceFile[] = [];
   const allSymbols: CodeSymbol[] = [];
+  const normalizedPlatforms = new Set<Platform>();
 
   for (const platform of platformsDir) {
     const platformPath = path.join(RAW_SOURCES_DIR, platform);
+    const normalizedPlatform = normalizePlatformName(platform);
+    normalizedPlatforms.add(normalizedPlatform);
     console.log(`🌐 处理平台: ${platform}`);
 
     const components = fs.readdirSync(platformPath).filter(d => fs.statSync(path.join(platformPath, d)).isDirectory());
@@ -452,16 +590,16 @@ function main() {
       const componentPath = path.join(platformPath, component);
       console.log(`  📦 组件: ${component}`);
 
-      const files = walk(componentPath).filter(f => /\.(swift|java|kt|ts|js)$/.test(f));
+      const files = walk(componentPath).filter(f => /\.(swift|java|kt|ts|tsx|js|jsx|dart|ets)$/.test(f));
       
       for (const file of files) {
-        const { symbols, classes } = parseFile(file, platform as Platform, component);
+        const { symbols, classes } = parseFile(file, normalizedPlatform, component);
         const relativePath = path.relative(RAW_SOURCES_DIR, file);
         const content = fs.readFileSync(file, 'utf-8');
 
         allFiles.push({
           path: relativePath,
-          platform: platform as Platform,
+          platform: normalizedPlatform,
           component,
           classes,
           lines: content.split('\n').length
@@ -473,9 +611,9 @@ function main() {
 
   // 1. 写入索引
   const index: SourceIndex = {
-    version: '2.1.0',
+    version: '2.2.0',
     lastUpdated: new Date().toISOString(),
-    platforms: platformsDir as Platform[],
+    platforms: Array.from(normalizedPlatforms),
     files: allFiles,
     symbols: allSymbols
   };

@@ -294,7 +294,10 @@ export class AmbiguityDetector {
       unity: 'Unity（C#）',
       rn: 'React Native（JavaScript/TypeScript）',
       harmony: 'HarmonyOS（ArkTS）',
+      windows: 'Windows（C++/C#）',
       all: '所有平台'
+      ,
+      unknown: '未知平台'
     };
     return descriptions[platform] || platform;
   }
@@ -332,8 +335,12 @@ export class AmbiguityDetector {
       intent.likelyPlatform = 'web';
     } else if (lowerQuery.includes('flutter') || lowerQuery.includes('dart')) {
       intent.likelyPlatform = 'flutter';
+    } else if (lowerQuery.includes('harmony') || lowerQuery.includes('harmonyos') || lowerQuery.includes('ohos') || lowerQuery.includes('arkts')) {
+      intent.likelyPlatform = 'harmony';
     } else if (lowerQuery.includes('unity') || lowerQuery.includes('c#')) {
       intent.likelyPlatform = 'unity';
+    } else if (lowerQuery.includes('windows') || lowerQuery.includes('win32') || lowerQuery.includes('c++') || lowerQuery.includes('cpp')) {
+      intent.likelyPlatform = 'windows';
     }
 
     // 检测层级

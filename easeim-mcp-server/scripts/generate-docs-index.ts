@@ -16,7 +16,7 @@ const RAW_DOCS_DIR = path.join(PROJECT_ROOT, 'raw-materials/docs');
 const OUTPUT_DIR = path.join(__dirname, '../data/docs');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'index.json');
 
-type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'windows' | 'all' | 'unknown';
+type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'harmony' | 'windows' | 'all' | 'unknown';
 type Product = 'sdk' | 'chatuikit' | 'callkit' | 'chatroomuikit' | 'imkit' | 'general';
 
 interface GuideDoc {
@@ -36,6 +36,7 @@ interface ApiModule {
   docPath: string;
   platform: Platform;
   product: Product;
+  keywords: string[];
 }
 
 interface DocsIndex {
@@ -66,11 +67,40 @@ function walkDir(dir: string, baseDir: string): string[] {
 function analyzeProduct(relativePath: string): Product {
   const lowerPath = relativePath.toLowerCase();
   if (lowerPath.includes('callkit')) return 'callkit';
-  if (lowerPath.includes('chatuikit') || lowerPath.includes('uikit')) return 'chatuikit';
   if (lowerPath.includes('chatroomuikit')) return 'chatroomuikit';
+  if (lowerPath.includes('chatuikit') || lowerPath.includes('uikit')) return 'chatuikit';
   if (lowerPath.includes('imkit')) return 'imkit';
   if (lowerPath.includes('sdk')) return 'sdk';
   return 'general';
+}
+
+function normalizePlatformName(rawPlatform: string): Platform {
+  const normalized = rawPlatform.trim().toLowerCase();
+  if (normalized === 'react-native' || normalized === 'reactnative') return 'rn';
+  if (normalized === 'harmonyos' || normalized === 'ohos') return 'harmony';
+  if (normalized === 'ios' || normalized === 'android' || normalized === 'web' || normalized === 'flutter' || normalized === 'unity' || normalized === 'rn' || normalized === 'windows') {
+    return normalized;
+  }
+  return 'unknown';
+}
+
+function splitTokens(text: string): string[] {
+  return text
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .split(/[^a-zA-Z0-9\u4e00-\u9fa5]+/)
+    .map(token => token.trim().toLowerCase())
+    .filter(token => token.length > 1);
+}
+
+function buildDocKeywords(platform: Platform, product: Product, title: string, relativePath: string): string[] {
+  const fromPath = relativePath.split('/').flatMap(segment => splitTokens(segment));
+  const fromTitle = splitTokens(title);
+  return Array.from(new Set([
+    platform,
+    product,
+    ...fromPath,
+    ...fromTitle
+  ]));
 }
 
 function extractMeta(content: string) {
@@ -150,6 +180,7 @@ function main() {
   }
 
   const platforms = fs.readdirSync(RAW_DOCS_DIR).filter(d => fs.statSync(path.join(RAW_DOCS_DIR, d)).isDirectory());
+  const normalizedPlatforms = new Set<Platform>();
 
   const guides: GuideDoc[] = [];
   const apiModules: ApiModule[] = [];
@@ -157,6 +188,8 @@ function main() {
 
   for (const platform of platforms) {
     const platformPath = path.join(RAW_DOCS_DIR, platform);
+    const normalizedPlatform = normalizePlatformName(platform);
+    normalizedPlatforms.add(normalizedPlatform);
     console.log(`🌐 处理平台: ${platform}`);
 
     // 1. 处理指南 (guides)
@@ -165,13 +198,14 @@ function main() {
     for (const file of guideFiles) {
       const content = fs.readFileSync(path.join(platformPath, file), 'utf-8');
       const { title, description } = extractMeta(content);
+      const product = analyzeProduct(file);
       guides.push({
-        id: `${platform}_${file.replace(/\.md$/, '').replace(/\//g, '_')}`,
+        id: `${normalizedPlatform}_${file.replace(/\.md$/, '').replace(/\//g, '_')}`,
         title: title || path.basename(file),
         path: `${platform}/${file}`,
-        platform: platform as Platform,
-        product: analyzeProduct(file),
-        keywords: [platform, title || ''].filter(Boolean),
+        platform: normalizedPlatform,
+        product,
+        keywords: buildDocKeywords(normalizedPlatform, product, title || path.basename(file), file),
         description: description || ''
       });
     }
@@ -182,13 +216,15 @@ function main() {
     for (const file of apiFiles) {
       const content = fs.readFileSync(path.join(platformPath, file), 'utf-8');
       const { title, description } = extractMeta(content);
+      const product = analyzeProduct(file);
       apiModules.push({
-        id: `${platform}_${file.replace(/\.md$/, '').replace(/\//g, '_')}`,
+        id: `${normalizedPlatform}_${file.replace(/\.md$/, '').replace(/\//g, '_')}`,
         name: title || path.basename(file),
         description: description || '',
         docPath: `${platform}/${file}`,
-        platform: platform as Platform,
-        product: analyzeProduct(file)
+        platform: normalizedPlatform,
+        product,
+        keywords: buildDocKeywords(normalizedPlatform, product, title || path.basename(file), file)
       });
     }
 
@@ -226,7 +262,7 @@ function main() {
   const index: DocsIndex = {
     version: '3.0.0',
     lastUpdated: new Date().toISOString(),
-    platforms: platforms as Platform[],
+    platforms: Array.from(normalizedPlatforms),
     guides,
     apiModules,
     errorCodeIndex

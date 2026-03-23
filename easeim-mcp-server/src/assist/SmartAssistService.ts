@@ -12,6 +12,8 @@ import { ShardedSourceSearch } from '../search/ShardedSourceSearch.js';
 import { SimilarityMatcher, Vectorizable } from '../intelligence/SimilarityMatcher.js';
 import { SmartAssistLogger } from '../utils/SmartAssistLogger.js';
 import { PlatformCapabilityRegistry, PlatformRoute } from '../intelligence/PlatformCapabilityRegistry.js';
+import { inspectMcpResult } from '../utils/LogResponseInspector.js';
+import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { execFile } from 'child_process';
@@ -23,6 +25,10 @@ const execFileAsync = promisify(execFile);
 
 export class SmartAssistService {
   private readonly platformCapabilityRegistry = new PlatformCapabilityRegistry();
+  private platformCoverageCache: {
+    docsProductsByPlatform: Record<string, Set<string>>;
+    sourceComponentsByPlatform: Record<string, Set<string>>;
+  } | null = null;
 
   constructor(
     private readonly intentClassifier: IntentClassifier,
@@ -49,6 +55,7 @@ export class SmartAssistService {
     });
 
     const logAndReturn = (entry: Omit<Parameters<typeof SmartAssistLogger.log>[0], 'log_version' | 'timestamp' | 'request_id' | 'session_id' | 'raw_query' | 'timing_ms'>, result: any) => {
+      const inspection = inspectMcpResult(result);
       SmartAssistLogger.log({
         log_version: 'v1',
         timestamp: new Date().toISOString(),
@@ -58,7 +65,16 @@ export class SmartAssistService {
         timing_ms: {
           total: Date.now() - startTime
         },
-        ...entry
+        ...entry,
+        response: {
+          ...entry.response,
+          category: inspection.category,
+          has_no_result_cue: inspection.hasNoResultCue,
+          has_clarification_cue: inspection.hasClarificationCue,
+          direct_no_result: inspection.directNoResult,
+          evidence_count: inspection.evidenceCount,
+          preview: inspection.preview
+        }
       });
       return result;
     };
@@ -126,6 +142,41 @@ export class SmartAssistService {
     const { intent, confidence, entities } = intentResult;
     const platformForAnswer = effectivePlatform || platformCheck.detectedPlatform || platform || 'ios';
     const normalizedPlatform = platformForAnswer === 'react-native' ? 'rn' : platformForAnswer;
+
+    const platformConstraint = this.buildKnownPlatformConstraintResponse(
+      query,
+      normalizedPlatform,
+      entities.componentName
+    );
+    if (platformConstraint) {
+      return logAndReturn(
+        {
+          enhanced_query: enhancedQuery,
+          platform: {
+            provided: platform ?? null,
+            detected: platformCheck.detectedPlatform ?? null,
+            effective: effectivePlatform ?? platformForAnswer
+          },
+          continuity: { is_continuation: continuity.isContinuation, type: continuity.type },
+          intent: {
+            name: intent,
+            confidence,
+            sub_intent: intentResult.subIntent
+          },
+          entities: toEntityLog(entities),
+          route: { name: 'platform_constraint', reason: platformConstraint.reason },
+          response: { type: 'answer' }
+        },
+        {
+          content: [
+            {
+              type: 'text',
+              text: platformConstraint.text
+            }
+          ]
+        }
+      );
+    }
 
     const templateMatch = this.matchTemplateIntent(enhancedQuery, normalizedPlatform);
     if (templateMatch) {
@@ -394,6 +445,128 @@ export class SmartAssistService {
     }
 
     return builder.build();
+  }
+
+  private normalizeCoveragePlatform(platform: string): string {
+    const normalized = platform.toLowerCase();
+    if (normalized === 'react-native' || normalized === 'reactnative') return 'rn';
+    if (normalized === 'harmonyos' || normalized === 'ohos') return 'harmony';
+    return normalized;
+  }
+
+  private detectComponentHint(query: string, componentName?: string | null): 'callkit' | 'chatroomuikit' | 'chatuikit' | null {
+    const normalizedComponent = (componentName || '').toLowerCase();
+    if (normalizedComponent.includes('call')) return 'callkit';
+    if (normalizedComponent.includes('chatroom')) return 'chatroomuikit';
+    if (normalizedComponent.includes('chat')) return 'chatuikit';
+
+    const lowerQuery = query.toLowerCase();
+    if (/callkit|calluikit|easecalluikit|通话|音视频/.test(lowerQuery)) return 'callkit';
+    if (/chatroomuikit|chatroom|聊天室/.test(lowerQuery)) return 'chatroomuikit';
+    if (/chatuikit|easechatuikit|消息界面|会话界面/.test(lowerQuery)) return 'chatuikit';
+    return null;
+  }
+
+  private loadPlatformCoverage() {
+    if (this.platformCoverageCache) return this.platformCoverageCache;
+
+    const docsProductsByPlatform: Record<string, Set<string>> = {};
+    const sourceComponentsByPlatform: Record<string, Set<string>> = {};
+
+    const projectRoot = path.join(__dirname, '../..');
+    const docsIndexPath = path.join(projectRoot, 'data/docs/index.json');
+    if (fs.existsSync(docsIndexPath)) {
+      const docsIndex = JSON.parse(fs.readFileSync(docsIndexPath, 'utf-8')) as {
+        apiModules?: Array<{ platform?: string; product?: string }>;
+        guides?: Array<{ platform?: string; product?: string }>;
+      };
+      for (const item of [...(docsIndex.apiModules || []), ...(docsIndex.guides || [])]) {
+        const platform = this.normalizeCoveragePlatform(String(item.platform || 'unknown'));
+        const product = String(item.product || 'general');
+        if (!docsProductsByPlatform[platform]) docsProductsByPlatform[platform] = new Set<string>();
+        docsProductsByPlatform[platform].add(product);
+      }
+    }
+
+    const sourcesIndexPath = path.join(projectRoot, 'data/sources/index.json');
+    if (fs.existsSync(sourcesIndexPath)) {
+      const sourcesIndex = JSON.parse(fs.readFileSync(sourcesIndexPath, 'utf-8')) as {
+        files?: Array<{ platform?: string; component?: string }>;
+      };
+      for (const file of sourcesIndex.files || []) {
+        const platform = this.normalizeCoveragePlatform(String(file.platform || 'unknown'));
+        const component = String(file.component || '');
+        if (!sourceComponentsByPlatform[platform]) sourceComponentsByPlatform[platform] = new Set<string>();
+        if (component) sourceComponentsByPlatform[platform].add(component);
+      }
+    }
+
+    this.platformCoverageCache = { docsProductsByPlatform, sourceComponentsByPlatform };
+    return this.platformCoverageCache;
+  }
+
+  private buildKnownPlatformConstraintResponse(
+    query: string,
+    platform: string,
+    componentName?: string | null
+  ): { reason: string; text: string } | null {
+    const normalizedPlatform = this.normalizeCoveragePlatform(platform);
+    const componentHint = this.detectComponentHint(query, componentName);
+    if (!componentHint) return null;
+
+    const lowerQuery = query.toLowerCase();
+    const asksDemoOrSource = /demo|sample|源码|示例|例子|source/.test(lowerQuery);
+    const coverage = this.loadPlatformCoverage();
+    const docsProducts = Array.from(coverage.docsProductsByPlatform[normalizedPlatform] || []);
+    const sourceComponents = Array.from(coverage.sourceComponentsByPlatform[normalizedPlatform] || []);
+
+    const productHasCallkit = docsProducts.includes('callkit');
+    const sourceHasCallkit = sourceComponents.includes('EaseCallUIKit');
+    const sourceHasChatroomUIKit = sourceComponents.includes('EaseChatroomUIKit');
+    const sourceHasChatUIKit = sourceComponents.includes('EaseChatUIKit');
+
+    if (componentHint === 'callkit' && (normalizedPlatform === 'flutter' || normalizedPlatform === 'harmony')) {
+      const text = `## ⚠️ 当前平台暂无 CallKit 可用内容\n\n`
+        + `您询问的是 CallKit/通话能力，但当前索引中该平台无对应 CallKit 文档与源码。\n\n`
+        + `### 证据\n\n`
+        + `- docs 产品覆盖（${normalizedPlatform}）: ${docsProducts.join(', ') || '无'}\n`
+        + `- sources 组件覆盖（${normalizedPlatform}）: ${sourceComponents.join(', ') || '无'}\n`
+        + `- CallKit docs 命中: ${productHasCallkit ? '有' : '无'}\n`
+        + `- CallKit source 命中: ${sourceHasCallkit ? '有' : '无'}\n\n`
+        + `### 建议\n\n`
+        + `1. 若需要通话能力，请切换到 iOS/Android/Web/RN 路线查询。\n`
+        + `2. 若当前仅做 ${normalizedPlatform}，建议先聚焦 ChatUIKit/SDK 可用能力。\n`;
+      return { reason: 'callkit_unavailable_on_platform', text };
+    }
+
+    if (normalizedPlatform === 'flutter' && componentHint === 'chatroomuikit') {
+      const text = `## ℹ️ Flutter 平台 ChatroomUIKit 能力并入 ChatUIKit\n\n`
+        + `您询问了 ChatroomUIKit。在 Flutter 索引中，聊天室相关能力已并入 \`EaseChatUIKit\` 组件，而非单独的 \`EaseChatroomUIKit\` 组件。\n\n`
+        + `### 证据\n\n`
+        + `- docs 产品覆盖（flutter）: ${docsProducts.join(', ') || '无'}\n`
+        + `- sources 组件覆盖（flutter）: ${sourceComponents.join(', ') || '无'}\n`
+        + `- EaseChatroomUIKit source 命中: ${sourceHasChatroomUIKit ? '有' : '无'}\n`
+        + `- EaseChatUIKit source 命中: ${sourceHasChatUIKit ? '有' : '无'}\n\n`
+        + `### 建议\n\n`
+        + `1. 使用 \`search_source query="chatroom" component="EaseChatUIKit" platform="flutter"\`。\n`
+        + `2. 优先查看 Flutter ChatUIKit 文档中的聊天室章节。\n`;
+      return { reason: asksDemoOrSource ? 'flutter_chatroom_merged_no_separate_demo' : 'flutter_chatroom_merged', text };
+    }
+
+    if (normalizedPlatform === 'harmony' && componentHint === 'chatroomuikit' && asksDemoOrSource) {
+      const text = `## ⚠️ HarmonyOS ChatroomUIKit 暂无独立 Demo 源码\n\n`
+        + `当前鸿蒙索引仅包含 SDK 文档与 ChatUIKit 源码，未发现 ChatroomUIKit 独立 Demo 源码。\n\n`
+        + `### 证据\n\n`
+        + `- docs 产品覆盖（harmony）: ${docsProducts.join(', ') || '无'}\n`
+        + `- sources 组件覆盖（harmony）: ${sourceComponents.join(', ') || '无'}\n`
+        + `- EaseChatroomUIKit source 命中: ${sourceHasChatroomUIKit ? '有' : '无'}\n\n`
+        + `### 建议\n\n`
+        + `1. 先参考鸿蒙 SDK 文档 + ChatUIKit 源码实现等价功能。\n`
+        + `2. 使用 \`search_source query="chatroom|room" component="EaseChatUIKit" platform="harmony"\` 定位可复用实现。\n`;
+      return { reason: 'harmony_chatroom_demo_missing', text };
+    }
+
+    return null;
   }
 
   private getPossibleIntents(query: string): Array<{ intent: string; label: string; description: string }> {

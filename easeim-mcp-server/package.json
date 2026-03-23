@@ -23,6 +23,9 @@
     "generate-class-shards": "tsx scripts/generate-class-shards.ts",
     "generate-integration-shards": "tsx scripts/generate-integration-shards.ts",
     "generate-lexicon-shards": "tsx scripts/generate-lexicon-shards.ts",
+    "replay-smart-assist-sessions": "tsx scripts/replay-smart-assist-sessions.ts",
+    "analyze-query-friction": "tsx scripts/analyze-query-friction.ts",
+    "generate-all-platform-shards": "npm run generate-all && npm run generate-docs-shards && npm run generate-source-shards && npm run generate-config-shards",
     "generate-all": "npm run generate-docs-index && npm run generate-source-index && npm run generate-config-index && npm run analyze-config-impact && npm run generate-template-shards && npm run generate-knowledge-shards && npm run generate-class-shards && npm run generate-integration-shards && npm run generate-lexicon-shards"
   },
   "keywords": [

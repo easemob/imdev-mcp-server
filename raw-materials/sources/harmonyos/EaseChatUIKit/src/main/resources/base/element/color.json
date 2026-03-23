@@ -1,0 +1,268 @@
+{
+  "color": [
+    {
+      "name": "transparent",
+      "value": "#00FFFFFF"
+    },
+    {
+      "name": "primary_0",
+      "value": "#000000"
+    },
+    {
+      "name": "primary_10",
+      "value": "#002033"
+    },
+    {
+      "name": "primary_20",
+      "value": "#003F66"
+    },
+    {
+      "name": "primary_30",
+      "value": "#005E99"
+    },
+    {
+      "name": "primary_40",
+      "value": "#007ECC"
+    },
+    {
+      "name": "primary_50",
+      "value": "#009EFF"
+    },
+    {
+      "name": "primary_60",
+      "value": "#33B1FF"
+    },
+    {
+      "name": "primary_70",
+      "value": "#66C5FF"
+    },
+    {
+      "name": "primary_80",
+      "value": "#99D8FF"
+    },
+    {
+      "name": "primary_90",
+      "value": "#CCECFF"
+    },
+    {
+      "name": "primary_95",
+      "value": "#E6F5FF"
+    },
+    {
+      "name": "primary_98",
+      "value": "#F5FBFF"
+    },
+    {
+      "name": "primary_100",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "secondary_0",
+      "value": "#000000"
+    },
+    {
+      "name": "secondary_10",
+      "value": "#00331E"
+    },
+    {
+      "name": "secondary_20",
+      "value": "#00663B"
+    },
+    {
+      "name": "secondary_30",
+      "value": "#009959"
+    },
+    {
+      "name": "secondary_40",
+      "value": "#00CC77"
+    },
+    {
+      "name": "secondary_50",
+      "value": "#00FF95"
+    },
+    {
+      "name": "secondary_60",
+      "value": "#33FFAA"
+    },
+    {
+      "name": "secondary_70",
+      "value": "#66FFBF"
+    },
+    {
+      "name": "secondary_80",
+      "value": "#99FFD4"
+    },
+    {
+      "name": "secondary_90",
+      "value": "#CCFFEA"
+    },
+    {
+      "name": "secondary_95",
+      "value": "#E5FFF4"
+    },
+    {
+      "name": "secondary_98",
+      "value": "#F5FFFB"
+    },
+    {
+      "name": "secondary_100",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "error_0",
+      "value": "#000000"
+    },
+    {
+      "name": "error_10",
+      "value": "#330009"
+    },
+    {
+      "name": "error_20",
+      "value": "#660011"
+    },
+    {
+      "name": "error_30",
+      "value": "#99001A"
+    },
+    {
+      "name": "error_40",
+      "value": "#CC0022"
+    },
+    {
+      "name": "error_50",
+      "value": "#FF002B"
+    },
+    {
+      "name": "error_60",
+      "value": "#FF3355"
+    },
+    {
+      "name": "error_70",
+      "value": "#FF6680"
+    },
+    {
+      "name": "error_80",
+      "value": "#FF99AA"
+    },
+    {
+      "name": "error_90",
+      "value": "#FFCCD5"
+    },
+    {
+      "name": "error_95",
+      "value": "#FFE5EA"
+    },
+    {
+      "name": "error_98",
+      "value": "#FFF5F7"
+    },
+    {
+      "name": "error_100",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "neutral_0",
+      "value": "#000000"
+    },
+    {
+      "name": "neutral_10",
+      "value": "#171A1C"
+    },
+    {
+      "name": "neutral_20",
+      "value": "#2F3437"
+    },
+    {
+      "name": "neutral_30",
+      "value": "#464E53"
+    },
+    {
+      "name": "neutral_40",
+      "value": "#5E686E"
+    },
+    {
+      "name": "neutral_50",
+      "value": "#75828A"
+    },
+    {
+      "name": "neutral_60",
+      "value": "#919BA1"
+    },
+    {
+      "name": "neutral_70",
+      "value": "#ACB4B9"
+    },
+    {
+      "name": "neutral_80",
+      "value": "#C8CDD0"
+    },
+    {
+      "name": "neutral_90",
+      "value": "#E3E6E8"
+    },
+    {
+      "name": "neutral_95",
+      "value": "#F1F2F3"
+    },
+    {
+      "name": "neutral_98",
+      "value": "#F9FAFA"
+    },
+    {
+      "name": "neutral_100",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "neutral_special_0",
+      "value": "#000000"
+    },
+    {
+      "name": "neutral_special_10",
+      "value": "#101623"
+    },
+    {
+      "name": "neutral_special_20",
+      "value": "#212D45"
+    },
+    {
+      "name": "neutral_special_30",
+      "value": "#314368"
+    },
+    {
+      "name": "neutral_special_40",
+      "value": "#415A8B"
+    },
+    {
+      "name": "neutral_special_50",
+      "value": "#5270AD"
+    },
+    {
+      "name": "neutral_special_60",
+      "value": "#748DBE"
+    },
+    {
+      "name": "neutral_special_70",
+      "value": "#97A9CE"
+    },
+    {
+      "name": "neutral_special_80",
+      "value": "#BAC6DE"
+    },
+    {
+      "name": "neutral_special_90",
+      "value": "#DCE2EF"
+    },
+    {
+      "name": "neutral_special_95",
+      "value": "#EEF1F7"
+    },
+    {
+      "name": "neutral_special_98",
+      "value": "#F8F9FC"
+    },
+    {
+      "name": "neutral_special_100",
+      "value": "#FFFFFF"
+    }
+  ]
+}

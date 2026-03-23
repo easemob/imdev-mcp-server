@@ -14,6 +14,12 @@ export type ToolLogEntry = {
   response: {
     type: 'success' | 'error';
     content_length?: number;
+    category?: 'answer' | 'clarification' | 'no_result';
+    has_no_result_cue?: boolean;
+    has_clarification_cue?: boolean;
+    direct_no_result?: boolean;
+    evidence_count?: number;
+    preview?: string;
   };
   timing_ms: {
     total: number;

@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "lastUpdated": "2026-01-30T09:33:21.199Z",
+  "lastUpdated": "2026-03-23T06:32:34.917Z",
   "errorCodes": {
     "1": {
       "code": 1,
@@ -704,6 +704,30 @@
         "需结合日志进一步分析。"
       ]
     },
+    "512": {
+      "code": 512,
+      "name": "MESSAGE_STREAM_INTERVAL_TIMEOUT",
+      "brief": "流式消息的相邻消息分片的发送间隔超时",
+      "description": "流式消息的相邻消息分片的发送间隔超时：该间隔不能超过 30 秒，超时则返回该错误并终止流式消息。",
+      "causes": [
+        "流式消息的相邻消息分片的发送间隔超时"
+      ],
+      "solutions": [
+        "可在 UI 上进行提示，或检查消息分片发送间隔。"
+      ]
+    },
+    "513": {
+      "code": 513,
+      "name": "MESSAGE_STREAM_TIMEOUT",
+      "brief": "流式消息的发送总时长超时",
+      "description": "流式消息的发送总时长超时：该时长不能超过 30 分钟，超时再发送分片则返回该错误。",
+      "causes": [
+        "流式消息的发送总时长超时"
+      ],
+      "solutions": [
+        "可在 UI 上进行提示，或检查流式消息的发送总时长。"
+      ]
+    },
     "600": {
       "code": 600,
       "name": "EMErrorGroupInvalidId",
@@ -1172,7 +1196,7 @@
     }
   },
   "stats": {
-    "count": 103,
+    "count": 105,
     "categories": [
       "通用错误",
       "参数错误",

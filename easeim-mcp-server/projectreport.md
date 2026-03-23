@@ -10,6 +10,29 @@
 
 ## 版本历史
 
+### v3.1.0 - 全平台覆盖与查询证据链优化 (2026-03-23)
+
+#### 关键改动
+
+- 文档/源码索引覆盖扩展到：`android`、`ios`、`web`、`rn`、`flutter`、`harmony`。
+- 平台别名归一：
+  - `harmonyos` / `ohos` → `harmony`
+  - `react-native` / `reactnative` → `rn`
+- 新增全平台分片刷新命令：
+  - `npm run generate-all-platform-shards`
+- 源码索引增强：
+  - 新增 `.dart`、`.ets`、`.tsx`、`.jsx` 解析支持
+  - `search_source` 增加“符号命中反推文件”
+- 智能助手增强：
+  - 平台能力约束分支（平台无覆盖时直接告知无内容并给出覆盖证据）
+  - Flutter `ChatroomUIKit` 能力并入 `ChatUIKit` 的显式说明
+- 新增查询纠缠分析链路：
+  - `scripts/replay-smart-assist-sessions.ts`
+  - `scripts/analyze-query-friction.ts`
+  - 响应观测字段：`category`、`has_no_result_cue`、`direct_no_result`、`evidence_count`、`preview`
+
+---
+
 ### v3.0.0 - 平台分片优化 (2026-01-15)
 
 #### 实现目标
@@ -137,7 +160,7 @@ private detectPlatform(query: string): string[] {
 ```json
 {
   "version": "3.0.0",
-  "platforms": ["android", "ios"],
+  "platforms": ["android", "ios", "web", "rn", "flutter", "harmony"],
   "shards": {
     "ios": {
       "path": "shards/ios.json",
@@ -195,7 +218,7 @@ console.log(docSearch.getCacheStats());
 ### 短期计划 (1-2 周)
 
 #### 1. 工具层迁移
-将现有 MCP Tools 从全量搜索引擎迁移到分片版本：
+将运行时 `DocSearch/ConfigSearch` 逐步迁移到分片搜索引擎（保留向后兼容）：
 
 ```typescript
 // 当前 (tools/searchApi.ts)
@@ -212,30 +235,35 @@ import { ShardedDocSearch } from '../search/ShardedDocSearch.js';
 - `src/tools/listConfigOptions.ts`
 - `src/tools/getExtensionPoints.ts`
 
-#### 2. 新平台数据添加
-添加其他平台的文档和配置数据：
+#### 2. 平台数据覆盖现状与补齐
+
+当前覆盖：
 
 | 平台 | 状态 | 预计数据量 |
 |------|------|------------|
 | iOS | ✅ 已完成 | 20 guides, 60 APIs |
 | Android | ✅ 已完成 | 32 guides, 72 APIs |
-| Flutter | 📋 待添加 | ~25 guides, ~50 APIs |
-| Web | 📋 待添加 | ~20 guides, ~40 APIs |
-| Unity | 📋 待添加 | ~15 guides, ~30 APIs |
-| React Native | 📋 待添加 | ~20 guides, ~45 APIs |
+| Web | ✅ 已完成 | ~20 guides, ~40 APIs |
+| React Native | ✅ 已完成 | ~20 guides, ~45 APIs |
+| Flutter | ✅ 已完成 | ~25 guides, ~50 APIs |
+| Harmony | ✅ 已完成 | ~20 guides, ~40 APIs |
+| Unity | 📋 待补齐 | ~15 guides, ~30 APIs |
 
-**添加步骤**:
+新增/补齐平台时，统一走 `raw-materials` → 索引/分片脚本链路：
+
 ```bash
-# 1. 编辑文档索引，添加新平台数据
-vim data/docs/index.json
+# 1) 将文档/源码放入 raw-materials 对应平台目录
+# raw-materials/docs/<platform>/
+# raw-materials/sources/<platform>/
 
-# 2. 编辑配置索引（如有）
-vim data/configs/index.json
-
-# 3. 重新生成分片
-npx tsx scripts/generate-doc-shards.ts
-npx tsx scripts/generate-config-shards.ts
+# 2) 一键刷新索引与分片
+npm run generate-all-platform-shards
 ```
+
+#### 3. 证据链强度提升
+
+- 提升回答中“证据路径/行号”的覆盖率，降低“证据链弱”类型纠缠。
+- 在无结果场景中持续强化“直接告知无内容”的一致性。
 
 ### 中期计划 (1-2 月)
 
@@ -314,6 +342,7 @@ interface I18nConfig {
 | 全量搜索引擎保留 | 低 | 保留向后兼容，但增加维护成本 |
 | 缺少单元测试 | 中 | 分片搜索引擎需要添加测试用例 |
 | 硬编码平台列表 | 低 | `generate-config-shards.ts` 中平台列表硬编码 |
+| 证据链路径/行号覆盖率 | 中 | 部分回答仍可能出现 evidence_count 低的问题 |
 
 ---
 
@@ -321,11 +350,10 @@ interface I18nConfig {
 
 ### 添加新平台
 
-1. **准备数据**: 整理新平台的 guides 和 apiModules 数据
-2. **更新索引**: 编辑 `data/docs/index.json` 和 `data/configs/index.json`
-3. **生成分片**: 运行分片生成脚本
-4. **测试验证**: 确保新平台可被正确搜索
-5. **更新文档**: 更新 README.md 中的平台列表
+1. **准备数据**: 将文档和源码放入 `raw-materials/docs/<platform>/`、`raw-materials/sources/<platform>/`
+2. **生成索引与分片**: 运行 `npm run generate-all-platform-shards`
+3. **测试验证**: 验证 `search_api`、`search_source`、`smart_assist` 对新平台可用
+4. **更新文档**: 同步更新 `README.md` 与 `docs/*` 中的平台覆盖说明
 
 ### 代码规范
 

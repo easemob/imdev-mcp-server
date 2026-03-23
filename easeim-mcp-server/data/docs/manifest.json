@@ -1,9 +1,11 @@
 {
   "version": "3.0.0",
-  "lastUpdated": "2026-01-30T09:33:21.199Z",
+  "lastUpdated": "2026-03-23T06:32:34.917Z",
   "description": "文档索引清单 - 支持按平台分片加载",
   "platforms": [
     "android",
+    "flutter",
+    "harmony",
     "ios",
     "rn",
     "web"
@@ -15,7 +17,7 @@
       "guideCount": 35,
       "apiModuleCount": 72,
       "errorCodeCount": 0,
-      "sizeBytes": 47123,
+      "sizeBytes": 62347,
       "keywords": [
         "android",
         "kotlin",
@@ -26,13 +28,37 @@
         "apk"
       ]
     },
+    "flutter": {
+      "path": "shards/flutter.json",
+      "platform": "flutter",
+      "guideCount": 38,
+      "apiModuleCount": 57,
+      "errorCodeCount": 0,
+      "sizeBytes": 53224,
+      "keywords": [
+        "flutter",
+        "dart",
+        "cross-platform"
+      ]
+    },
+    "harmony": {
+      "path": "shards/harmony.json",
+      "platform": "harmony",
+      "guideCount": 29,
+      "apiModuleCount": 55,
+      "errorCodeCount": 0,
+      "sizeBytes": 46612,
+      "keywords": [
+        "harmony"
+      ]
+    },
     "ios": {
       "path": "shards/ios.json",
       "platform": "ios",
       "guideCount": 25,
       "apiModuleCount": 60,
       "errorCodeCount": 0,
-      "sizeBytes": 35939,
+      "sizeBytes": 48012,
       "keywords": [
         "ios",
         "swift",
@@ -51,7 +77,7 @@
       "guideCount": 95,
       "apiModuleCount": 111,
       "errorCodeCount": 0,
-      "sizeBytes": 76811,
+      "sizeBytes": 106913,
       "keywords": [
         "rn",
         "react-native",
@@ -68,7 +94,7 @@
       "guideCount": 34,
       "apiModuleCount": 53,
       "errorCodeCount": 0,
-      "sizeBytes": 38895,
+      "sizeBytes": 50343,
       "keywords": [
         "web",
         "javascript",
@@ -83,13 +109,13 @@
     "errorCodes": {
       "path": "shards/error-codes.json",
       "description": "跨平台共享的错误码索引",
-      "count": 103,
-      "sizeBytes": 48202
+      "count": 105,
+      "sizeBytes": 49178
     }
   },
   "stats": {
-    "totalGuides": 189,
-    "totalApiModules": 296,
-    "totalErrorCodes": 103
+    "totalGuides": 256,
+    "totalApiModules": 408,
+    "totalErrorCodes": 105
   }
 }

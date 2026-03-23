@@ -12,7 +12,10 @@
   - `theme_tokens`（主题变量）
   - `override`（源码扩展）
 
-目前仅接入 iOS 入口路由，其余平台保留模板。
+当前状态：
+
+- 入口路由（`entryRoutes`）目前以 iOS 为主，其余平台可继续按模板补充。
+- 运行时能力约束已覆盖全平台（`android/ios/web/rn/flutter/harmony`），在“平台有内容”和“平台无内容”两种场景下都能稳定分流。
 
 ## 入口路由配置文件
 
@@ -83,3 +86,17 @@
 - 保持 `entryRoutes` 的 **平台语义一致**，不要强行统一配置名。
 - iOS 仍以 `Appearance` 为首要入口，找不到再走 `ChatUIKitOptions/UIOptions`。
 - 如果平台未接入，系统会提示“入口未接入”并引导回到本指南。
+
+## 2026-03 运行时能力约束补充
+
+为避免用户在无覆盖能力上反复追问，`smart_assist` 增加了“平台能力约束”分支：
+
+- 当平台确实无能力内容时，直接返回“当前无对应内容”，并附上覆盖证据（docs/sources 命中情况）。
+- 当平台能力存在但命名有差异时，返回归一说明并给出正确组件路径。
+
+当前内置规则（与 raw-materials 实际覆盖保持一致）：
+
+- `flutter`：聊天室能力并入 `EaseChatUIKit`，无单独 `EaseChatroomUIKit`。
+- `flutter`：无 `CallKit` 覆盖。
+- `harmony`：无 `CallKit` 覆盖。
+- `harmony`：`ChatroomUIKit` 无独立 demo 源码，仅保留 SDK 文档 + ChatUIKit 源码/文档覆盖。

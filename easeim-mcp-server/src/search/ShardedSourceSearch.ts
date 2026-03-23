@@ -210,12 +210,15 @@ export class ShardedSourceSearch {
     const documents: IndexedDocument[] = [];
 
     // 索引文件
+    const filePlatformMap = new Map<string, string>();
     for (const file of shard.files) {
+      filePlatformMap.set(file.path, file.platform);
       // 类名：原始 + 驼峰拆分
       const classNames = file.classes.map(c => `${c} ${this.splitCamelCase(c)}`).join(' ');
       // 路径：提取文件名并拆分
       const fileName = file.path.split('/').pop() || '';
-      const pathTerms = `${file.path} ${this.splitCamelCase(fileName.replace('.swift', ''))}`;
+      const fileStem = fileName.replace(/\.[^.]+$/, '');
+      const pathTerms = `${file.path} ${this.splitCamelCase(fileStem)}`;
 
       documents.push({
         id: `file:${file.path}`,
@@ -227,8 +230,9 @@ export class ShardedSourceSearch {
         },
         metadata: {
           type: 'file',
+          path: file.path,
           component: file.component,
-          platform: file.platform,
+          platform: normalizePlatform(file.platform),
           classes: file.classes,
           lines: file.lines,
         }
@@ -239,6 +243,7 @@ export class ShardedSourceSearch {
     for (const symbol of shard.symbols) {
       // 符号名：原始 + 驼峰拆分
       const symbolTerms = `${symbol.name} ${this.splitCamelCase(symbol.name)}`;
+      const symbolPlatform = filePlatformMap.get(symbol.file) || shard.platform;
 
       documents.push({
         id: `symbol:${symbol.file}:${symbol.name}`,
@@ -249,8 +254,14 @@ export class ShardedSourceSearch {
         },
         metadata: {
           type: 'symbol',
+          name: symbol.name,
           symbolType: symbol.type,
           file: symbol.file,
+          owner: symbol.owner,
+          startLine: symbol.startLine,
+          endLine: symbol.endLine,
+          platform: normalizePlatform(symbolPlatform),
+          component: shard.component,
           line: symbol.line,
           signature: symbol.signature,
         }
@@ -334,7 +345,7 @@ export class ShardedSourceSearch {
       : [component];
 
     // 收集所有结果
-    const allResults: Array<SourceSearchResult & { _score: number }> = [];
+    const resultMap = new Map<string, SourceSearchResult & { _score: number }>();
     const loadedShards: string[] = [];
 
     for (const comp of targetComponents) {
@@ -342,30 +353,99 @@ export class ShardedSourceSearch {
 
       const cached = this.loadShard(comp);
       loadedShards.push(comp);
+      const fileMap = new Map(cached.shard.files.map(file => [file.path, file]));
 
       // 使用倒排索引搜索
       const indexResults = cached.index.search(prepared.expandedQueryStr, limit * 2);
 
       // 转换结果
       for (const result of indexResults) {
-        if (normalizedPlatform && result.metadata?.platform !== normalizedPlatform) {
+        const resultPlatform = typeof result.metadata?.platform === 'string'
+          ? normalizePlatform(result.metadata.platform)
+          : result.metadata?.platform;
+        if (normalizedPlatform && resultPlatform !== normalizedPlatform) {
           continue;
         }
 
         if (result.metadata?.type === 'file') {
-          allResults.push({
-            path: result.metadata.path || result.docId.replace('file:', ''),
+          const path = result.metadata.path || result.docId.replace('file:', '');
+          const existing = resultMap.get(path);
+          if (existing) {
+            existing._score = Math.max(existing._score, result.score);
+            existing.score = existing._score;
+            if ((!existing.matchedSymbols || existing.matchedSymbols.length === 0) && query.trim()) {
+              existing.matchedSymbols = this.findMatchedSymbols(cached.shard, `file:${path}`, query);
+            }
+            continue;
+          }
+
+          const sourceFile = fileMap.get(path);
+          resultMap.set(path, {
+            path,
             component: comp,
             description: `来自 ${comp} 的源文件`,
-            classes: result.metadata.classes || [],
-            matchedSymbols: this.findMatchedSymbols(cached.shard, result.docId, query),
+            classes: sourceFile?.classes || result.metadata.classes || [],
+            matchedSymbols: this.findMatchedSymbols(cached.shard, `file:${path}`, query),
             score: result.score,
-            tags: [result.metadata.platform, comp],
+            tags: [String(resultPlatform || sourceFile?.platform || 'unknown'), comp],
             _score: result.score,
           });
         }
+
+        if (result.metadata?.type === 'symbol') {
+          const path = result.metadata.file as string | undefined;
+          if (!path) continue;
+
+          const sourceFile = fileMap.get(path);
+          if (!sourceFile) continue;
+
+          const symbolName = typeof result.metadata.name === 'string' ? result.metadata.name : '';
+          const symbolLine = typeof result.metadata.line === 'number' ? result.metadata.line : undefined;
+          const matchedSymbol = cached.shard.symbols.find(symbol =>
+            symbol.file === path &&
+            (symbolLine === undefined || symbol.line === symbolLine) &&
+            (!symbolName || symbol.name === symbolName)
+          );
+
+          const boostedScore = result.score + 1.0;
+          const existing = resultMap.get(path);
+          if (!existing) {
+            resultMap.set(path, {
+              path,
+              component: comp,
+              description: `来自 ${comp} 的源文件`,
+              classes: sourceFile.classes || [],
+              matchedSymbols: matchedSymbol ? [matchedSymbol] : [],
+              score: boostedScore,
+              tags: [String(resultPlatform || sourceFile.platform || 'unknown'), comp],
+              _score: boostedScore,
+            });
+            continue;
+          }
+
+          existing._score = Math.max(existing._score, boostedScore);
+          existing.score = existing._score;
+          if (matchedSymbol) {
+            const exists = (existing.matchedSymbols || []).some(symbol =>
+              symbol.file === matchedSymbol.file &&
+              symbol.line === matchedSymbol.line &&
+              symbol.name === matchedSymbol.name
+            );
+            if (!exists) {
+              if (!existing.matchedSymbols) {
+                existing.matchedSymbols = [];
+              }
+              existing.matchedSymbols.push(matchedSymbol);
+            }
+          }
+        }
       }
     }
+
+    const allResults = Array.from(resultMap.values()).map(result => ({
+      ...result,
+      matchedSymbols: result.matchedSymbols?.slice(0, 5)
+    }));
 
     const sortedResults = this.truncateSourceResults(
       this.rerankSourceResults(query, allResults)
@@ -445,7 +525,7 @@ export class ShardedSourceSearch {
 
       const cached = this.loadShard(comp);
       const symbol = cached.shard.symbols.find(
-        s => (s.type === 'class' || s.type === 'struct' || s.type === 'protocol') &&
+        s => (s.type === 'class' || s.type === 'struct' || s.type === 'protocol' || s.type === 'interface' || s.type === 'enum' || s.type === 'mixin') &&
              s.name === className
       );
 
@@ -469,7 +549,7 @@ export class ShardedSourceSearch {
 
       const cached = this.loadShard(comp);
       const classMembers = cached.shard.symbols.filter(
-        s => s.name.startsWith(`${className}.`)
+        s => s.owner === className || s.name.startsWith(`${className}.`)
       );
 
       members.push(...classMembers);

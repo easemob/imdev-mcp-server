@@ -1,0 +1,384 @@
+{
+  "float": [
+    {
+      "name": "conversation_list_time_padding",
+      "value": "3vp"
+    },
+    {
+      "name": "conversation_list_time_width",
+      "value": "45vp"
+    },
+    {
+      "name": "icon_margin_12",
+      "value": "12vp"
+    },
+    {
+      "name": "icon_margin_24",
+      "value": "24vp"
+    },
+    {
+      "name": "text_line_height_19",
+      "value": "19fp"
+    },
+    {
+      "name": "text_line_height_14",
+      "value": "14fp"
+    },
+    {
+      "name": "text_line_height_22",
+      "value": "22fp"
+    },
+    {
+      "name": "avatar_image_size",
+      "value": "28vp"
+    },
+    {
+      "name": "font_size_ten",
+      "value": "10fp"
+    },
+    {
+      "name": "font_size_eleven",
+      "value": "11fp"
+    },
+    {
+      "name": "font_size_twelve",
+      "value": "12fp"
+    },
+    {
+      "name": "font_size_fourteen",
+      "value": "14fp"
+    },
+    {
+      "name": "font_size_sixteen",
+      "value": "16fp"
+    },
+    {
+      "name": "font_size_eighteen",
+      "value": "18fp"
+    },
+    {
+      "name": "font_size_twenty",
+      "value": "20fp"
+    },
+    {
+      "name": "font_size_twenty_four",
+      "value": "24fp"
+    },
+    {
+      "name": "font_size_thirty_two",
+      "value": "32fp"
+    },
+    {
+      "name": "chat_checkbox_size",
+      "value": "20vp",
+      "comment": "uikit中checkbox通用大小"
+    },
+    {
+      "name": "chat_switch_width",
+      "value": "51vp",
+      "comment": "uikit中switch的通用宽度"
+    },
+    {
+      "name": "chat_switch_height",
+      "value": "31vp",
+      "comment": "uikit中switch的通用高度"
+    },
+    {
+      "name": "chat_emoji_size",
+      "value": "32vp",
+      "comment": "uikit中Emoji的通用图片大小"
+    },
+    {
+      "name": "chat_emoji_outline_size",
+      "value": "40vp",
+      "comment": "uikit中emoji的外框大小"
+    },
+    {
+      "name": "message_item_padding_start",
+      "value": "12vp",
+      "comment": "消息条目左侧边距"
+    },
+    {
+      "name": "message_item_avatar_margin_end",
+      "value": "13vp",
+      "comment": "消息条目头像右侧边距"
+    },
+    {
+      "name": "message_item_avatar_margin_bottom",
+      "value": "18vp",
+      "comment": "消息条目头像底部边距"
+    },
+    {
+      "name": "message_item_date_height",
+      "value": "18vp",
+      "comment": "消息条目时间控件的高度"
+    },
+    {
+      "name": "message_item_image_border_width",
+      "value": "1vp",
+      "comment": "图片消息/视频消息描边宽度"
+    },
+    {
+      "name": "message_item_bubble_margin",
+      "value": "2vp",
+      "comment": "消息条目bubble头部和底部边距"
+    },
+    {
+      "name": "message_item_bubble_max_width",
+      "value": "240vp",
+      "comment": "消息条目文本最大宽度"
+    },
+    {
+      "name": "message_item_bubble_padding",
+      "value": "8vp",
+      "comment": "消息条目通用内边距"
+    },
+    {
+      "name": "message_item_bubble_padding_max",
+      "value": "12vp",
+      "comment": "消息条目通用最大内边距"
+    },
+    {
+      "name": "message_item_text_bubble_padding_horizontal",
+      "value": "$float:message_item_bubble_padding_max",
+      "comment": "消息条目文本左右内边距"
+    },
+    {
+      "name": "message_item_text_bubble_padding_vertical",
+      "value": "$float:message_item_bubble_padding",
+      "comment": "消息条目文本上下内边距"
+    },
+    {
+      "name": "message_item_voice_bubble_padding",
+      "value": "$float:message_item_bubble_padding",
+      "comment": "消息条目语音内边距"
+    },
+    {
+      "name": "message_item_voice_bubble_padding_max",
+      "value": "$float:message_item_bubble_padding_max",
+      "comment": "消息条目语音最大内边距"
+    },
+    {
+      "name": "message_item_voice_receive_icon_size",
+      "value": "16vp",
+      "comment": "消息条目中语音消息接收图标的大小"
+    },
+    {
+      "name": "message_item_voice_width_1_9s",
+      "value": "70vp",
+      "comment": "语音消息1-9s的bubble宽度"
+    },
+    {
+      "name": "message_item_voice_width_10_19s",
+      "value": "95vp",
+      "comment": "语音消息10-19s的bubble宽度"
+    },
+    {
+      "name": "message_item_voice_width_20_29s",
+      "value": "120vp",
+      "comment": "语音消息20-29s的bubble宽度"
+    },
+    {
+      "name": "message_item_voice_width_30_39s",
+      "value": "145vp",
+      "comment": "语音消息30-39s的bubble宽度"
+    },
+    {
+      "name": "message_item_voice_width_40_49s",
+      "value": "170vp",
+      "comment": "语音消息40-49s的bubble宽度"
+    },
+    {
+      "name": "message_item_voice_width_50_59s",
+      "value": "195vp",
+      "comment": "语音消息50-59s的bubble宽度"
+    },
+    {
+      "name": "message_item_voice_width_60s",
+      "value": "220vp",
+      "comment": "语音消息大于60s的bubble宽度"
+    },
+    {
+      "name": "message_item_image_default_size",
+      "value": "132vp",
+      "comment": "视频消息或者图片消息错误占位图的尺寸"
+    },
+    {
+      "name": "message_item_video_flag_size",
+      "value": "64vp",
+      "comment": "视频消息标志尺寸"
+    },
+    {
+      "name": "message_item_file_width",
+      "value": "$float:message_item_bubble_max_width",
+      "comment": "文件消息bubble的宽度"
+    },
+    {
+      "name": "message_item_file_height",
+      "value": "60vp",
+      "comment": "文件消息bubble的高度"
+    },
+    {
+      "name": "message_item_user_card_width",
+      "value": "$float:message_item_bubble_max_width",
+      "comment": "名片消息bubble的宽度"
+    },
+    {
+      "name": "message_item_user_card_height",
+      "value": "90vp",
+      "comment": "名片消息bubble的高度"
+    },
+    {
+      "name": "chat_primary_icon_size",
+      "value": "30vp",
+      "comment": "聊天菜单图标尺寸"
+    },
+    {
+      "name": "chat_margin_common_large",
+      "value": "16vp",
+      "comment": "通用中尺寸间距"
+    },
+    {
+      "name": "chat_margin_common_medium",
+      "value": "12vp",
+      "comment": "通用中尺寸间距"
+    },
+    {
+      "name": "chat_margin_common_small",
+      "value": "8vp",
+      "comment": "通用小尺寸间距"
+    },
+    {
+      "name": "chat_primary_input_min_height",
+      "value": "36vp",
+      "comment": "输入框最小高度"
+    },
+    {
+      "name": "chat_primary_input_top_margin",
+      "value": "7vp",
+      "comment": "输入框距离顶部的距离"
+    },
+    {
+      "name": "chat_primary_input_bottom_margin",
+      "value": "7vp",
+      "comment": "输入框距离底部的距离"
+    },
+    {
+      "name": "chat_emoji_extend_rows_gap",
+      "value": "12vp",
+      "comment": "表情扩展区域行间距"
+    },
+    {
+      "name": "chat_emoji_extend_height",
+      "value": "300vp",
+      "comment": "表情扩展区域高度"
+    },
+    {
+      "name": "chat_emoji_extend_top_padding",
+      "value": "20vp",
+      "comment": "表情扩展区域顶部内边距"
+    },
+    {
+      "name": "chat_emoji_extend_bottom_padding",
+      "value": "60vp",
+      "comment": "表情扩展区域底部内边距"
+    },
+    {
+      "name": "chat_emoji_extend_start_padding",
+      "value": "12vp",
+      "comment": "表情扩展区域左边距"
+    },
+    {
+      "name": "chat_emoji_extend_end_padding",
+      "value": "12vp",
+      "comment": "表情扩展区域右边距"
+    },
+    {
+      "name": "chat_emoji_extend_btn_size",
+      "value": "44vp",
+      "comment": "表情扩展区域按钮的尺寸"
+    },
+    {
+      "name": "chat_emoji_extend_btn_margin",
+      "value": "16vp",
+      "comment": "表情扩展区域按钮的外边距"
+    },
+    {
+      "name": "chat_menu_item_icon_medium_size",
+      "value": "24vp",
+      "comment": "菜单条目图标尺寸"
+    },
+    {
+      "name": "chat_menu_item_medium_height",
+      "value": "56vp",
+      "comment": "菜单条目默认高度"
+    },
+    {
+      "name": "chat_menu_item_icon_large_size",
+      "value": "32vp",
+      "comment": "菜单条目大图标尺寸"
+    },
+    {
+      "name": "chat_menu_item_large_size",
+      "value": "64vp",
+      "comment": "菜单条目大尺寸高度"
+    },
+    {
+      "name": "chat_record_dialog_height",
+      "value": "234vp",
+      "comment": "录音弹框的默认高度"
+    },
+    {
+      "name": "chat_icon_size_small",
+      "value": "24vp"
+    },
+    {
+      "name": "chat_icon_size_medium",
+      "value": "36vp"
+    },
+    {
+      "name": "chat_icon_size_large",
+      "value": "50vp"
+    },
+    {
+      "name": "chat_more_extend_top_padding",
+      "value": "16vp",
+      "comment": "更多扩展区域顶部内边距"
+    },
+    {
+      "name": "chat_more_extend_bottom_padding",
+      "value": "22vp",
+      "comment": "更多扩展区域底部内边距"
+    },
+    {
+      "name": "chat_more_extend_start_padding",
+      "value": "31vp",
+      "comment": "更多扩展区域左边距"
+    },
+    {
+      "name": "chat_more_extend_end_padding",
+      "value": "31vp",
+      "comment": "更多扩展区域右边距"
+    },
+    {
+      "name": "chat_default_bottom_margin",
+      "value": "34vp",
+      "comment": "默认举例底部的边距"
+    },
+    {
+      "name": "chat_dialog_button_height",
+      "value": "50vp",
+      "comment": "弹框按钮高度"
+    },
+    {
+      "name": "conv_item_height",
+      "value": "76vp",
+      "comment": "会话列表条目高度"
+    },
+    {
+      "name": "new_request_icon_size",
+      "value": "40vp",
+      "comment": "新请求条目中头像尺寸"
+    }
+  ]
+}

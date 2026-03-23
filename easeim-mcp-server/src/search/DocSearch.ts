@@ -17,6 +17,7 @@ import { InvertedIndex, IndexedDocument } from './InvertedIndex.js';
 import { SpellCorrector, QueryCorrectionResult } from '../intelligence/SpellCorrector.js';
 import { SearchSuggester, SearchSuggestion } from '../intelligence/SearchSuggester.js';
 import { SearchPipeline } from './SearchPipeline.js';
+import { normalizePlatform } from '../utils/platform.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -83,6 +84,7 @@ export class DocSearch {
     // 索引 API 模块
     const modules = this.index.apiModules || [];
     for (const mod of modules) {
+      const normalizedPlatform = typeof mod.platform === 'string' ? normalizePlatform(mod.platform) : mod.platform;
       documents.push({
         id: mod.id,
         fields: {
@@ -93,7 +95,7 @@ export class DocSearch {
         },
         metadata: {
           type: 'api',
-          platform: mod.platform,
+          platform: normalizedPlatform,
           docPath: mod.docPath,
           product: mod.product,
         }
@@ -107,6 +109,7 @@ export class DocSearch {
     // 索引指南文档
     const guides = this.index.guides || [];
     for (const guide of guides) {
+      const normalizedPlatform = typeof guide.platform === 'string' ? normalizePlatform(guide.platform) : guide.platform;
       documents.push({
         id: guide.id,
         fields: {
@@ -117,7 +120,7 @@ export class DocSearch {
         },
         metadata: {
           type: 'guide',
-          platform: guide.platform,
+          platform: normalizedPlatform,
           path: guide.path,
           product: guide.product,
         }
@@ -158,7 +161,7 @@ export class DocSearch {
     const modules = index.apiModules || [];
 
     // 构建 ID → Module 映射表
-    type PlatformType = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'all';
+    type PlatformType = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'harmony' | 'windows' | 'all' | 'unknown';
     interface ApiModule {
       id: string;
       name: string;
@@ -176,7 +179,13 @@ export class DocSearch {
       if (indexResult.metadata?.type !== 'api') continue;
 
       // 平台过滤
-      if (context?.platform && indexResult.metadata?.platform !== context.platform) continue;
+      const normalizedResultPlatform = typeof indexResult.metadata?.platform === 'string'
+        ? normalizePlatform(indexResult.metadata.platform)
+        : indexResult.metadata?.platform;
+      const normalizedContextPlatform = typeof context?.platform === 'string'
+        ? normalizePlatform(context.platform)
+        : context?.platform;
+      if (normalizedContextPlatform && normalizedResultPlatform !== normalizedContextPlatform) continue;
 
       const mod = moduleMap.get(indexResult.docId);
       if (!mod) continue;
@@ -188,7 +197,7 @@ export class DocSearch {
         description: mod.description || '',
         docPath: mod.docPath,
         score: indexResult.score,
-        platform: mod.platform,
+        platform: (typeof mod.platform === 'string' ? normalizePlatform(mod.platform) : mod.platform) as PlatformType,
         layer: 'sdk'
       });
     }

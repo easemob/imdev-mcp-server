@@ -1,0 +1,100 @@
+{
+  "routerMap": [
+    {
+      "name": "ChatPage",
+      "pageSourceFile": "src/main/ets/pages/ChatPage.ets",
+      "buildFunction": "ChatPageBuilder",
+      "data": {
+        "description" : "Chat page"
+      }
+    },
+    {
+      "name": "ConversationListPage",
+      "pageSourceFile": "src/main/ets/pages/ConversationListPage.ets",
+      "buildFunction": "ConversationListPageBuilder",
+      "data": {
+        "description" : "Conversation list page"
+      }
+    },
+    {
+      "name": "SearchConversationPage",
+      "pageSourceFile": "src/main/ets/pages/SearchConversationPage.ets",
+      "buildFunction": "SearchConversationPageBuilder",
+      "data": {
+        "description" : "Search conversations by keyword"
+      }
+    },
+    {
+      "name": "ContactListPage",
+      "pageSourceFile": "src/main/ets/pages/ContactListPage.ets",
+      "buildFunction": "ContactListPageBuilder",
+      "data": {
+        "description" : "Contact list page"
+      }
+    },
+    {
+      "name": "SearchContactPage",
+      "pageSourceFile": "src/main/ets/pages/SearchContactPage.ets",
+      "buildFunction": "SearchContactPageBuilder",
+      "data": {
+        "description" : "Search contacts by keyword"
+      }
+    },
+    {
+      "name": "GroupListPage",
+      "pageSourceFile": "src/main/ets/pages/GroupListPage.ets",
+      "buildFunction": "GroupListPageBuilder",
+      "data": {
+        "description" : "Group list page"
+      }
+    },
+    {
+      "name": "AddContactDialogPage",
+      "pageSourceFile": "src/main/ets/pages/AddContactDialogPage.ets",
+      "buildFunction": "AddContactDialogPageBuilder",
+      "data": {
+        "description" : "Add contact dialog page"
+      }
+    },
+    {
+      "name": "CreateGroupPage",
+      "pageSourceFile": "src/main/ets/pages/CreateGroupPage.ets",
+      "buildFunction": "CreateGroupPageBuilder",
+      "data": {
+        "description" : "Create group page"
+      }
+    },
+    {
+      "name": "ContactSearchSelectorPage",
+      "pageSourceFile": "src/main/ets/pages/SearchContactPage.ets",
+      "buildFunction": "ContactSearchSelectorPageBuilder",
+      "data": {
+        "description" : "Search contacts by keyword"
+      }
+    },
+    {
+      "name": "ShareContactPage",
+      "pageSourceFile": "src/main/ets/pages/ShareContactPage.ets",
+      "buildFunction": "ShareContactPageBuilder",
+      "data": {
+        "description" : "Share contact to another"
+      }
+    },
+    {
+      "name": "NewConversationPage",
+      "pageSourceFile": "src/main/ets/pages/NewConversationPage.ets",
+      "buildFunction": "NewConversationPageBuilder",
+      "data": {
+        "description" : "Select a contact to start a new conversation"
+      }
+    },
+    {
+      "name": "NewRequestsPage",
+      "pageSourceFile": "src/main/ets/pages/NewRequestsPage.ets",
+      "buildFunction": "NewRequestsPageBuilder",
+      "data": {
+        "description" : "New request list page"
+      }
+    }
+  ]
+}

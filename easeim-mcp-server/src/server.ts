@@ -28,6 +28,7 @@ import { SmartAssistService } from './assist/SmartAssistService.js';
 import { SmartAssistContext } from './assist/SmartAssistContext.js';
 import { ToolLogger } from './utils/ToolLogger.js';
 import { normalizePlatformInArgs } from './utils/platform.js';
+import { inspectMcpResult } from './utils/LogResponseInspector.js';
 
 export class EaseIMServer {
   private server: Server;
@@ -220,6 +221,7 @@ export class EaseIMServer {
             sum + (typeof item?.text === 'string' ? item.text.length : 0)
           ), 0)
           : undefined;
+        const inspection = inspectMcpResult(result);
 
         ToolLogger.log({
           log_version: 'v1',
@@ -227,7 +229,16 @@ export class EaseIMServer {
           request_id: requestId,
           session_id: sessionId,
           tool: { name, args: args ?? null },
-          response: { type: 'success', content_length: contentLength },
+          response: {
+            type: 'success',
+            content_length: contentLength,
+            category: inspection.category,
+            has_no_result_cue: inspection.hasNoResultCue,
+            has_clarification_cue: inspection.hasClarificationCue,
+            direct_no_result: inspection.directNoResult,
+            evidence_count: inspection.evidenceCount,
+            preview: inspection.preview
+          },
           timing_ms: { total: Date.now() - startTime }
         });
 
@@ -848,6 +859,17 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
   /**
    * 处理 read_source
    */
+  private detectCodeFenceLanguage(filePath: string): string {
+    const lower = filePath.toLowerCase();
+    if (lower.endsWith('.swift')) return 'swift';
+    if (lower.endsWith('.kt')) return 'kotlin';
+    if (lower.endsWith('.java')) return 'java';
+    if (lower.endsWith('.dart')) return 'dart';
+    if (lower.endsWith('.ets') || lower.endsWith('.ts') || lower.endsWith('.tsx')) return 'typescript';
+    if (lower.endsWith('.js') || lower.endsWith('.jsx')) return 'javascript';
+    return 'text';
+  }
+
   private async handleReadSource(args: any) {
     const { path, symbol, component = 'all', startLine, endLine } = args;
 
@@ -895,7 +917,7 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
       content: [
         {
           type: 'text',
-          text: `\`\`\`swift\n${content}\n\`\`\``
+          text: `\`\`\`${this.detectCodeFenceLanguage(resolvedPath)}\n${content}\n\`\`\``
         }
       ]
     };

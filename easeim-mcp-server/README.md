@@ -92,6 +92,71 @@ EASEIM_TOOL_LOG_PATH="/tmp/easeim-tool.log"
 
 ---
 
+## 2026-03 优化更新（全平台 + 证据链）
+
+### 1) 全平台分片脚本链路
+
+新增一键脚本：
+
+```bash
+npm run generate-all-platform-shards
+```
+
+等价执行：
+
+- `generate-docs-index + generate-docs-shards`
+- `generate-source-index + generate-source-shards`
+- `generate-config-index + generate-config-shards`
+- 以及 template/knowledge/class/integration/lexicon 的索引更新
+
+### 2) Flutter / HarmonyOS 平台支持增强
+
+- 文档索引与分片已纳入 `flutter`、`harmony` 平台。
+- 平台别名统一：`harmonyos`/`ohos` 自动归一为 `harmony`。
+- 源码索引新增语言支持：`.dart`、`.ets`、`.tsx`、`.jsx`。
+- `read_source` 代码块语言根据扩展名自动识别（swift/kotlin/java/dart/typescript/javascript）。
+
+### 3) 查询与证据链优化
+
+- `search_source` 增加“符号级命中反推文件”，提高大模型检索可用性。
+- Smart Assist 新增平台能力约束响应：
+  - Flutter/Harmony 请求 CallKit 时明确告知“当前无对应内容”，并给出覆盖证据。
+  - Flutter 请求 ChatroomUIKit 时明确告知“能力并入 ChatUIKit”。
+
+### 4) 日志可观测性增强（用于纠缠分析）
+
+Tool/SmartAssist 日志新增字段：
+
+- `response.category`：`answer|clarification|no_result`
+- `response.has_no_result_cue`
+- `response.direct_no_result`
+- `response.evidence_count`
+- `response.preview`
+
+用于自动识别：
+
+- 用户是否在“没有内容”上反复追问
+- 是否因为回答没直接说“没有”
+- 是否因为证据链弱导致不信任
+
+### 5) 自动纠缠分析脚本
+
+```bash
+# 生成回放日志
+EASEIM_SMART_ASSIST_LOG=1 \
+EASEIM_SMART_ASSIST_LOG_PATH=./tmp/smart-assist.log \
+npm run replay-smart-assist-sessions
+
+# 生成证据链报告
+npm run analyze-query-friction -- \
+  --assist-log ./tmp/smart-assist.log \
+  --output ./tmp/query-friction-report.md
+```
+
+详细说明见：
+
+- `docs/QUERY_FRICTION_ANALYSIS.md`
+
 ## 技术实现
 
 ### 🔧 源码索引增强（参数名准确性）
@@ -255,7 +320,7 @@ data/sources/
 
 | 优化项 | 实现 | 效果 |
 |--------|------|------|
-| **文档平台分片** | 按 iOS/Android 等平台拆分文档索引 | 启动内存节省 99% |
+| **文档平台分片** | 按 `android/ios/web/rn/flutter/harmony` 拆分文档索引 | 启动内存节省 99% |
 | **配置平台分片** | 按平台拆分配置索引 | 启动内存节省 99.1% |
 | **LRU 平台缓存** | 最多缓存 4 个平台分片 | 支持 10+ 平台无压力 |
 | **智能平台检测** | 根据查询关键词自动识别目标平台 | 无需手动指定平台 |
@@ -268,6 +333,10 @@ data/docs/
 └── shards/
     ├── ios.json            (32.66 KB)  # iOS 平台分片
     ├── android.json        (46.05 KB)  # Android 平台分片
+    ├── web.json            (...)       # Web 平台分片
+    ├── rn.json             (...)       # RN 平台分片
+    ├── flutter.json        (...)       # Flutter 平台分片
+    ├── harmony.json        (...)       # Harmony 平台分片
     └── error-codes.json    (45.99 KB)  # 共享错误码
 
 data/configs/

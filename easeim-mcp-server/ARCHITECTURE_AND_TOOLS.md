@@ -4,6 +4,41 @@
 
 ---
 
+## 0. 2026-03 优化补充（全平台 + 证据链）
+
+### 全平台分片刷新
+
+新增聚合命令：
+
+```bash
+npm run generate-all-platform-shards
+```
+
+覆盖链路：
+
+- 文档索引 + 文档分片
+- 源码索引 + 源码分片
+- 配置索引 + 配置分片
+- template/knowledge/class/integration/lexicon 索引
+
+### 平台覆盖与归一
+
+- 文档与源码索引已覆盖：`android/ios/web/rn/flutter/harmony`
+- 平台别名自动归一：
+  - `harmonyos` / `ohos` → `harmony`
+  - `react-native` / `reactnative` → `rn`
+
+### 查询与证据链能力
+
+- `search_source`：新增“符号级命中反推文件”，提升 query 到文件命中率。
+- `smart_assist`：新增平台能力约束分支，平台无覆盖时直接返回“无内容”并附覆盖证据。
+- 日志新增响应观测字段：`category`、`has_no_result_cue`、`direct_no_result`、`evidence_count`、`preview`。
+- 新增纠缠分析脚本：
+  - `npm run replay-smart-assist-sessions`
+  - `npm run analyze-query-friction`
+
+---
+
 ## 1. 整体架构逻辑
 
 系统采用 **Intent-Driven Architecture (意图驱动架构)**，所有的用户请求首先经过意图识别层，然后根据识别结果路由到具体的搜索引擎或诊断模块，最终由响应构建器组装成标准化回复。

@@ -319,6 +319,7 @@ export class IntentClassifier {
   private normalizePlatform(platform: string): string {
     const normalized = platform.toLowerCase();
     if (normalized === 'react-native' || normalized === 'reactnative') return 'rn';
+    if (normalized === 'harmonyos' || normalized === 'ohos') return 'harmony';
     return normalized;
   }
 

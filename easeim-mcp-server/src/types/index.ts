@@ -7,7 +7,7 @@
 /**
  * 支持的平台
  */
-export type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'harmony' | 'all';
+export type Platform = 'ios' | 'android' | 'web' | 'flutter' | 'unity' | 'rn' | 'harmony' | 'windows' | 'all' | 'unknown';
 
 /**
  * 技术栈层级
@@ -158,7 +158,7 @@ export interface CodeSymbol {
   /** 符号名称 */
   name: string;
   /** 符号类型 */
-  type: 'class' | 'struct' | 'enum' | 'protocol' | 'property' | 'method' | 'function';
+  type: 'class' | 'struct' | 'enum' | 'protocol' | 'interface' | 'mixin' | 'property' | 'method' | 'function';
   /** 所在文件 */
   file: string;
   /** 行号 */

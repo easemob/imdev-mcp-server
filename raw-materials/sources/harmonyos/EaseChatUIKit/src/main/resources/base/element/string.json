@@ -1,0 +1,415 @@
+{
+  "string": [
+    {
+      "name": "downloading_image_tips",
+      "value": "图片下载中，请稍后..."
+    },
+    {
+      "name": "download_image_error_tips",
+      "value": "图片下载失败"
+    },
+    {
+      "name": "downloading_video_tips",
+      "value": "视频文件下载中，请稍后..."
+    },
+    {
+      "name": "download_video_error_tips",
+      "value": "视频文件下载失败"
+    },
+    {
+      "name": "download_file_error_tips",
+      "value": "文件下载失败"
+    },
+    {
+      "name": "downloading_tips",
+      "value": "下载中..."
+    },
+    {
+      "name": "contact",
+      "value": "联系人"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "confirm",
+      "value": "确定"
+    },
+    {
+      "name": "add",
+      "value": "添加"
+    },
+    {
+      "name": "search",
+      "value": "搜索"
+    },
+    {
+      "name": "chat_primary_input_placeholder",
+      "value": "Aa"
+    },
+    {
+      "name": "chat_extend_more_camera",
+      "value": "相机"
+    },
+    {
+      "name": "chat_extend_more_image",
+      "value": "相册"
+    },
+    {
+      "name": "chat_extend_more_file",
+      "value": "文件"
+    },
+    {
+      "name": "chat_extend_more_user",
+      "value": "名片"
+    },
+    {
+      "name": "chat_record_time",
+      "value": "%ds"
+    },
+    {
+      "name": "chat_record_start_hint",
+      "value": "点击录音"
+    },
+    {
+      "name": "chat_record_recording",
+      "value": "正在录音"
+    },
+    {
+      "name": "chat_record_start_play",
+      "value": "点击播放"
+    },
+    {
+      "name": "chat_record_playing",
+      "value": "播放中"
+    },
+    {
+      "name": "chat_record_remain_time",
+      "value": "%d Remaining"
+    },
+    {
+      "name": "chat_message_menu_copy",
+      "value": "复制"
+    },
+    {
+      "name": "chat_message_menu_reply",
+      "value": "回复"
+    },
+    {
+      "name": "chat_message_menu_forward",
+      "value": "转发"
+    },
+    {
+      "name": "chat_message_menu_multi",
+      "value": "多选"
+    },
+    {
+      "name": "chat_message_menu_edit",
+      "value": "编辑"
+    },
+    {
+      "name": "chat_message_menu_report",
+      "value": "举报"
+    },
+    {
+      "name": "chat_message_menu_delete",
+      "value": "删除"
+    },
+    {
+      "name": "chat_message_menu_recall",
+      "value": "撤回"
+    },
+    {
+      "name": "chat_media_type_phone",
+      "value": "拍照"
+    },
+    {
+      "name": "chat_media_type_video",
+      "value": "摄像"
+    },
+    {
+      "name": "chat_edit_message_flag",
+      "value": "已编辑"
+    },
+    {
+      "name": "chat_reply_tips",
+      "value": "正在回复 "
+    },
+    {
+      "name": "chat_reply_file_tips",
+      "value": "附件"
+    },
+    {
+      "name": "chat_reply_voice_tips",
+      "value": "语音"
+    },
+    {
+      "name": "chat_reply_image_tips",
+      "value": "图片"
+    },
+    {
+      "name": "chat_reply_video_tips",
+      "value": "视频"
+    },
+    {
+      "name": "chat_reply_file_message_tips",
+      "value": "附件：",
+      "comment": "消息中被回复消息附件提示内容"
+    },
+    {
+      "name": "chat_reply_voice_message_tips",
+      "value": "语音：",
+      "comment": "消息中被回复消息语音提示内容"
+    },
+    {
+      "name": "chat_reply_lost_message_tips",
+      "value": "引用的内容不存在",
+      "comment": "消息中被回复消息不存在提示的内容"
+    },
+    {
+      "name": "chat_reply_voice_duration",
+      "value": "%d ''"
+    },
+    {
+      "name": "chat_reply_preview_image",
+      "value": "[Image]"
+    },
+    {
+      "name": "chat_reply_preview_video",
+      "value": "[Video]"
+    },
+    {
+      "name": "chat_reply_preview_location",
+      "value": "[Location]"
+    },
+    {
+      "name": "chat_reply_preview_file",
+      "value": "[File]"
+    },
+    {
+      "name": "chat_reply_preview_voice",
+      "value": "[Audio]"
+    },
+    {
+      "name": "chat_reply_preview_custom",
+      "value": "[Custom message]"
+    },
+    {
+      "name": "chat_reply_preview_combine",
+      "value": "[Chat history]"
+    },
+    {
+      "name": "chat_reply_unkown_type",
+      "value": "不支持的消息类型"
+    },
+    {
+      "name": "chat_message_resend_title",
+      "value": "确认重新发送这条消息？",
+      "comment": "消息发送失败后，重新发送"
+    },
+    {
+      "name": "chat_group_mention_title",
+      "value": "@提及",
+      "comment": "群@消息成员列表标题"
+    },
+    {
+      "name": "chat_group_mention_all",
+      "value": "所有人"
+    },
+    {
+      "name": "chat_msg_recall_content_self",
+      "value": "你 撤回了一条消息"
+    },
+    {
+      "name": "chat_msg_recall_content_other",
+      "value": "%s 撤回了一条消息"
+    },
+    {
+      "name": "chat_conv_mention_self_flag",
+      "value": "[有人@你]"
+    },
+    {
+      "name": "chat_conv_mention_all_flag",
+      "value": "[@所有人]"
+    },
+    {
+      "name": "chat_msg_label_location_send",
+      "value": "[我的位置消息]",
+      "comment": "发送方位置消息的显示标记"
+    },
+    {
+      "name": "chat_msg_label_location_receive",
+      "value": "[%s的位置消息]",
+      "comment": "接收方位置消息的显示标记"
+    },
+    {
+      "name": "chat_msg_label_image",
+      "value": "[图片]"
+    },
+    {
+      "name": "chat_msg_label_video",
+      "value": "[视频]"
+    },
+    {
+      "name": "chat_msg_label_voice",
+      "value": "[语音]"
+    },
+    {
+      "name": "chat_msg_label_file",
+      "value": "[附件]"
+    },
+    {
+      "name": "chat_msg_label_custom",
+      "value": "[自定义消息]"
+    },
+    {
+      "name": "chat_msg_label_combine",
+      "value": "[聊天记录]"
+    },
+    {
+      "name": "chat_msg_label_user_card",
+      "value": "[联系人] %s"
+    },
+    {
+      "name": "chat_msg_label_dynamic_expression",
+      "value": "[Animoji]"
+    },
+    {
+      "name": "chat_msg_unknown_type",
+      "value": "不支持的消息类型：%s"
+    },
+    {
+      "name": "conv_item_action_mute",
+      "value": "免打扰"
+    },
+    {
+      "name": "conv_item_action_unmute",
+      "value": "取消免打扰"
+    },
+    {
+      "name": "conv_item_action_pin",
+      "value": "置顶"
+    },
+    {
+      "name": "conv_item_action_unpin",
+      "value": "取消置顶"
+    },
+    {
+      "name": "conv_item_action_delete",
+      "value": "删除"
+    },
+    {
+      "name": "conv_page_action_new_chat",
+      "value": "发起新会话"
+    },
+    {
+      "name": "conv_page_action_add_contact",
+      "value": "添加联系人"
+    },
+    {
+      "name": "conv_page_action_create_group",
+      "value": "创建群组"
+    },
+    {
+      "name": "new_request",
+      "value": "新请求"
+    },
+    {
+      "name": "group_chat",
+      "value": "群聊"
+    },
+    {
+      "name": "block_list",
+      "value": "黑名单"
+    },
+    {
+      "name": "contact_list_page_action_add_contact",
+      "value": "添加联系人"
+    },
+    {
+      "name": "placeholder_search_contact",
+      "value": "搜索联系人"
+    },
+    {
+      "name": "contact_list_count",
+      "value": "%d位联系人"
+    },
+    {
+      "name": "group_list_count_title",
+      "value": "群聊(%d)"
+    },
+    {
+      "name": "add_contact_dialog_title",
+      "value": "添加联系人"
+    },
+    {
+      "name": "add_contact_dialog_content",
+      "value": "通过用户ID添加联系人"
+    },
+    {
+      "name": "add_contact_dialog_placeholder",
+      "value": "输入用户ID"
+    },
+    {
+      "name": "add_contact_common_error",
+      "value": "添加好友失败"
+    },
+    {
+      "name": "add_contact_reach_limit",
+      "value": "你的好友数量达到上限"
+    },
+    {
+      "name": "add_contact_reach_limit_peer",
+      "value": "对方的好友数量达到上限"
+    },
+    {
+      "name": "create_group_page_title",
+      "value": "新群组"
+    },
+    {
+      "name": "create_group_menu_action",
+      "value": "创建(%d)"
+    },
+    {
+      "name": "share_contact_page_title",
+      "value": "分享联系人"
+    },
+    {
+      "name": "share_contact_content",
+      "value": "确认分享“%s”给“%s”？"
+    },
+    {
+      "name": "chat_message_delete_dialog_title",
+      "value": "确认删除这条消息？"
+    },
+    {
+      "name": "chat_message_delete_dialog_content",
+      "value": "删除后，对方依旧可以看到这条消息。"
+    },
+    {
+      "name": "chat_message_recall_dialog_title",
+      "value": "确认撤回这条消息？"
+    },
+    {
+      "name": "new_conversation_page_title",
+      "value": "新会话"
+    },
+    {
+      "name": "notification_invitation_reason",
+      "value": "请求添加你为好友"
+    },
+    {
+      "name": "new_request_page_title",
+      "value": "新请求"
+    },
+    {
+      "name": "new_request_agreed",
+      "value": "已同意"
+    },
+    {
+      "name": "new_request_refused",
+      "value": "已拒绝"
+    }
+  ]
+}

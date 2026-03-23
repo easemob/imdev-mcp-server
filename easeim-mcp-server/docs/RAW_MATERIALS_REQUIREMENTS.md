@@ -8,15 +8,17 @@ raw-materials/
 │   ├── ios/
 │   ├── android/
 │   ├── web/
-│   ├── rn/              (待接入)
-│   ├── flutter/         (待接入)
+│   ├── rn/
+│   ├── flutter/
+│   ├── harmonyos/       (索引内归一为 harmony)
 │   └── ...
 └── sources/
     ├── ios/
     ├── android/
     ├── web/
-    ├── rn/              (待接入)
-    ├── flutter/         (待接入)
+    ├── rn/
+    ├── flutter/
+    ├── harmonyos/       (索引内归一为 harmony)
     └── ...
 ```
 
@@ -103,12 +105,14 @@ Some description text here  ← 自动作为 description
 
 ```typescript
 if (path.includes('callkit'))        → product = 'callkit'
-if (path.includes('chatuikit'))      → product = 'chatuikit'
 if (path.includes('chatroomuikit'))  → product = 'chatroomuikit'
+if (path.includes('chatuikit'))      → product = 'chatuikit'
 if (path.includes('imkit'))          → product = 'imkit'
 if (path.includes('sdk'))            → product = 'sdk'
 else                                 → product = 'general'
 ```
+
+> 说明：`chatroomuikit` 判断优先级高于 `chatuikit`，避免路径中同时包含 `uikit` 时误归类。
 
 ### 示例结构
 
@@ -164,8 +168,10 @@ raw-materials/sources/<platform>/
 |------|----------|------|
 | iOS | `.swift` | Swift 源码，支持 class/struct/protocol/enum/func/var/let 解析 |
 | Android | `.java`、`.kt` | Java/Kotlin，支持 class/method/field 解析 |
-| Web | `.tsx`、`.ts`、`.jsx`、`.js` | TypeScript/JavaScript (计划中) |
-| React Native | `.tsx`、`.ts`、`.jsx`、`.js` | TypeScript/JavaScript (计划中) |
+| Web | `.tsx`、`.ts`、`.jsx`、`.js` | TypeScript/JavaScript |
+| React Native | `.tsx`、`.ts`、`.jsx`、`.js` | TypeScript/JavaScript |
+| Flutter | `.dart` | Dart 源码，支持 class/method/property 基础解析 |
+| HarmonyOS | `.ets` | ArkTS/ETS 源码，支持 class/interface/method/property 基础解析 |
 
 ### 代码符号解析
 
@@ -215,7 +221,7 @@ func notDocumented() { }
 
 #### Android (Java/Kotlin)
 
-计划中，脚本框架已预留支持:
+已支持基础解析:
 
 ```java
 // Java
@@ -235,7 +241,22 @@ class ChatScreen : Composable {
 
 #### Web/React Native (TypeScript/JavaScript)
 
-计划中，但基础框架已就绪。
+已支持基础解析（含 `.ts/.tsx/.js/.jsx`）。
+
+#### Flutter (Dart)
+
+已支持基础解析（含 `.dart`）。
+
+#### HarmonyOS (ETS/ArkTS)
+
+已支持基础解析（含 `.ets`）。
+
+### 平台命名归一
+
+索引侧会自动归一平台命名：
+
+- `harmonyos` / `ohos` → `harmony`
+- `react-native` / `reactnative` → `rn`
 
 ### 性能考虑
 
@@ -293,7 +314,7 @@ npm run generate-docs-index
 ```json
 {
   "version": "3.0.0",
-  "platforms": ["ios", "android", "web"],
+  "platforms": ["ios", "android", "web", "rn", "flutter", "harmony"],
   "guides": [
     {
       "id": "ios_sdk_integration",

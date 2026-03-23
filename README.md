@@ -29,6 +29,22 @@ cd imdev-mcp-server/easeim-mcp-server/ && npm install && npm run build
 }
 ```
 
+## 2026-03 关键优化（文档同步）
+
+本仓库的核心实现位于 `easeim-mcp-server/`，本次优化已同步到对应文档：
+
+- 全平台分片刷新命令：`npm --prefix "easeim-mcp-server" run generate-all-platform-shards`
+- 新增平台覆盖：`flutter`、`harmony`（含平台别名归一）
+- 查询纠缠证据链分析：支持回放日志并自动输出归因报告
+- 平台能力约束回答：对“当前无内容”场景直接说明并附证据
+
+详细说明见：
+
+- `easeim-mcp-server/README.md`
+- `easeim-mcp-server/docs/TECHNICAL_OVERVIEW.md`
+- `easeim-mcp-server/docs/RAW_MATERIALS_REQUIREMENTS.md`
+- `easeim-mcp-server/docs/QUERY_FRICTION_ANALYSIS.md`
+
 # 功能概览
 
 ```
