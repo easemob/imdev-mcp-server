@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "version": "1.0.0",
-  "lastUpdated": "2026-01-19T07:22:04.001Z",
+  "lastUpdated": "2026-03-24T06:24:49.588Z",
   "description": "知识图谱分片清单",
   "platforms": [
     "common",
@@ -27,7 +27,7 @@
       "path": "shards/ios.json",
       "platform": "ios",
       "scenarioCount": 7,
-      "sizeBytes": 6468,
+      "sizeBytes": 6467,
       "keywords": [
         "ios",
         "swift",

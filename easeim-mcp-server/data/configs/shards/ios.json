@@ -1,94 +1,8 @@
 {
   "version": "2.0.0",
   "platform": "ios",
-  "lastUpdated": "2026-01-27T01:46:01.324Z",
+  "lastUpdated": "2026-03-24T06:24:51.315Z",
   "components": {
-    "EaseCallUIKit": {
-      "name": "EaseCallUIKit",
-      "description": "ios 平台的 EaseCallUIKit 组件",
-      "configProperties": [],
-      "extensionPoints": [
-        {
-          "name": "ThemeSwitchProtocol",
-          "type": "protocol",
-          "description": "When the system theme changes, you can use this static method to switch between the light and dark themes of the ease chat UIKit.",
-          "file": "ios/EaseCallUIKit/Classes/Commons/Theme/Theme.swift",
-          "line": 18,
-          "methods": [
-            "switchTheme"
-          ]
-        },
-        {
-          "name": "CallProfileProtocol",
-          "type": "protocol",
-          "description": "CallUserProfileProtocol.swift EaseCallUIKit Created by 朱继超 on 6/25/25. Profile of the EaseCallUIKit display needed.",
-          "file": "ios/EaseCallUIKit/Classes/CoreService/Provider/CallProfileProtocol.swift",
-          "line": 11,
-          "methods": [
-            "toJsonObject"
-          ]
-        },
-        {
-          "name": "EaseChatNavigationBarRightCell",
-          "type": "class",
-          "description": "可继承的 EaseChatNavigationBarRightCell 类",
-          "file": "ios/EaseCallUIKit/Classes/Commons/Utils/CallNavigationBar.swift",
-          "line": 333
-        },
-        {
-          "name": "DragFloatView",
-          "type": "class",
-          "description": "可继承的 DragFloatView 类",
-          "file": "ios/EaseCallUIKit/Classes/Commons/Utils/DragFloatView.swift",
-          "line": 18
-        },
-        {
-          "name": "GroupParticipantsCell",
-          "type": "class",
-          "description": "GroupParticipantsCell.swift EaseCallUIKit Created by 朱继超 on 6/30/25.",
-          "file": "ios/EaseCallUIKit/Classes/UI/Cells/GroupParticipantsCell.swift",
-          "line": 9
-        },
-        {
-          "name": "Call1v1VideoViewController",
-          "type": "class",
-          "description": "Call1v1VideoViewController.swift EaseCallUIKit Created by 朱继超 on 6/25/25.",
-          "file": "ios/EaseCallUIKit/Classes/UI/Controllers/Call1v1VideoViewController.swift",
-          "line": 11
-        },
-        {
-          "name": "CallMultiViewController",
-          "type": "class",
-          "description": "可继承的 CallMultiViewController 类",
-          "file": "ios/EaseCallUIKit/Classes/UI/Controllers/CallMultiViewController.swift",
-          "line": 15
-        },
-        {
-          "name": "MultiCallParticipantsController",
-          "type": "class",
-          "description": "MultiCallParticipantsController.swift EaseCallUIKit Created by 朱继超 on 6/30/25.",
-          "file": "ios/EaseCallUIKit/Classes/UI/Controllers/MultiCallParticipantsController.swift",
-          "line": 11
-        }
-      ]
-    },
-    "EaseChatDemo": {
-      "name": "EaseChatDemo",
-      "description": "ios 平台的 EaseChatDemo 组件",
-      "configProperties": [],
-      "extensionPoints": [
-        {
-          "name": "ImageBrowserProtocol",
-          "type": "protocol",
-          "file": "ios/EaseChatDemo/PhotoBrowser/PreviewImage.swift",
-          "line": 30,
-          "methods": [
-            "numberOfPhotos",
-            "photo"
-          ]
-        }
-      ]
-    },
     "EaseChatUIKit": {
       "name": "EaseChatUIKit",
       "description": "ios 平台的 EaseChatUIKit 组件",
@@ -1064,6 +978,92 @@
           "description": "可继承的 ChoiceItemCell 类",
           "file": "ios/EaseChatUIKit/Classes/UI/Core/UIKit/DialogComponent/DialogManager/PageContainerTitleBar.swift",
           "line": 116
+        }
+      ]
+    },
+    "EaseCallUIKit": {
+      "name": "EaseCallUIKit",
+      "description": "ios 平台的 EaseCallUIKit 组件",
+      "configProperties": [],
+      "extensionPoints": [
+        {
+          "name": "ThemeSwitchProtocol",
+          "type": "protocol",
+          "description": "When the system theme changes, you can use this static method to switch between the light and dark themes of the ease chat UIKit.",
+          "file": "ios/EaseCallUIKit/Classes/Commons/Theme/Theme.swift",
+          "line": 18,
+          "methods": [
+            "switchTheme"
+          ]
+        },
+        {
+          "name": "CallProfileProtocol",
+          "type": "protocol",
+          "description": "CallUserProfileProtocol.swift EaseCallUIKit Created by 朱继超 on 6/25/25. Profile of the EaseCallUIKit display needed.",
+          "file": "ios/EaseCallUIKit/Classes/CoreService/Provider/CallProfileProtocol.swift",
+          "line": 11,
+          "methods": [
+            "toJsonObject"
+          ]
+        },
+        {
+          "name": "EaseChatNavigationBarRightCell",
+          "type": "class",
+          "description": "可继承的 EaseChatNavigationBarRightCell 类",
+          "file": "ios/EaseCallUIKit/Classes/Commons/Utils/CallNavigationBar.swift",
+          "line": 333
+        },
+        {
+          "name": "DragFloatView",
+          "type": "class",
+          "description": "可继承的 DragFloatView 类",
+          "file": "ios/EaseCallUIKit/Classes/Commons/Utils/DragFloatView.swift",
+          "line": 18
+        },
+        {
+          "name": "GroupParticipantsCell",
+          "type": "class",
+          "description": "GroupParticipantsCell.swift EaseCallUIKit Created by 朱继超 on 6/30/25.",
+          "file": "ios/EaseCallUIKit/Classes/UI/Cells/GroupParticipantsCell.swift",
+          "line": 9
+        },
+        {
+          "name": "Call1v1VideoViewController",
+          "type": "class",
+          "description": "Call1v1VideoViewController.swift EaseCallUIKit Created by 朱继超 on 6/25/25.",
+          "file": "ios/EaseCallUIKit/Classes/UI/Controllers/Call1v1VideoViewController.swift",
+          "line": 11
+        },
+        {
+          "name": "CallMultiViewController",
+          "type": "class",
+          "description": "可继承的 CallMultiViewController 类",
+          "file": "ios/EaseCallUIKit/Classes/UI/Controllers/CallMultiViewController.swift",
+          "line": 15
+        },
+        {
+          "name": "MultiCallParticipantsController",
+          "type": "class",
+          "description": "MultiCallParticipantsController.swift EaseCallUIKit Created by 朱继超 on 6/30/25.",
+          "file": "ios/EaseCallUIKit/Classes/UI/Controllers/MultiCallParticipantsController.swift",
+          "line": 11
+        }
+      ]
+    },
+    "EaseChatDemo": {
+      "name": "EaseChatDemo",
+      "description": "ios 平台的 EaseChatDemo 组件",
+      "configProperties": [],
+      "extensionPoints": [
+        {
+          "name": "ImageBrowserProtocol",
+          "type": "protocol",
+          "file": "ios/EaseChatDemo/PhotoBrowser/PreviewImage.swift",
+          "line": 30,
+          "methods": [
+            "numberOfPhotos",
+            "photo"
+          ]
         }
       ]
     },

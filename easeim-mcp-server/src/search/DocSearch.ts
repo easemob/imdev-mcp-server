@@ -296,11 +296,19 @@ export class DocSearch {
 
   }
 
-  getGuidePath(topic: string): string | null {
+  getGuidePath(topic: string, platform?: string): string | null {
     const index = this.loadIndex();
     const guides = index.guides || [];
-    // 模糊匹配 topic
-    const guide = guides.find((g: any) => g.id.includes(topic) || g.title.includes(topic));
+
+    // 先按平台过滤，再按 topic 匹配
+    const normalizedPlatform = platform ? normalizePlatform(platform) : undefined;
+    const guide = guides.find((g: any) => {
+      const matchesTopic = g.id.includes(topic) || g.title.includes(topic);
+      const guidePlatform = typeof g.platform === 'string' ? normalizePlatform(g.platform) : g.platform;
+      const matchesPlatform = !normalizedPlatform || guidePlatform === normalizedPlatform;
+      return matchesTopic && matchesPlatform;
+    });
+
     return guide ? guide.path : null;
   }
 

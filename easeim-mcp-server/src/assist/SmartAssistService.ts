@@ -296,7 +296,7 @@ export class SmartAssistService {
 
       case UserIntent.UNDERSTAND_CLASS:
         if (entities.className) {
-          resultText += await this.explainClass(entities.className);
+          resultText += await this.explainClass(entities.className, normalizedPlatform);
         } else {
           resultText += `## 💡 建议\n\n`;
           resultText += `请提供具体的类名，例如：\n`;
@@ -770,7 +770,7 @@ EMClient.shared().chatManager?.send(message) { msg, error in
     const entryRouteSummary = appearanceQuickIndex ? '' : this.buildEntryRouteSummary(platformRoute);
 
     if (configProperty) {
-      const usage = this.configSearch.getConfigUsage(configProperty, 'all');
+      const usage = this.configSearch.getConfigUsage(configProperty, 'all', normalizedPlatform);
       if (usage) {
         resultText += `### 配置项: ${configProperty}\n\n`;
         resultText += `**类型**: \`${usage.property.type}\`\n`;
@@ -1227,19 +1227,35 @@ Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
     return result;
   }
 
-  async explainClass(className: string): Promise<string> {
-    const classInfo = this.knowledgeGraph.getClassInfo(className);
+  async explainClass(className: string, platform?: string): Promise<string> {
+    // 先检查该平台是否有知识图谱数据
+    const hasPlatformData = platform ? this.knowledgeGraph.hasPlatformData(platform) : true;
+    const classInfo = this.knowledgeGraph.getClassInfo(className, platform);
 
     if (!classInfo) {
-      const searchResult = this.sourceSearch.search(className, 'all', 3);
+      // 知识图谱中没有找到，尝试源码搜索
+      const searchResult = this.sourceSearch.search(className, 'all', 3, platform);
       if (searchResult.results.length > 0) {
         let resultText = `## 📖 ${className}\n\n`;
+        // 如果指定平台没有知识图谱数据，提示用户
+        if (platform && !hasPlatformData) {
+          resultText += `> ℹ️ ${platform} 平台暂无知识图谱数据，以下为源码搜索结果。\n\n`;
+        }
         resultText += `在以下文件中找到相关定义：\n\n`;
         for (const r of searchResult.results) {
           resultText += `- \`${r.path}\`\n`;
         }
         resultText += `\n使用 \`read_source path="${searchResult.results[0].path}"\` 查看具体实现。\n`;
         return resultText;
+      }
+      // 如果平台没有知识图谱数据，给出提示
+      if (platform && !hasPlatformData) {
+        const supportedPlatforms = this.knowledgeGraph.getSupportedPlatforms();
+        return `${platform} 平台暂无知识图谱数据。\n\n` +
+          `当前支持的平台: ${supportedPlatforms.join(', ') || '无'}\n\n` +
+          `建议使用以下工具查找信息：\n` +
+          `- \`search_source query="${className}" platform="${platform}"\` 搜索源码\n` +
+          `- \`search_api query="${className}" platform="${platform}"\` 搜索 API 文档\n`;
       }
       return `未找到类 ${className} 的定义。请检查类名是否正确。\n`;
     }
@@ -1251,7 +1267,7 @@ Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
     }
 
     if (classInfo.superclass) {
-      const inheritanceChain = this.knowledgeGraph.getInheritanceChain(className);
+      const inheritanceChain = this.knowledgeGraph.getInheritanceChain(className, platform);
       resultText += `### 继承关系\n\n`;
       resultText += `\`${inheritanceChain.join(' → ')}\`\n\n`;
     }
@@ -1275,9 +1291,10 @@ Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
     if (classInfo.usageScenarios && classInfo.usageScenarios.length > 0) {
       resultText += `### 使用场景\n\n`;
       for (const scenario of classInfo.usageScenarios) {
-        const scenarioInfo = this.knowledgeRegistry.getScenario(`common:${scenario}`)
-          || this.knowledgeRegistry.getScenario(`ios:${scenario}`)
-          || this.knowledgeRegistry.getScenario(scenario);
+        // 按平台优先级查找场景信息
+        const scenarioInfo = this.knowledgeRegistry.getScenario(`${platform}:${scenario}`, platform)
+          || this.knowledgeRegistry.getScenario(`common:${scenario}`)
+          || this.knowledgeRegistry.getScenario(scenario, platform);
         if (scenarioInfo) {
           resultText += `- **${scenarioInfo.scenario}**: ${scenarioInfo.description}\n`;
         } else {

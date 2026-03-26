@@ -1,9 +1,10 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-01-27T01:46:01.324Z",
+  "lastUpdated": "2026-03-24T06:24:51.315Z",
   "description": "配置索引清单 - 支持按平台分片加载",
   "platforms": [
     "android",
+    "flutter",
     "ios",
     "rn",
     "web"
@@ -23,6 +24,18 @@
         "EaseChatroomUIKit"
       ]
     },
+    "flutter": {
+      "path": "shards/flutter.json",
+      "platform": "flutter",
+      "componentCount": 2,
+      "configPropertyCount": 0,
+      "extensionPointCount": 0,
+      "sizeBytes": 579,
+      "components": [
+        "EaseChatDemo",
+        "EaseChatUIKit"
+      ]
+    },
     "ios": {
       "path": "shards/ios.json",
       "platform": "ios",
@@ -31,9 +44,9 @@
       "extensionPointCount": 148,
       "sizeBytes": 67822,
       "components": [
+        "EaseChatUIKit",
         "EaseCallUIKit",
         "EaseChatDemo",
-        "EaseChatUIKit",
         "EaseChatroomUIKit"
       ]
     },
@@ -67,7 +80,7 @@
     }
   },
   "stats": {
-    "totalComponents": 16,
+    "totalComponents": 19,
     "totalConfigProperties": 7310,
     "totalExtensionPoints": 459
   }

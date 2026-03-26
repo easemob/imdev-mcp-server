@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-01-27T01:46:05.317Z",
+  "lastUpdated": "2026-03-24T06:20:40.154Z",
   "components": {
     "android/EaseCallUIKit": {
       "name": "EaseCallUIKit",
@@ -11697,6 +11697,24 @@
           "line": 7
         }
       ]
+    },
+    "flutter/EaseChatDemo": {
+      "name": "EaseChatDemo",
+      "description": "flutter 平台的 EaseChatDemo 组件",
+      "configProperties": [],
+      "extensionPoints": []
+    },
+    "flutter/EaseChatUIKit": {
+      "name": "EaseChatUIKit",
+      "description": "flutter 平台的 EaseChatUIKit 组件",
+      "configProperties": [],
+      "extensionPoints": []
+    },
+    "harmonyos/EaseChatUIKit": {
+      "name": "EaseChatUIKit",
+      "description": "harmonyos 平台的 EaseChatUIKit 组件",
+      "configProperties": [],
+      "extensionPoints": []
     },
     "ios/EaseCallUIKit": {
       "name": "EaseCallUIKit",

@@ -7,6 +7,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import type { ConfigIndex, ComponentConfig, ConfigProperty, ExtensionPoint, UIKitComponent } from '../types/index.js';
+import { normalizePlatform } from '../utils/platform.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -82,23 +83,45 @@ export class ConfigSearch {
 
   /**
    * 列出配置项
+   * @param component 组件名称或 'all'
+   * @param platform 平台名称（如 ios, android, web, flutter, rn, harmony）
    */
-  listConfigOptions(component: UIKitComponent | 'all'): Record<string, ConfigProperty[]> {
+  listConfigOptions(component: UIKitComponent | 'all', platform?: string): Record<string, ConfigProperty[]> {
     const index = this.loadIndex();
     const result: Record<string, ConfigProperty[]> = {};
+    const normalizedPlatform = platform ? normalizePlatform(platform) : undefined;
 
     if (component === 'all') {
-      // 返回所有组件的配置
-      for (const [compName, compConfig] of Object.entries(index.components)) {
+      // 返回所有组件的配置，按平台过滤
+      for (const [compKey, compConfig] of Object.entries(index.components)) {
+        // compKey 格式: "platform/Component"
+        const keyPlatform = compKey.split('/')[0];
+        const normalizedKeyPlatform = normalizePlatform(keyPlatform);
+
+        // 如果指定了平台，只返回匹配的组件
+        if (normalizedPlatform && normalizedKeyPlatform !== normalizedPlatform) {
+          continue;
+        }
+
         if (compConfig.configProperties.length > 0) {
-          result[compName] = compConfig.configProperties;
+          result[compKey] = compConfig.configProperties;
         }
       }
     } else {
       // 返回指定组件的配置
-      const compConfig = index.components[component];
+      // 构建查找键：如果指定了平台，使用 "platform/component" 格式
+      const lookupKey = normalizedPlatform ? `${normalizedPlatform}/${component}` : component;
+      const compConfig = index.components[lookupKey];
+
       if (compConfig && compConfig.configProperties.length > 0) {
-        result[component] = compConfig.configProperties;
+        result[lookupKey] = compConfig.configProperties;
+      } else if (!normalizedPlatform) {
+        // 未指定平台时，搜索所有平台的该组件
+        for (const [compKey, config] of Object.entries(index.components)) {
+          if (compKey.endsWith(`/${component}`) && config.configProperties.length > 0) {
+            result[compKey] = config.configProperties;
+          }
+        }
       }
     }
 
@@ -107,19 +130,46 @@ export class ConfigSearch {
 
   /**
    * 获取扩展点
+   * @param component 组件名称或 'all'
+   * @param type 扩展点类型
+   * @param platform 平台名称（如 ios, android, web, flutter, rn, harmony）
    */
   getExtensionPoints(
     component: UIKitComponent | 'all',
-    type: 'protocol' | 'class' | 'all' = 'all'
+    type: 'protocol' | 'class' | 'all' = 'all',
+    platform?: string
   ): Record<string, ExtensionPoint[]> {
     const index = this.loadIndex();
     const result: Record<string, ExtensionPoint[]> = {};
+    const normalizedPlatform = platform ? normalizePlatform(platform) : undefined;
 
-    const components: [string, ComponentConfig][] = component === 'all'
-      ? Object.entries(index.components)
-      : [[component, index.components[component]]];
+    let components: [string, ComponentConfig][];
 
-    for (const [compName, compConfig] of components) {
+    if (component === 'all') {
+      // 按平台过滤所有组件
+      components = Object.entries(index.components).filter(([compKey]) => {
+        if (!normalizedPlatform) return true;
+        const keyPlatform = compKey.split('/')[0];
+        return normalizePlatform(keyPlatform) === normalizedPlatform;
+      });
+    } else {
+      // 指定组件：使用 "platform/component" 格式查找
+      const lookupKey = normalizedPlatform ? `${normalizedPlatform}/${component}` : component;
+      const compConfig = index.components[lookupKey];
+
+      if (compConfig) {
+        components = [[lookupKey, compConfig]];
+      } else if (!normalizedPlatform) {
+        // 未指定平台时，搜索所有平台的该组件
+        components = Object.entries(index.components).filter(([compKey]) =>
+          compKey.endsWith(`/${component}`)
+        );
+      } else {
+        components = [];
+      }
+    }
+
+    for (const [compKey, compConfig] of components) {
       if (!compConfig) continue;
 
       let extensionPoints = compConfig.extensionPoints;
@@ -130,7 +180,7 @@ export class ConfigSearch {
       }
 
       if (extensionPoints.length > 0) {
-        result[compName as string] = extensionPoints;
+        result[compKey] = extensionPoints;
       }
     }
 
@@ -205,23 +255,50 @@ export class ConfigSearch {
 
   /**
    * 获取配置项的使用情况
+   * @param propertyName 配置项名称
+   * @param component 组件名称或 'all'
+   * @param platform 平台名称（如 ios, android, web, flutter, rn, harmony）
    */
-  getConfigUsage(propertyName: string, component: UIKitComponent | 'all' = 'all'): ConfigImpact | null {
+  getConfigUsage(propertyName: string, component: UIKitComponent | 'all' = 'all', platform?: string): ConfigImpact | null {
     const analysis = this.loadImpactAnalysis();
+    const normalizedPlatform = platform ? normalizePlatform(platform) : undefined;
 
-    // 如果指定了组件，只搜索该组件
+    // 如果指定了组件
     if (component !== 'all') {
-      const componentImpacts = analysis.byComponent[component];
-      if (!componentImpacts) {
-        return null;
+      // 构建查找键：使用 "platform/component" 格式
+      const lookupKey = normalizedPlatform ? `${normalizedPlatform}/${component}` : component;
+      let componentImpacts = analysis.byComponent[lookupKey];
+
+      if (componentImpacts) {
+        const impact = componentImpacts.find(i => i.property.name === propertyName);
+        return impact || null;
       }
 
-      const impact = componentImpacts.find(i => i.property.name === propertyName);
-      return impact || null;
+      // 未指定平台时，搜索所有平台的该组件
+      if (!normalizedPlatform) {
+        for (const [compKey, impacts] of Object.entries(analysis.byComponent)) {
+          if (compKey.endsWith(`/${component}`)) {
+            const impact = impacts.find(i => i.property.name === propertyName);
+            if (impact) {
+              return impact;
+            }
+          }
+        }
+      }
+
+      return null;
     }
 
-    // 搜索所有组件
-    for (const [compName, impacts] of Object.entries(analysis.byComponent)) {
+    // 搜索所有组件，按平台过滤
+    for (const [compKey, impacts] of Object.entries(analysis.byComponent)) {
+      // 按平台过滤
+      if (normalizedPlatform) {
+        const keyPlatform = compKey.split('/')[0];
+        if (normalizePlatform(keyPlatform) !== normalizedPlatform) {
+          continue;
+        }
+      }
+
       const impact = impacts.find(i => i.property.name === propertyName);
       if (impact) {
         return impact;

@@ -95,6 +95,24 @@ export class ClassRegistry {
     return map.get(className) || [];
   }
 
+  /**
+   * 检查指定平台是否有知识图谱数据
+   * @param platform 平台名称
+   * @returns 是否有数据
+   */
+  hasPlatformData(platform: string): boolean {
+    const shard = this.loadShard(platform, false);
+    return shard.classes.length > 0 || shard.inheritance.length > 0;
+  }
+
+  /**
+   * 获取支持的平台列表（有数据的平台）
+   */
+  getSupportedPlatforms(): string[] {
+    const manifest = this.loadManifest();
+    return manifest.platforms.filter(p => this.hasPlatformData(p));
+  }
+
   private getInheritanceMap(platform?: string): Map<string, string[]> {
     const targetPlatform = platform || this.defaultPlatform;
     const manifest = this.loadManifest();

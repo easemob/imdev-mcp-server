@@ -701,12 +701,12 @@ ${r.matchedSymbols.map(s => {
    * 处理 get_guide
    */
   private async handleGetGuide(args: any) {
-    const { topic } = args;
+    const { topic, platform } = args;
 
-    const guidePath = this.docSearch.getGuidePath(topic);
+    const guidePath = this.docSearch.getGuidePath(topic, platform);
 
     if (!guidePath) {
-      throw new Error(`未找到主题 "${topic}" 的指南`);
+      throw new Error(`未找到平台 "${platform}" 主题 "${topic}" 的指南`);
     }
 
     const content = this.docSearch.readDoc(guidePath);
@@ -719,7 +719,7 @@ ${r.matchedSymbols.map(s => {
       content: [
         {
           type: 'text',
-          text: `# ${topic} 指南\n\n${content}`
+          text: `# ${topic} 指南 (${platform})\n\n${content}`
         }
       ]
     };
@@ -927,9 +927,9 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
    * 处理 list_config_options
    */
   private async handleListConfigOptions(args: any) {
-    const { component = 'all' } = args;
+    const { component = 'all', platform } = args;
 
-    const configs = this.configSearch.listConfigOptions(component);
+    const configs = this.configSearch.listConfigOptions(component, platform);
 
     if (Object.keys(configs).length === 0) {
       return {
@@ -988,9 +988,9 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
    * 处理 get_extension_points
    */
   private async handleGetExtensionPoints(args: any) {
-    const { component = 'all', type = 'all' } = args;
+    const { component = 'all', type = 'all', platform } = args;
 
-    const extensionPoints = this.configSearch.getExtensionPoints(component, type);
+    const extensionPoints = this.configSearch.getExtensionPoints(component, type, platform);
 
     if (Object.keys(extensionPoints).length === 0) {
       return {
@@ -1080,13 +1080,13 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
    * 处理 get_config_usage
    */
   private async handleGetConfigUsage(args: any) {
-    const { propertyName, component = 'all' } = args;
+    const { propertyName, component = 'all', platform } = args;
 
     if (typeof propertyName !== 'string' || !propertyName.trim()) {
       throw new Error('propertyName 参数必须是非空字符串');
     }
 
-    const usage = this.configSearch.getConfigUsage(propertyName, component);
+    const usage = this.configSearch.getConfigUsage(propertyName, component, platform);
 
     if (!usage) {
       return {
@@ -1282,7 +1282,7 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
    * 处理 generate_code - 代码生成器
    */
   private async handleGenerateCode(args: any) {
-    const { scenario, name, cellHeight = 120 } = args;
+    const { scenario, name, cellHeight = 120, platform = 'ios' } = args;
 
     if (typeof scenario !== 'string' || !scenario.trim()) {
       throw new Error('scenario 参数必须是非空字符串');
@@ -1313,7 +1313,7 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
       };
     }
 
-    const generated = this.platformOrchestrator.generateCode(templateId, 'ios', name || 'Custom');
+    const generated = this.platformOrchestrator.generateCode(templateId, platform, name || 'Custom');
     const result = generated
       ? this.codeGenerator.generate(generated.templateId || templateId, {
         messageName: name || 'Custom',
@@ -1371,7 +1371,7 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
    * 处理 explain_class - 类解释器
    */
   private async handleExplainClass(args: any) {
-    const { className } = args;
+    const { className, platform } = args;
 
     if (typeof className !== 'string' || !className.trim()) {
       throw new Error('className 参数必须是非空字符串');
@@ -1392,7 +1392,7 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
       );
     }
 
-    const explanation = await this.smartAssistService.explainClass(className);
+    const explanation = await this.smartAssistService.explainClass(className, platform);
 
     return {
       content: [
@@ -1408,9 +1408,9 @@ ${e.solutions.map((s: any, j: number) => `${j + 1}. ${s}`).join('\n')}
    * 处理 list_scenarios - 场景列表
    */
   private async handleListScenarios(args: any) {
-    const { keyword } = args;
+    const { keyword, platform = 'ios' } = args;
 
-    const scenarios = this.platformOrchestrator.buildScenarioViews('ios', keyword);
+    const scenarios = this.platformOrchestrator.buildScenarioViews(platform, keyword);
 
     let resultText = `# 📋 开发场景列表\n\n`;
 

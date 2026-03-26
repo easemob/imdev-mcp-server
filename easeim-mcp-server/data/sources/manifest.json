@@ -1,6 +1,6 @@
 {
   "version": "2.2.0",
-  "lastUpdated": "2026-03-23T06:32:36.598Z",
+  "lastUpdated": "2026-03-24T06:24:50.992Z",
   "platforms": [
     "android",
     "flutter",
@@ -129,8 +129,8 @@
     "EaseChatUIKit": {
       "path": "shards/EaseChatUIKit.json",
       "fileCount": 1615,
-      "symbolCount": 22100,
-      "sizeBytes": 11400675,
+      "symbolCount": 22103,
+      "sizeBytes": 11402215,
       "classes": [
         "ChatUIKitClient",
         "ChatUIKitConfig",
@@ -360,5 +360,5 @@
     }
   },
   "totalFiles": 2622,
-  "totalSymbols": 35221
+  "totalSymbols": 35224
 }
