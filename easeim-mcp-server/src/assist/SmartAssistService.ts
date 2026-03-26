@@ -371,16 +371,7 @@ export class SmartAssistService {
         break;
 
       case UserIntent.INTEGRATE_SDK:
-        resultText += `## 📚 SDK 集成指南\n\n`;
-        resultText += `建议使用 \`get_guide\` 工具获取详细的集成指南：\n\n`;
-        resultText += `\`\`\`\nget_guide topic="quickstart"\n\`\`\`\n\n`;
-        resultText += `### 快速集成步骤\n\n`;
-        resultText += `1. **CocoaPods 安装**\n`;
-        resultText += `   \`\`\`ruby\n   pod 'EaseChatUIKit'\n   \`\`\`\n\n`;
-        resultText += `2. **初始化 SDK**\n`;
-        resultText += `   \`\`\`swift\n   import EaseChatUIKit\n   \n   // 在 AppDelegate 中初始化\n   let options = ChatOptions(appkey: "您的AppKey")\n   ChatUIKitClient.shared.setup(option: options)\n   \`\`\`\n\n`;
-        resultText += `3. **登录**\n`;
-        resultText += `   \`\`\`swift\n   ChatUIKitClient.shared.login(user: userId, token: token) { error in\n       if let error = error {\n           print("登录失败: \\(error.errorDescription)")\n       } else {\n           print("登录成功")\n       }\n   }\n   \`\`\`\n`;
+        resultText += this.generatePlatformIntegrationGuide(normalizedPlatform);
         break;
 
       case UserIntent.IMPLEMENT_FEATURE:
@@ -1371,5 +1362,302 @@ Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
     resultText += `使用 \`read_source path="${classInfo.file}"\` 查看完整源码。\n`;
 
     return resultText;
+  }
+
+  /**
+   * 生成平台特定的 SDK 集成指南
+   */
+  private generatePlatformIntegrationGuide(platform: string): string {
+    let resultText = `## 📚 SDK 集成指南 (${this.getPlatformDisplayName(platform)})\n\n`;
+    resultText += `建议使用 \`get_guide\` 工具获取详细的集成指南：\n\n`;
+    resultText += `\`\`\`\nget_guide topic="quickstart" platform="${platform}"\n\`\`\`\n\n`;
+    resultText += `### 快速集成步骤\n\n`;
+
+    switch (platform) {
+      case 'ios':
+        resultText += this.generateIOSIntegrationGuide();
+        break;
+      case 'android':
+        resultText += this.generateAndroidIntegrationGuide();
+        break;
+      case 'harmony':
+        resultText += this.generateHarmonyIntegrationGuide();
+        break;
+      case 'flutter':
+        resultText += this.generateFlutterIntegrationGuide();
+        break;
+      case 'web':
+        resultText += this.generateWebIntegrationGuide();
+        break;
+      case 'rn':
+        resultText += this.generateRNIntegrationGuide();
+        break;
+      default:
+        resultText += this.generateGenericIntegrationGuide(platform);
+    }
+
+    return resultText;
+  }
+
+  private getPlatformDisplayName(platform: string): string {
+    const names: Record<string, string> = {
+      ios: 'iOS',
+      android: 'Android',
+      harmony: 'HarmonyOS',
+      flutter: 'Flutter',
+      web: 'Web',
+      rn: 'React Native'
+    };
+    return names[platform] || platform;
+  }
+
+  private generateIOSIntegrationGuide(): string {
+    return `1. **CocoaPods 安装**
+   \`\`\`ruby
+   pod 'EaseChatUIKit'
+   \`\`\`
+
+2. **初始化 SDK**
+   \`\`\`swift
+   import EaseChatUIKit
+
+   // 在 AppDelegate 中初始化
+   let options = ChatOptions(appkey: "您的AppKey")
+   ChatUIKitClient.shared.setup(option: options)
+   \`\`\`
+
+3. **登录**
+   \`\`\`swift
+   ChatUIKitClient.shared.login(user: userId, token: token) { error in
+       if let error = error {
+           print("登录失败: \\(error.errorDescription)")
+       } else {
+           print("登录成功")
+       }
+   }
+   \`\`\`
+`;
+  }
+
+  private generateAndroidIntegrationGuide(): string {
+    return `1. **Gradle 依赖配置**
+   \`\`\`groovy
+   // 在 settings.gradle 中添加 Maven 仓库
+   repositories {
+       maven { url 'https://maven.easemob.com/repository/maven-public/' }
+   }
+
+   // 在 app/build.gradle 中添加依赖
+   dependencies {
+       implementation 'io.hyphenate:ease-chat-uikit:4.x.x'
+   }
+   \`\`\`
+
+2. **初始化 SDK**
+   \`\`\`kotlin
+   import com.hyphenate.chat.EMClient
+   import com.hyphenate.chat.EMOptions
+
+   // 在 Application 中初始化
+   val options = EMOptions().apply {
+       appKey = "您的AppKey"
+   }
+   EMClient.getInstance().init(context, options)
+   \`\`\`
+
+3. **登录**
+   \`\`\`kotlin
+   EMClient.getInstance().login(userId, token, object : EMCallBack {
+       override fun onSuccess() {
+           Log.d("EaseIM", "登录成功")
+       }
+       override fun onError(code: Int, error: String?) {
+           Log.e("EaseIM", "登录失败: $code - $error")
+       }
+   })
+   \`\`\`
+`;
+  }
+
+  private generateHarmonyIntegrationGuide(): string {
+    return `1. **ohpm 安装**
+   \`\`\`shell
+   ohpm install @aspect/chat-uikit
+   \`\`\`
+
+   或在 oh-package.json5 中添加：
+   \`\`\`json
+   "dependencies": {
+       "@aspect/chat-uikit": "^1.0.0"
+   }
+   \`\`\`
+
+2. **初始化 SDK**
+   \`\`\`typescript
+   import { ChatClient, ChatOptions } from '@aspect/chat-uikit'
+
+   // 初始化
+   const options: ChatOptions = {
+       appKey: '您的AppKey'
+   }
+   await ChatClient.getInstance().init(options)
+   \`\`\`
+
+3. **登录**
+   \`\`\`typescript
+   try {
+       await ChatClient.getInstance().login(userId, token)
+       console.info('登录成功')
+   } catch (error) {
+       console.error('登录失败:', error)
+   }
+   \`\`\`
+
+4. **权限配置** (module.json5)
+   \`\`\`json
+   "requestPermissions": [
+       { "name": "ohos.permission.INTERNET" },
+       { "name": "ohos.permission.GET_NETWORK_INFO" }
+   ]
+   \`\`\`
+`;
+  }
+
+  private generateFlutterIntegrationGuide(): string {
+    return `1. **pubspec.yaml 依赖**
+   \`\`\`yaml
+   dependencies:
+     em_chat_uikit: ^1.0.0
+   \`\`\`
+
+   然后运行：
+   \`\`\`shell
+   flutter pub get
+   \`\`\`
+
+2. **初始化 SDK**
+   \`\`\`dart
+   import 'package:em_chat_uikit/em_chat_uikit.dart';
+
+   void main() async {
+       WidgetsFlutterBinding.ensureInitialized();
+
+       final options = ChatOptions(appKey: '您的AppKey');
+       await ChatUIKit.instance.init(options: options);
+
+       runApp(MyApp());
+   }
+   \`\`\`
+
+3. **登录**
+   \`\`\`dart
+   try {
+       await ChatUIKit.instance.login(
+           userId: userId,
+           token: token,
+       );
+       print('登录成功');
+   } on ChatError catch (e) {
+       print('登录失败: \${e.code} - \${e.description}');
+   }
+   \`\`\`
+`;
+  }
+
+  private generateWebIntegrationGuide(): string {
+    return `1. **npm 安装**
+   \`\`\`shell
+   npm install easemob-websdk
+   # 或使用 yarn
+   yarn add easemob-websdk
+   \`\`\`
+
+2. **初始化 SDK**
+   \`\`\`javascript
+   import EC from 'easemob-websdk'
+
+   const conn = new EC.connection({
+       appKey: '您的AppKey'
+   })
+   \`\`\`
+
+3. **登录**
+   \`\`\`javascript
+   conn.open({
+       user: userId,
+       accessToken: token
+   }).then(() => {
+       console.log('登录成功')
+   }).catch((error) => {
+       console.error('登录失败:', error)
+   })
+   \`\`\`
+
+4. **监听消息**
+   \`\`\`javascript
+   conn.addEventHandler('messageHandler', {
+       onTextMessage: (message) => {
+           console.log('收到文本消息:', message)
+       }
+   })
+   \`\`\`
+`;
+  }
+
+  private generateRNIntegrationGuide(): string {
+    return `1. **npm 安装**
+   \`\`\`shell
+   npm install react-native-chat-sdk
+   # 或使用 yarn
+   yarn add react-native-chat-sdk
+   \`\`\`
+
+   iOS 需要额外执行：
+   \`\`\`shell
+   cd ios && pod install
+   \`\`\`
+
+2. **初始化 SDK**
+   \`\`\`typescript
+   import { ChatClient, ChatOptions } from 'react-native-chat-sdk'
+
+   const options = new ChatOptions({
+       appKey: '您的AppKey',
+       autoLogin: false
+   })
+
+   ChatClient.getInstance()
+       .init(options)
+       .then(() => console.log('初始化成功'))
+   \`\`\`
+
+3. **登录**
+   \`\`\`typescript
+   ChatClient.getInstance()
+       .login(userId, token)
+       .then(() => {
+           console.log('登录成功')
+       })
+       .catch((error) => {
+           console.error('登录失败:', error)
+       })
+   \`\`\`
+`;
+  }
+
+  private generateGenericIntegrationGuide(platform: string): string {
+    return `目前 ${platform} 平台的集成指南正在完善中。
+
+请参考以下通用步骤：
+
+1. **安装 SDK**: 使用对应平台的包管理器安装环信 IM SDK
+2. **初始化**: 使用 AppKey 初始化 SDK
+3. **登录**: 使用用户 ID 和 Token 进行登录
+
+建议使用以下工具获取更多信息：
+- \`search_api query="初始化"\` - 搜索初始化相关 API
+- \`get_guide topic="quickstart"\` - 获取快速入门指南
+- \`list_scenarios\` - 查看支持的功能场景
+`;
   }
 }
