@@ -83,17 +83,28 @@ export class QueryExpander {
 
   /**
    * 分词
+   * 支持驼峰式分词：sendMessage -> ['sendmessage', 'send', 'message']
    */
   private tokenize(text: string): string[] {
     const tokens: string[] = [];
-    const normalized = text.toLowerCase();
 
-    // 英文单词
-    const englishWords = normalized.match(/[a-z][a-z0-9]*/g) || [];
-    tokens.push(...englishWords);
+    // 提取驼峰式英文词汇（保留原始大小写信息用于拆分）
+    const camelCaseWords = text.match(/[a-zA-Z][a-zA-Z0-9]*/g) || [];
+    for (const word of camelCaseWords) {
+      // 添加完整词（小写）
+      tokens.push(word.toLowerCase());
+
+      // 驼峰式拆分：sendMessage -> ['send', 'Message'] -> ['send', 'message']
+      const camelParts = this.splitCamelCase(word);
+      if (camelParts.length > 1) {
+        for (const part of camelParts) {
+          tokens.push(part.toLowerCase());
+        }
+      }
+    }
 
     // 中文词汇 - 简单按标点/空格分割
-    const chineseSegments = normalized.match(/[\u4e00-\u9fa5]+/g) || [];
+    const chineseSegments = text.match(/[\u4e00-\u9fa5]+/g) || [];
     for (const segment of chineseSegments) {
       tokens.push(segment);
       // 拆分为单字以增加匹配机会
@@ -105,6 +116,24 @@ export class QueryExpander {
     }
 
     return [...new Set(tokens)];
+  }
+
+  /**
+   * 驼峰式拆分
+   * sendMessage -> ['send', 'Message']
+   * XMLParser -> ['XML', 'Parser']
+   * getAPIKey -> ['get', 'API', 'Key']
+   */
+  private splitCamelCase(word: string): string[] {
+    // 处理全大写缩写词（如 API, XML, SDK）
+    // 匹配模式：小写字母后跟大写字母，或大写字母序列后跟大写+小写
+    const parts = word
+      .replace(/([a-z])([A-Z])/g, '$1 $2')           // camelCase
+      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')     // XMLParser -> XML Parser
+      .split(' ')
+      .filter(p => p.length > 0);
+
+    return parts;
   }
 
   /**
