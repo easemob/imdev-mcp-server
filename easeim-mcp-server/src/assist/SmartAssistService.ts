@@ -11,6 +11,7 @@ import { KnowledgeGraph } from '../intelligence/KnowledgeGraph.js';
 import { ShardedSourceSearch } from '../search/ShardedSourceSearch.js';
 import { SimilarityMatcher, Vectorizable } from '../intelligence/SimilarityMatcher.js';
 import { SmartAssistLogger } from '../utils/SmartAssistLogger.js';
+import { TraceLogger, TraceContext } from '../utils/TraceLogger.js';
 import { PlatformCapabilityRegistry, PlatformRoute } from '../intelligence/PlatformCapabilityRegistry.js';
 import { inspectMcpResult } from '../utils/LogResponseInspector.js';
 import * as fs from 'fs';
@@ -50,12 +51,18 @@ export class SmartAssistService {
     const requestId = SmartAssistLogger.newRequestId();
     const sessionId = session_id || 'default';
     const rawQuery = typeof query === 'string' ? query : String(query ?? '');
+
+    // 创建调用链追踪上下文
+    const traceCtx = TraceLogger.createContext('smart_assist', args, sessionId);
+
     const toEntityLog = (value: ExtractedEntities): Record<string, string | number | null> => ({
       ...value
     });
 
     const logAndReturn = (entry: Omit<Parameters<typeof SmartAssistLogger.log>[0], 'log_version' | 'timestamp' | 'request_id' | 'session_id' | 'raw_query' | 'timing_ms'>, result: any) => {
       const inspection = inspectMcpResult(result);
+
+      // 记录原有日志
       SmartAssistLogger.log({
         log_version: 'v1',
         timestamp: new Date().toISOString(),
@@ -76,6 +83,24 @@ export class SmartAssistService {
           preview: inspection.preview
         }
       });
+
+      // 记录调用链追踪日志
+      traceCtx.setRoute({ name: entry.route?.name || 'unknown', reason: entry.route?.reason });
+      if (entry.intent) {
+        traceCtx.setIntent({
+          name: entry.intent.name,
+          confidence: entry.intent.confidence,
+          sub_intent: entry.intent.sub_intent,
+          entities: entry.entities
+        });
+      }
+      TraceLogger.log(traceCtx.finish({
+        type: entry.response.type === 'error' ? 'error' : entry.response.type === 'clarification' ? 'clarification' : 'success',
+        content_length: inspection.preview?.length,
+        result_count: inspection.evidenceCount,
+        preview: inspection.preview
+      }));
+
       return result;
     };
 
@@ -96,7 +121,14 @@ export class SmartAssistService {
       throw new Error('query 参数必须是非空字符串');
     }
 
-    const ambiguityAnalysis = analyzeQueryAmbiguity(query);
+    // === 步骤 1: 歧义分析 ===
+    const ambiguityAnalysis = TraceLogger.trace(
+      traceCtx,
+      'analyze_ambiguity',
+      { query },
+      () => analyzeQueryAmbiguity(query)
+    );
+
     if (ambiguityAnalysis.isAmbiguous) {
       return logAndReturn(
         {
@@ -112,11 +144,36 @@ export class SmartAssistService {
       );
     }
 
-    const continuity = this.context.detectContinuity(query, sessionId);
+    // === 步骤 2: 上下文检测与查询增强 ===
+    const continuity = TraceLogger.trace(
+      traceCtx,
+      'detect_continuity',
+      { query, sessionId },
+      () => this.context.detectContinuity(query, sessionId)
+    );
     const contextSummary = this.context.getContextSummary(sessionId);
-    const { enhancedQuery } = this.context.enhanceQuery(query, sessionId);
+    const { enhancedQuery } = TraceLogger.trace(
+      traceCtx,
+      'enhance_query',
+      { query, sessionId },
+      () => this.context.enhanceQuery(query, sessionId)
+    );
 
-    const platformCheck = detectMissingPlatform(query, platform);
+    // 记录查询处理信息
+    traceCtx.setQueryProcessing({
+      raw_query: rawQuery,
+      normalized_platform: platform,
+      enhanced_query: enhancedQuery !== query ? enhancedQuery : undefined
+    });
+
+    // === 步骤 3: 平台检测 ===
+    const platformCheck = TraceLogger.trace(
+      traceCtx,
+      'detect_platform',
+      { query, platform },
+      () => detectMissingPlatform(query, platform)
+    );
+
     if (platformCheck.needsPlatform && platformCheck.isImplementationQuery) {
       const missingPlatformResult = this.intentClassifier.classify(enhancedQuery);
       return logAndReturn(
@@ -138,7 +195,14 @@ export class SmartAssistService {
     }
 
     const effectivePlatform = platformCheck.detectedPlatform || platform;
-    const intentResult = this.intentClassifier.classify(enhancedQuery, effectivePlatform);
+
+    // === 步骤 4: 意图分类 ===
+    const intentResult = TraceLogger.trace(
+      traceCtx,
+      'classify_intent',
+      { query: enhancedQuery, platform: effectivePlatform },
+      () => this.intentClassifier.classify(enhancedQuery, effectivePlatform)
+    );
     const { intent, confidence, entities } = intentResult;
     const platformForAnswer = effectivePlatform || platformCheck.detectedPlatform || platform || 'ios';
     const normalizedPlatform = platformForAnswer === 'react-native' ? 'rn' : platformForAnswer;
