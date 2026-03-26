@@ -55,7 +55,7 @@ export type SmartAssistLogEntry = {
 
 export class SmartAssistLogger {
   private static enabled = SmartAssistLogger.resolveEnabled();
-  private static logPath = process.env.EASEIM_SMART_ASSIST_LOG_PATH;
+  private static logPath = SmartAssistLogger.resolveLogPath();
   private static dirReady = false;
 
   static newRequestId(): string {
@@ -77,8 +77,13 @@ export class SmartAssistLogger {
 
   private static resolveEnabled(): boolean {
     const value = process.env.EASEIM_SMART_ASSIST_LOG;
-    if (!value) return false;
-    return ['1', 'true', 'yes', 'on'].includes(value.toLowerCase());
+    // 默认开启，除非显式设置为 0/false/no/off
+    if (!value) return true;
+    return !['0', 'false', 'no', 'off'].includes(value.toLowerCase());
+  }
+
+  private static resolveLogPath(): string {
+    return process.env.EASEIM_SMART_ASSIST_LOG_PATH || '/tmp/smart_assist.log';
   }
 
   private static ensureDir() {

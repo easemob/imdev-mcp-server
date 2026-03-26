@@ -31,7 +31,7 @@ export type ToolLogEntry = {
 
 export class ToolLogger {
   private static enabled = ToolLogger.resolveEnabled();
-  private static logPath = process.env.EASEIM_TOOL_LOG_PATH;
+  private static logPath = ToolLogger.resolveLogPath();
   private static dirReady = false;
 
   static newRequestId(): string {
@@ -53,8 +53,13 @@ export class ToolLogger {
 
   private static resolveEnabled(): boolean {
     const value = process.env.EASEIM_TOOL_LOG;
-    if (!value) return false;
-    return ['1', 'true', 'yes', 'on'].includes(value.toLowerCase());
+    // 默认开启，除非显式设置为 0/false/no/off
+    if (!value) return true;
+    return !['0', 'false', 'no', 'off'].includes(value.toLowerCase());
+  }
+
+  private static resolveLogPath(): string {
+    return process.env.EASEIM_TOOL_LOG_PATH || '/tmp/tool.log';
   }
 
   private static ensureDir() {
