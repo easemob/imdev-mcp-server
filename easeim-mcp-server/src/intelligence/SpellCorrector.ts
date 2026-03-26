@@ -255,14 +255,29 @@ export class SpellCorrector {
   }
 
   /**
-   * 分词
+   * 分词（支持驼峰式拆分）
+   * sendMessage -> ['send', 'message']
+   * "hello sendMessage world" -> ['hello', 'send', 'message', 'world']
    */
   private tokenize(text: string): string[] {
-    // 按空格和常见分隔符分割
-    return text
-      .toLowerCase()
-      .split(/[\s\-_.,;:!?]+/)
-      .filter(t => t.length > 0);
+    const tokens: string[] = [];
+
+    // 先按空格和常见分隔符分割
+    const rawTokens = text.split(/[\s\-_.,;:!?]+/).filter(t => t.length > 0);
+
+    for (const token of rawTokens) {
+      // 检查是否包含驼峰式命名（小写字母后跟大写字母）
+      if (/[a-z][A-Z]/.test(token)) {
+        // 拆分驼峰并添加所有部分
+        const parts = this.splitCamelCase(token);
+        tokens.push(...parts);
+      } else {
+        // 普通词直接添加（转小写）
+        tokens.push(token.toLowerCase());
+      }
+    }
+
+    return tokens;
   }
 
   /**

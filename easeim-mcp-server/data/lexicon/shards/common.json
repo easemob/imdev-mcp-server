@@ -449,6 +449,70 @@
       "SDK",
       "开发包",
       "开发套件"
+    ],
+    "init": [
+      "initialize",
+      "初始化",
+      "initialization"
+    ],
+    "initialize": [
+      "init",
+      "初始化"
+    ],
+    "初始化": [
+      "init",
+      "initialize",
+      "initialization"
+    ],
+    "chat": [
+      "聊天",
+      "会话",
+      "对话"
+    ],
+    "聊天": [
+      "chat",
+      "会话",
+      "conversation"
+    ],
+    "client": [
+      "客户端",
+      "终端"
+    ],
+    "客户端": [
+      "client",
+      "终端"
+    ],
+    "manager": [
+      "管理器",
+      "管理类"
+    ],
+    "管理器": [
+      "manager"
+    ],
+    "create": [
+      "创建",
+      "新建",
+      "生成"
+    ],
+    "创建": [
+      "create",
+      "new",
+      "生成"
+    ],
+    "get": [
+      "获取",
+      "取得",
+      "查询"
+    ],
+    "获取": [
+      "get",
+      "fetch",
+      "query"
+    ],
+    "fetch": [
+      "获取",
+      "拉取",
+      "抓取"
     ]
   },
   "abbreviations": {
