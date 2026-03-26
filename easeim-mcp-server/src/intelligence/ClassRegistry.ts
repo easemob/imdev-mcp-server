@@ -58,7 +58,7 @@ export class ClassRegistry {
   private shardCache: Map<string, ClassShard> = new Map();
   private defaultPlatform: string;
 
-  constructor(defaultPlatform: string = 'ios', dataDir?: string) {
+  constructor(defaultPlatform: string = 'common', dataDir?: string) {
     this.defaultPlatform = defaultPlatform;
     this.dataDir = dataDir || path.join(__dirname, '../../data/classes');
   }

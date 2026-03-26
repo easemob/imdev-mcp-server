@@ -702,12 +702,13 @@ EMClient.shared().chatManager?.send(message) { msg, error in
 
   private async getCustomMessageSolution(messageName: string, platform?: string): Promise<string> {
     const normalizedPlatform = platform === 'react-native' ? 'rn' : platform;
+    const effectivePlatform = normalizedPlatform || 'ios';
     const scenario = this.knowledgeRegistry.getScenario('custom_message', normalizedPlatform)
       || this.knowledgeRegistry.getScenario('common:custom_message')
-      || this.knowledgeRegistry.getScenario('ios:custom_message')
+      || this.knowledgeRegistry.getScenario(`${effectivePlatform}:custom_message`)
       || this.knowledgeRegistry.getScenario('custom_message');
 
-    let resultText = `## 📝 自定义 ${messageName} 消息实现方案\n\n`;
+    let resultText = `## 📝 自定义 ${messageName} 消息实现方案 (${this.getPlatformDisplayName(effectivePlatform)})\n\n`;
 
     if (scenario) {
       resultText += `### 实现步骤\n\n`;
@@ -717,8 +718,8 @@ EMClient.shared().chatManager?.send(message) { msg, error in
       resultText += '\n';
     }
 
-    const generated = this.platformOrchestrator.generateCode('custom_message_full', normalizedPlatform || 'ios', {
-      platform: normalizedPlatform || 'ios',
+    const generated = this.platformOrchestrator.generateCode('custom_message_full', effectivePlatform, {
+      platform: effectivePlatform,
       name: messageName,
       variables: {
         messageName,
@@ -728,34 +729,90 @@ EMClient.shared().chatManager?.send(message) { msg, error in
 
     if (generated) {
       resultText += `### 完整代码\n\n`;
-      resultText += `\`\`\`swift\n${generated.code}\n\`\`\`\n\n`;
+      const codeLanguage = this.getCodeLanguageForPlatform(effectivePlatform);
+      resultText += `\`\`\`${codeLanguage}\n${generated.code}\n\`\`\`\n\n`;
       if (generated.usage) {
         resultText += `**集成步骤**:\n${generated.usage}\n\n`;
       }
     }
 
     resultText += `### 关键类说明\n\n`;
-    resultText += `| 类名 | 作用 | 源文件 |\n`;
-    resultText += `|------|------|--------|\n`;
-    resultText += `| CustomMessageCell | 自定义消息 Cell 基类 | CustomMessageCell.swift |\n`;
-    resultText += `| MessageEntity | 消息实体，包含高度计算 | MessageEntity.swift |\n`;
-    resultText += `| ComponentsRegister | 注册自定义组件 | ComponentsRegister.swift |\n`;
-    resultText += `| ChatCustomMessageBody | 自定义消息体 | SDK |\n\n`;
+    resultText += this.getKeyClassesTableForPlatform(effectivePlatform);
 
     resultText += `### 💡 提示\n\n`;
-    resultText += `使用 \`generate_code scenario="custom_message" name="${messageName}"\` 可单独生成代码模板。\n`;
+    resultText += `使用 \`generate_code scenario="custom_message" name="${messageName}" platform="${effectivePlatform}"\` 可单独生成代码模板。\n`;
 
     return resultText;
   }
 
+  /**
+   * 根据平台返回代码语言标记
+   */
+  private getCodeLanguageForPlatform(platform: string): string {
+    switch (platform) {
+      case 'ios': return 'swift';
+      case 'android': return 'kotlin';
+      case 'harmony': return 'typescript';
+      case 'flutter': return 'dart';
+      case 'web': return 'typescript';
+      case 'rn': return 'typescript';
+      default: return 'typescript';
+    }
+  }
+
+  /**
+   * 根据平台返回关键类表格
+   */
+  private getKeyClassesTableForPlatform(platform: string): string {
+    let table = `| 类名 | 作用 | 源文件 |\n`;
+    table += `|------|------|--------|\n`;
+
+    switch (platform) {
+      case 'ios':
+        table += `| CustomMessageCell | 自定义消息 Cell 基类 | CustomMessageCell.swift |\n`;
+        table += `| MessageEntity | 消息实体，包含高度计算 | MessageEntity.swift |\n`;
+        table += `| ComponentsRegister | 注册自定义组件 | ComponentsRegister.swift |\n`;
+        table += `| ChatCustomMessageBody | 自定义消息体 | SDK |\n\n`;
+        break;
+      case 'android':
+        table += `| EaseChatCustomMessageViewHolder | 自定义消息 ViewHolder 基类 | EaseChatCustomMessageViewHolder.kt |\n`;
+        table += `| EaseChatMessageListAdapter | 消息列表适配器 | EaseChatMessageListAdapter.kt |\n`;
+        table += `| ChatCustomMessageBody | 自定义消息体 | SDK |\n\n`;
+        break;
+      case 'harmony':
+        table += `| CustomMessageCell | 自定义消息组件基类 | CustomMessageCell.ets |\n`;
+        table += `| MessageListViewModel | 消息列表 ViewModel | MessageListViewModel.ets |\n`;
+        table += `| ChatCustomMessageBody | 自定义消息体 | SDK |\n\n`;
+        break;
+      case 'flutter':
+        table += `| CustomMessageWidget | 自定义消息 Widget 基类 | custom_message_widget.dart |\n`;
+        table += `| MessageListController | 消息列表控制器 | message_list_controller.dart |\n`;
+        table += `| ChatCustomMessageBody | 自定义消息体 | SDK |\n\n`;
+        break;
+      case 'web':
+      case 'rn':
+        table += `| CustomMessageComponent | 自定义消息组件基类 | CustomMessageComponent.tsx |\n`;
+        table += `| MessageListStore | 消息列表状态管理 | MessageListStore.ts |\n`;
+        table += `| ChatCustomMessageBody | 自定义消息体 | SDK |\n\n`;
+        break;
+      default:
+        table += `| CustomMessageCell | 自定义消息组件基类 | 参考平台文档 |\n`;
+        table += `| MessageList | 消息列表组件 | 参考平台文档 |\n`;
+        table += `| ChatCustomMessageBody | 自定义消息体 | SDK |\n\n`;
+    }
+
+    return table;
+  }
+
   private async getAddMenuSolution(platform?: string): Promise<string> {
     const normalizedPlatform = platform === 'react-native' ? 'rn' : platform;
+    const effectivePlatform = normalizedPlatform || 'ios';
     const scenario = this.knowledgeRegistry.getScenario('add_attachment_menu', normalizedPlatform)
       || this.knowledgeRegistry.getScenario('common:add_attachment_menu')
-      || this.knowledgeRegistry.getScenario('ios:add_attachment_menu')
+      || this.knowledgeRegistry.getScenario(`${effectivePlatform}:add_attachment_menu`)
       || this.knowledgeRegistry.getScenario('add_attachment_menu');
 
-    let resultText = `## ➕ 添加附件菜单项方案\n\n`;
+    let resultText = `## ➕ 添加附件菜单项方案 (${this.getPlatformDisplayName(effectivePlatform)})\n\n`;
 
     if (scenario) {
       resultText += `### 实现步骤\n\n`;
@@ -765,8 +822,8 @@ EMClient.shared().chatManager?.send(message) { msg, error in
       resultText += '\n';
     }
 
-    const generated = this.platformOrchestrator.generateCode('attachment_menu', normalizedPlatform || 'ios', {
-      platform: normalizedPlatform || 'ios',
+    const generated = this.platformOrchestrator.generateCode('attachment_menu', effectivePlatform, {
+      platform: effectivePlatform,
       name: 'SendOrder',
       variables: {
         menuName: '发送订单',
@@ -777,14 +834,15 @@ EMClient.shared().chatManager?.send(message) { msg, error in
 
     resultText += `### 代码示例\n\n`;
     if (generated) {
-      resultText += `\`\`\`swift\n${generated.code}\n\`\`\`\n\n`;
+      const codeLanguage = this.getCodeLanguageForPlatform(effectivePlatform);
+      resultText += `\`\`\`${codeLanguage}\n${generated.code}\n\`\`\`\n\n`;
       if (generated.usage) {
         resultText += `**集成步骤**:\n${generated.usage}\n\n`;
       }
     }
 
     resultText += `### 💡 提示\n\n`;
-    resultText += `- 使用 \`generate_code scenario="attachment_menu"\` 生成更多代码模板\n`;
+    resultText += `- 使用 \`generate_code scenario="attachment_menu" platform="${effectivePlatform}"\` 生成更多代码模板\n`;
     resultText += `- 菜单图标建议使用 24x24 或 32x32 的 PNG 图片\n`;
 
     return resultText;
@@ -1004,7 +1062,6 @@ Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
   }): Promise<string> {
     const { query, moduleId, platform, subIntent, configProperty } = options;
     if (!query || !platform) return '';
-    if (platform !== 'ios') return '';
     if (configProperty) return '';
     if (!this.shouldUseRgFallback(query)) return '';
     if (subIntent && subIntent !== 'appearance_quick_index') return '';
@@ -1021,10 +1078,11 @@ Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
       maxLines: 40
     });
 
+    const sourceGlobs = this.getSourceGlobsForPlatform(platform);
     const sourceResult = await this.runRgSearch({
       query,
       roots: sourceRoots,
-      globs: ['*.swift'],
+      globs: sourceGlobs,
       projectRoot,
       maxFiles: 4,
       maxLines: 40
@@ -1077,27 +1135,64 @@ Appearance.chat.contentStyle = [.withReply, .withDateAndTime]
     const docBase = path.join(projectRoot, 'data/docs');
     const sourceBase = path.join(projectRoot, 'data/sources');
 
-    if (platform !== 'ios') {
+    // 平台目录名映射
+    const platformDirMap: Record<string, string> = {
+      ios: 'ios',
+      android: 'android',
+      harmony: 'harmonyos',
+      flutter: 'flutter',
+      web: 'web',
+      rn: 'rn'
+    };
+
+    const platformDir = platformDirMap[platform];
+    if (!platformDir) {
       return { docRoots: [], sourceRoots: [], projectRoot, docBase, sourceBase };
     }
 
-    if (moduleId === 'call_kit') {
-      return {
-        docRoots: [path.join(docBase, 'ios/guides/callkit')],
-        sourceRoots: [path.join(sourceBase, 'ios/EaseCallUIKit')],
-        projectRoot,
-        docBase,
-        sourceBase
-      };
+    // 根据模块选择组件目录
+    const isCallKit = moduleId === 'call_kit';
+    const guideFolder = isCallKit ? 'callkit' : 'chatuikit';
+    const sourceFolder = isCallKit ? 'EaseCallUIKit' : 'EaseChatUIKit';
+
+    const docRoots: string[] = [];
+    const sourceRoots: string[] = [];
+
+    // 添加文档路径（如果存在）
+    const docPath = path.join(docBase, platformDir, 'guides', guideFolder);
+    if (fs.existsSync(docPath)) {
+      docRoots.push(docPath);
     }
 
-    return {
-      docRoots: [path.join(docBase, 'ios/guides/chatuikit')],
-      sourceRoots: [path.join(sourceBase, 'ios/EaseChatUIKit')],
-      projectRoot,
-      docBase,
-      sourceBase
-    };
+    // 添加源码路径（如果存在）
+    const sourcePath = path.join(sourceBase, platformDir, sourceFolder);
+    if (fs.existsSync(sourcePath)) {
+      sourceRoots.push(sourcePath);
+    }
+
+    return { docRoots, sourceRoots, projectRoot, docBase, sourceBase };
+  }
+
+  /**
+   * 根据平台返回源码文件扩展名
+   */
+  private getSourceGlobsForPlatform(platform: string): string[] {
+    switch (platform) {
+      case 'ios':
+        return ['*.swift', '*.m', '*.h'];
+      case 'android':
+        return ['*.kt', '*.java', '*.xml'];
+      case 'harmony':
+        return ['*.ets', '*.ts'];
+      case 'flutter':
+        return ['*.dart'];
+      case 'web':
+        return ['*.ts', '*.tsx', '*.js', '*.jsx'];
+      case 'rn':
+        return ['*.ts', '*.tsx', '*.js', '*.jsx'];
+      default:
+        return ['*.ts', '*.js', '*.swift', '*.kt', '*.dart'];
+    }
   }
 
   private async runRgSearch(options: {

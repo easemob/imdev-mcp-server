@@ -296,7 +296,7 @@ export const TOOLS = [
   },
   {
     name: 'generate_code',
-    description: '📝 代码生成器 - 根据场景生成完整可用的 Swift 代码模板，包含注册、发送、点击处理等完整实现',
+    description: '📝 代码生成器 - 根据场景和平台生成完整可用的代码模板，包含注册、发送、点击处理等完整实现',
     inputSchema: {
       type: 'object',
       properties: {

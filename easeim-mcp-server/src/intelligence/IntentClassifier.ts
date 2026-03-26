@@ -328,8 +328,12 @@ export class IntentClassifier {
     return SimilarityMatcher.findBestMatch(query, scenarioTargets, 0.20);
   }
 
+  // 目前有 UIKit 配置属性索引的平台（data/configs/shards/ 下有对应分片）
+  private static readonly PLATFORMS_WITH_CONFIG = ['ios', 'android', 'web', 'flutter', 'rn'];
+
   private inferConfigPropertyFromQuery(query: string, platform?: string): string | null {
-    if (platform && platform !== 'ios') {
+    // 仅对有配置数据的平台进行属性推断
+    if (platform && !IntentClassifier.PLATFORMS_WITH_CONFIG.includes(platform)) {
       return null;
     }
     const lowerQuery = query.toLowerCase();
@@ -346,7 +350,8 @@ export class IntentClassifier {
   }
 
   private inferUiSubIntent(query: string, platform?: string): string | undefined {
-    if (platform && platform !== 'ios') {
+    // 仅对有配置数据的平台进行 UI 子意图推断
+    if (platform && !IntentClassifier.PLATFORMS_WITH_CONFIG.includes(platform)) {
       return undefined;
     }
     const lowerQuery = query.toLowerCase();
