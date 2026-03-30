@@ -23,11 +23,20 @@ cd imdev-mcp-server/easeim-mcp-server/ && npm install && npm run build
   "mcpServers": {
     "easeim":{
       "command": "node",
-      "args": ["/Path/imdev-mcp-server/easeim-mcp-server/dist/index.js"]
+      "args": ["/Path/imdev-mcp-server/easeim-mcp-server/dist/index.js"],
+      "env": {
+          "EASEIM_TRACE_LOG": "true",
+          "EASEIM_TRACE_LOG_PATH": "/Path/imdev-mcp-server/easeim-mcp-server/tmp/easeim-mcp-server.log",
+          "EASEIM_SMART_ASSIST_LOG": "1",
+          "EASEIM_SMART_ASSIST_LOG_PATH": "/Path/imdev-mcp-server/easeim-mcp-server/tmp/smart_assist.log",
+          "EASEIM_TOOL_LOG": "1",
+          "EASEIM_TOOL_LOG_PATH": "/Path/imdev-mcp-server/easeim-mcp-server/tmp/tool.log"
+        }
     }
   }
 }
 ```
+
 
 ## 2026-03 关键优化（文档同步）
 
